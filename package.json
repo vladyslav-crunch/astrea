@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev -w=astrea-backend\" \"npm run dev -w=astrea-frontend\" \"docker compose up\" "
+    "dev": "concurrently --names \"backend,frontend,mongodb\" \"npm run dev -w=astrea-backend\" \"npm run dev -w=astrea-frontend\" \"docker compose up\" "
   },
   "keywords": [],
   "author": "",
