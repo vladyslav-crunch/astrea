@@ -1,0 +1,18 @@
+{
+  "name": "astrea",
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w=astrea-backend\" \"npm run dev -w=astrea-frontend\" \"docker compose up\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "astrea-backend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run ./src/main.ts",
+    "dev": "bun run --watch ./src/main.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2"
+  }
+}
