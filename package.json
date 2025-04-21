@@ -6,13 +6,18 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently --names \"backend,frontend,mongodb\" \"npm run dev -w=astrea-backend\" \"npm run dev -w=astrea-frontend\" \"docker compose up\" "
+    "dev": "concurrently --names \"backend,frontend,mongodb\" \"npm run dev -w=astrea-backend\" \"npm run dev -w=astrea-frontend\" \"docker compose up -d\" "
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2"
   }
 }
