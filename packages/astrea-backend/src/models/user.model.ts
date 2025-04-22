@@ -1,17 +1,16 @@
-import { Schema, model, Document } from 'mongoose';
+import {Schema, model} from 'mongoose';
 import bcrypt from 'bcrypt';
+import type {IUser} from "../schemas/user.schema.ts";
 
-// Extend the Document interface to include comparePassword
-interface IUser extends Document {
-    username: string;
-    password: string;
-    comparePassword(candidatePassword: string): Promise<boolean>;
-}
 
 const userSchema = new Schema<IUser>({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-}, { timestamps: true });
+    username: {type: String, required: true},
+    password: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
+    level: {type: Number, default: 1},
+    profilePic: {type: String, default: ""},
+    exp: {type: Number, default: 0},
+}, {timestamps: true});
 
 // Hash password before saving
 userSchema.pre('save', async function (next) {

@@ -2,14 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import authRoutes from './routes/auth.routes';
 import cookieParser from 'cookie-parser';
+import {PORT, MONGO_URI} from "./utils/env.ts";
+
 
 const app = express();
-const PORT = process.env.PORT;
-const MONGO_URI = process.env.MONGO_URI;
 
 // Connect to MongoDB
 mongoose
-  .connect(MONGO_URI!, {
+  .connect(MONGO_URI, {
     dbName: "astrea",
   })
   .then(() => console.log("✅ MongoDB connected"))
