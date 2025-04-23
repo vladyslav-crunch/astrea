@@ -11,14 +11,13 @@ export enum BUTTON_TYPE_CLASSES {
 
 type ButtonProps = {
     children: React.ReactNode;
-    onClick: () => void;
     buttonType?: BUTTON_TYPE_CLASSES;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-function Button({children, onClick, buttonType = BUTTON_TYPE_CLASSES.base}: ButtonProps) {
+function Button({children, buttonType = BUTTON_TYPE_CLASSES.base, ...rest}: ButtonProps) {
     const buttonClass = `${styles.button} ${styles[buttonType]}`;
     return (
-        <button className={buttonClass} onClick={onClick}>
+        <button className={buttonClass} {...rest}>
             {children}
         </button>
     );

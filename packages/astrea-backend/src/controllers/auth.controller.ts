@@ -34,7 +34,7 @@ export const loginUser = async (req: Request, res: Response) => {
     const {email, password} = parseResult.data;
     const user = await User.findOne({email});
     if (!user || !(await user.comparePassword(password))) {
-        res.status(401).json({message: 'Invalid credentials'});
+        res.status(401).json({message: 'Invalid email or password'});
         return;
     }
     const payload = {id: user._id, username: user.username};

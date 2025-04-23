@@ -3,6 +3,11 @@
     flex-direction: column;
 }
 
+.formTitle {
+    color: #44305E;
+    font-size: 42px;
+}
+
 .formHelper {
     font-size: 20px;
     font-weight: 500;
