@@ -2,7 +2,7 @@ import type {Request, Response} from 'express';
 import User from '../models/user.model.ts';
 import {generateAccessToken, generateRefreshToken} from "../utils/jwt";
 import jwt from "jsonwebtoken";
-import {signInSchema, signUpSchema} from 'astrea-shared/schemas';
+import {signInSchema, signUpSchema} from 'astrea-shared';
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
     const parseResult = signUpSchema.safeParse(req.body);

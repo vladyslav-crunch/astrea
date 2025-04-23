@@ -1,0 +1,12 @@
+.authContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}
+
+.authPicture {
+    width: 555px;
+    height: 555px;
+}
+
