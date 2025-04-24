@@ -18,3 +18,5 @@ export const signUpSchema = signInSchema.extend({
     path: ['repeatPassword'],
 });
 
+export type SignUpFormFields = z.infer<typeof signUpSchema>
+

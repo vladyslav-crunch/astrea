@@ -5,7 +5,7 @@ import styles from "./sign-form.module.css"
 import {Link} from "react-router-dom";
 
 import {SubmitHandler, useForm} from "react-hook-form";
-import {SignInFormFields, signInSchema} from "astrea-shared";
+import {SignUpFormFields, signUpSchema} from "astrea-shared";
 import {zodResolver} from "@hookform/resolvers/zod";
 
 function SignInForm() {
@@ -14,12 +14,11 @@ function SignInForm() {
         handleSubmit,
         formState: {errors, isSubmitting},
         setError
-    } = useForm<SignInFormFields>({resolver: zodResolver(signInSchema)});
+    } = useForm<SignUpFormFields>({resolver: zodResolver(signUpSchema)});
 
-    const onSubmit: SubmitHandler<SignInFormFields> = async (formData) => {
+    const onSubmit: SubmitHandler<SignUpFormFields> = async (formData) => {
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            const response = await fetch("/api/auth/sign-in", {
+            const response = await fetch("/api/auth/sign-up", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -45,22 +44,27 @@ function SignInForm() {
 
     return (
         <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={styles.formTitle}>Sign in</h2>
+            <h2 className={styles.formTitle}>Sign Up</h2>
+            <Input {...register("username")} type={"text"} label={"Username"} placeholder={"Username"} icon={"username"}
+                   error={errors.username?.message}/>
             <Input {...register("email")} type={"text"} label={"Email"} placeholder={"Email"} icon={"email"}
                    error={errors.email?.message}/>
             <Input {...register("password")} type={"password"} label={"Password"} placeholder={"Password"}
                    error={errors.password?.message}
-                   icon={"password"}
-                   hint={"Forget password?"} onHintClick={() => alert("This function is not ready yet")}/>
+                   icon={"password"}/>
+            <Input {...register("repeatPassword")} type={"password"} label={"Repeat password"}
+                   placeholder={"Repeat Password"}
+                   error={errors.repeatPassword?.message}
+                   icon={"password"}/>
+
             {errors.root && (<p className={styles.formErrorMessage}>{errors.root.message}</p>)}
             <div className={styles.formButtons}>
                 <Button buttonType={BUTTON_TYPE_CLASSES.purple} type={"submit"}
-                        disabled={isSubmitting}>{isSubmitting ? "Loading..." : "Sign in"}</Button>
-                <Button onClick={() => alert("Will b e soon")}
-                        type={"button"}
-                        buttonType={BUTTON_TYPE_CLASSES.google}>Google</Button>
+                        disabled={isSubmitting}>{isSubmitting ? "Loading..." : "Sign up"}</Button>
+                <Button onClick={() => alert("Will be soon")}
+                        buttonType={BUTTON_TYPE_CLASSES.google} type={"button"}>Google</Button>
             </div>
-            <p className={styles.formHelper}>Don’t have an account? <Link to="/auth/sign-up">Sign up</Link></p>
+            <p className={styles.formHelper}>Already have an account? <Link to="/auth/sign-in">Sign in</Link></p>
         </form>
     );
 }

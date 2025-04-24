@@ -10,15 +10,41 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
         res.status(400).json({message: 'Invalid input', errors: parseResult.error.flatten()});
         return;
     }
+
     const {username, password, email} = parseResult.data;
+
     try {
         const existing = await User.findOne({email});
         if (existing) {
             res.status(400).json({message: 'User with this email already exists'});
             return;
         }
+
         const user = await User.create({username, password, email});
-        res.status(201).json({message: 'User created', user: {id: user._id, username: user.username}});
+
+        // Generate tokens
+        const payload = {id: user._id, username: user.username};
+        const accessToken = generateAccessToken(payload);
+        const refreshToken = generateRefreshToken(payload);
+
+        // Set refresh token in cookie
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        });
+
+        // Respond with user info and access token
+        res.status(201).json({
+            message: 'User created',
+            user: {
+                id: user._id,
+                username: user.username
+            },
+            accessToken
+        });
+
     } catch (err) {
         res.status(500).json({message: 'Registration failed', error: err});
     }
