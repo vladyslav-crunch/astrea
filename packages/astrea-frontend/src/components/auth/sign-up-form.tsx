@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {SignUpFormFields, signUpSchema} from "astrea-shared";
 import {zodResolver} from "@hookform/resolvers/zod";
+import Spinner from "../ui/spinner.tsx";
 
 function SignInForm() {
     const {
@@ -60,7 +61,7 @@ function SignInForm() {
             {errors.root && (<p className={styles.formErrorMessage}>{errors.root.message}</p>)}
             <div className={styles.formButtons}>
                 <Button buttonType={BUTTON_TYPE_CLASSES.purple} type={"submit"}
-                        disabled={isSubmitting}>{isSubmitting ? "Loading..." : "Sign up"}</Button>
+                        disabled={isSubmitting}>{isSubmitting ? <Spinner/> : "Sign up"}</Button>
                 <Button onClick={() => alert("Will be soon")}
                         buttonType={BUTTON_TYPE_CLASSES.google} type={"button"}>Google</Button>
             </div>
