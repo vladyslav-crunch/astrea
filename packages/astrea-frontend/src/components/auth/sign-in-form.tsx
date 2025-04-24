@@ -45,13 +45,13 @@ function SignInForm() {
     return (
         <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={styles.formTitle}>Sign in</h2>
-            <Input {...register("email")} type={"text"} label={"Email"} placeholder={"Email"} icon={"email"}/>
-            {errors.email && (<p>{errors.email.message}</p>)}
+            <Input {...register("email")} type={"text"} label={"Email"} placeholder={"Email"} icon={"email"}
+                   error={errors.email?.message}/>
             <Input {...register("password")} type={"password"} label={"Password"} placeholder={"Password"}
+                   error={errors.password?.message}
                    icon={"password"}
                    hint={"Forget password?"} onHintClick={() => alert("This function is not ready yet")}/>
-            {errors.password && (<p>{errors.password.message}</p>)}
-            {errors.root && (<p>{errors.root.message}</p>)}
+            {errors.root && (<p className={styles.formErrorMessage}>{errors.root.message}</p>)}
             <Button buttonType={BUTTON_TYPE_CLASSES.purple} type={"submit"}
                     disabled={isSubmitting}>{isSubmitting ? "Loading..." : "Submit"}</Button>
             <Button onClick={() => alert("Will be soon")}

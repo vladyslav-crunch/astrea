@@ -26,6 +26,11 @@
     font-weight: 400;
 }
 
+
+.inputError {
+    border: solid 1px #E64B89;
+}
+
 .icon {
     pointer-events: none;
     position: absolute;
@@ -43,6 +48,17 @@
     position: absolute;
     right: 0;
     transform: translateY(-220%);
+}
+
+.inputErrorHint {
+    z-index: 2;
+    font-size: 15px;
+    color: #E64B89;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateY(120%);
 }
 
 .inputLabel {

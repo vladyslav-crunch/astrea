@@ -6,7 +6,6 @@ type AuthProps = {
 };
 
 function Auth({type}: AuthProps) {
-    console.log(type)
     return (
         <div className={styles.authContainer}>
             {type === "sign-up" ? <div></div> : <SignInForm/>}

@@ -18,3 +18,16 @@
         color: #BC7BFD;
     }
 }
+
+.formErrorMessage {
+    margin-top: 8px;
+    margin-bottom: -5px;
+    color: #E64B89;
+}
+
+@media (max-width: 768px) {
+    /* styles for screens 768px wide and smaller */
+    .your-class {
+        font-size: 14px;
+    }
+}
