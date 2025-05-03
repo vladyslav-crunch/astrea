@@ -6,3 +6,5 @@ export type User = {
     level?: number;
     exp?: number;
 };
+
+export type PublicUser = Omit<User, "password" | "email">;

@@ -1,8 +1,9 @@
 import type {Request, Response} from 'express';
 import User from '../models/user.model.ts';
-import {generateAccessToken, generateRefreshToken} from "../utils/jwt";
+import {generateAccessToken} from "../utils/jwt";
 import jwt from "jsonwebtoken";
 import {signInSchema, signUpSchema} from 'astrea-shared';
+import {sendTokens} from "../utils/token.ts";
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
     const parseResult = signUpSchema.safeParse(req.body);
@@ -22,33 +23,25 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
 
         const user = await User.create({username, password, email});
 
-        // Generate tokens
-        const payload = {id: user._id, username: user.username};
-        const accessToken = generateAccessToken(payload);
-        const refreshToken = generateRefreshToken(payload);
+        const accessToken = sendTokens(res, {id: user._id.toString(), username: user.username});
 
-        // Set refresh token in cookie
-        res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-        });
-
-        // Respond with user info and access token
         res.status(201).json({
-            message: 'User created',
+            message: 'User Logged Successfully',
             user: {
                 id: user._id,
-                username: user.username
+                username: user.username,
+                profilePic: user.profilePic,
+                email: user.email,
+                level: user.level,
+                exp: user.exp
             },
             accessToken
         });
-
     } catch (err) {
         res.status(500).json({message: 'Registration failed', error: err});
     }
 };
+
 
 //Login handling
 export const loginUser = async (req: Request, res: Response) => {
@@ -63,33 +56,53 @@ export const loginUser = async (req: Request, res: Response) => {
         res.status(401).json({message: 'Invalid email or password'});
         return;
     }
-    const payload = {id: user._id, username: user.username};
-    const accessToken = generateAccessToken(payload);
-    const refreshToken = generateRefreshToken(payload);
-    res.cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+    const accessToken = sendTokens(res, {id: user._id.toString(), username: user.username});
+    res.status(201).json({
+        message: 'User Logged Successfully',
+        user: {
+            id: user._id,
+            username: user.username,
+            profilePic: user.profilePic,
+            email: user.email,
+            level: user.level,
+            exp: user.exp
+        },
+        accessToken
     });
-    res.json({accessToken});
 };
 
 //Refresh Token handling
 
-export const refreshToken = (req: Request, res: Response) => {
-    const refreshToken = req.cookies.refreshToken; // Get the refresh token from the cookies
-    if (!refreshToken) {
-        res.sendStatus(401);
-        return
+export const refreshToken = async (req: Request, res: Response) => {
+    const token = req.cookies.refreshToken;
+
+    if (!token) {
+        return res.sendStatus(401); // No token
     }
+
     try {
-        const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!) as { id: string; username: string };
-        const newAccessToken = generateAccessToken({id: decoded.id, username: decoded.username});
-        res.json({accessToken: newAccessToken});
-        return
+        const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET!) as { id: string };
+
+        // Fetch user from DB
+        const user = await User.findById(decoded.id).select("-password"); // remove password for safety
+        if (!user) {
+            return res.status(404).json({message: "User not found"});
+        }
+
+        const accessToken = generateAccessToken({id: user.id, username: user.username});
+
+        return res.json({
+            accessToken,
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                profilePic: user.profilePic,
+                level: user.level,
+                exp: user.exp,
+            },
+        });
     } catch (err) {
-        res.status(403).json({message: 'Invalid refresh token'});
-        return
+        return res.status(403).json({message: "Invalid refresh token"});
     }
 };

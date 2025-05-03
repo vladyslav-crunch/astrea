@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import authRoutes from './routes/auth.routes';
 import cookieParser from 'cookie-parser';
 import {PORT, MONGO_URI} from "./utils/env.ts";
-
+import logger from "./middleware/logger.ts";
 
 const app = express();
 
@@ -17,17 +17,7 @@ mongoose
 
 app.use(cookieParser());
 app.use(express.json());
-app.use((req, res, next) => {
-    // Log the request method and URL before processing
-    console.log(`${req.method} ${req.originalUrl} - Request received`);
-
-    // Set up logging after the response is finished
-    res.on("finish", () => {
-        console.log(`${req.method} ${req.originalUrl} - Status: ${res.statusCode}`);
-    });
-
-    next();
-});
+app.use(logger);
 
 // Global API prefix
 app.use('/api/auth', authRoutes);

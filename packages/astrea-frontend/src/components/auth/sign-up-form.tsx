@@ -3,13 +3,15 @@ import Button from "../ui/button.tsx";
 import {BUTTON_TYPE_CLASSES} from "../ui/button.tsx";
 import styles from "./sign-form.module.css"
 import {Link} from "react-router-dom";
-
 import {SubmitHandler, useForm} from "react-hook-form";
 import {SignUpFormFields, signUpSchema} from "astrea-shared";
 import {zodResolver} from "@hookform/resolvers/zod";
 import Spinner from "../ui/spinner.tsx";
+import {useUser} from "../../context/user-context.tsx";
+
 
 function SignInForm() {
+    const {signUp} = useUser()
     const {
         register,
         handleSubmit,
@@ -19,28 +21,14 @@ function SignInForm() {
 
     const onSubmit: SubmitHandler<SignUpFormFields> = async (formData) => {
         try {
-            const response = await fetch("/api/auth/sign-up", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
-            const data = await response.json();
-
-            if (!response.ok) {
-                setError("root", {
-                    type: "manual",
-                    message: data.message || "Something went wrong",
-                });
-                return;
-            }
-
-            console.log(data)
+            await signUp(formData);
         } catch (error) {
-            console.log(error)
+            const message = error instanceof Error ? error.message : "Something went wrong";
+            setError("root", {
+                type: "manual",
+                message: message,
+            });
         }
-
     }
 
     return (
