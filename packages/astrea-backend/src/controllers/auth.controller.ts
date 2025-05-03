@@ -71,13 +71,24 @@ export const loginUser = async (req: Request, res: Response) => {
     });
 };
 
+export const logout = (req: Request, res: Response) => {
+    res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+    });
+    res.status(200).json({message: "Logged out"});
+};
+
+
 //Refresh Token handling
 
 export const refreshToken = async (req: Request, res: Response) => {
     const token = req.cookies.refreshToken;
 
     if (!token) {
-        return res.sendStatus(401); // No token
+        res.sendStatus(401);
+        return
     }
 
     try {
@@ -86,12 +97,13 @@ export const refreshToken = async (req: Request, res: Response) => {
         // Fetch user from DB
         const user = await User.findById(decoded.id).select("-password"); // remove password for safety
         if (!user) {
-            return res.status(404).json({message: "User not found"});
+            res.status(404).json({message: "User not found"});
+            return
         }
 
         const accessToken = generateAccessToken({id: user.id, username: user.username});
 
-        return res.json({
+        res.json({
             accessToken,
             user: {
                 id: user._id,
@@ -103,6 +115,7 @@ export const refreshToken = async (req: Request, res: Response) => {
             },
         });
     } catch (err) {
-        return res.status(403).json({message: "Invalid refresh token"});
+        res.status(403).json({message: "Invalid refresh token"});
+        return
     }
 };

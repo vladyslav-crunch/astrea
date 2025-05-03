@@ -8,9 +8,11 @@ import {SignInFormFields, signInSchema} from "astrea-shared";
 import {zodResolver} from "@hookform/resolvers/zod";
 import Spinner from "../ui/spinner.tsx";
 import {useUser} from "../../context/user-context.tsx";
+import {useNavigate} from "react-router-dom";
 
 function SignInForm() {
     const {signIn} = useUser()
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -21,6 +23,7 @@ function SignInForm() {
     const onSubmit: SubmitHandler<SignInFormFields> = async (formData) => {
         try {
             await signIn(formData);
+            navigate("/")
         } catch (error) {
             const message = error instanceof Error ? error.message : "Something went wrong";
             setError("root", {

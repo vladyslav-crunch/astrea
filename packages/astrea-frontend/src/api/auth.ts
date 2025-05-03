@@ -49,3 +49,12 @@ export async function refreshSession(): Promise<RefreshResponse> {
 
     return data;
 }
+
+export async function signOut() {
+    await fetch("/api/auth/log-out", {
+        method: "POST",
+        credentials: "include",
+    });
+}
+
+
