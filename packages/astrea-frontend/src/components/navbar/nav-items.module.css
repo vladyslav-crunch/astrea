@@ -1,0 +1,8 @@
+.navItemsContainer {
+    display: flex;
+    align-items: center;
+    height: 90px;
+    background-color: #E2D5FF;
+    border-radius: 20px;
+    padding: 15px;
+}

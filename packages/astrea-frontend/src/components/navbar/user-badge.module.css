@@ -1,0 +1,29 @@
+.userBadgeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ECE1FE;
+    height: 135px;
+    padding: 9px 20px;
+    border-radius: 15px;
+}
+
+.userAvatar {
+    cursor: pointer;
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+}
+
+.levelBadge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+    background-color: #9769FF;
+    width: 85px;
+    color: #fff;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 12px;
+}

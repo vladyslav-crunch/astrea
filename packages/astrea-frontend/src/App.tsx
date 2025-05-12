@@ -4,6 +4,7 @@ import Dashboard from "./pages/dashboard"; // create this
 import {AuthProvider} from "./context/user-context";
 import ProtectedRoute from "./components/auth/protected-route"; // just made
 import "normalize.css";
+import AppLayout from "./pages/app-layout.tsx";
 
 function App() {
     return (
@@ -15,7 +16,11 @@ function App() {
                         <Route path="sign-up" element={<Auth type="sign-up"/>}/>
                     </Route>
                     <Route element={<ProtectedRoute/>}>
-                        <Route path="/" element={<Dashboard/>}/>
+                        <Route element={<AppLayout/>}>
+                            <Route path="/" element={<Dashboard/>}/>
+                            <Route path="/shop" element={<Dashboard/>}/>
+                            <Route path="/setting" element={<Dashboard/>}/>
+                        </Route>
                     </Route>
                 </Routes>
             </BrowserRouter>

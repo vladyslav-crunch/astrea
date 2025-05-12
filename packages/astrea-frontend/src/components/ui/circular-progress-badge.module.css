@@ -1,0 +1,4 @@
+
+.progressCircle circle {
+    transition: stroke-dashoffset 0.8s ease;
+}
