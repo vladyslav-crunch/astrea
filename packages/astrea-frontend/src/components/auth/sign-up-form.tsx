@@ -7,11 +7,11 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {SignUpFormFields, signUpSchema} from "astrea-shared";
 import {zodResolver} from "@hookform/resolvers/zod";
 import Spinner from "../ui/spinner.tsx";
-import {useUser} from "../../context/user-context.tsx";
+import {useSignUp} from "../../hooks/useAuth.ts";
 import {useNavigate} from "react-router-dom";
 
 function SignInForm() {
-    const {signUp} = useUser()
+    const {mutateAsync: signUp} = useSignUp();
     const navigate = useNavigate();
     const {
         register,

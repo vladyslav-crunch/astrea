@@ -8,7 +8,7 @@ type SignResponse = {
     user: PublicUser
 };
 
-type RefreshResponse = {
+export type RefreshResponse = {
     user: PublicUser;
     accessToken: string;
 }

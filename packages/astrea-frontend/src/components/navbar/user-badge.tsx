@@ -1,12 +1,14 @@
-import {useUser} from "../../context/user-context.tsx";
 import CircularProgressBadge from "../ui/circular-progress-badge.tsx";
 import styles from "./user-badge.module.css"
+import {useSession} from "../../hooks/useAuth.ts";
 
 
 function UserBadge() {
-    const {user} = useUser();
+    const {data, isLoading, error} = useSession();
 
-    if (!user) return null;
+    if (isLoading || error || !data?.user) return null;
+
+    const {user} = data;
 
     const defaultAvatar = "/icons/navbar/defaultAvatar.png";
 

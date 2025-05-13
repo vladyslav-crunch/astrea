@@ -1,10 +1,13 @@
 import {Navigate, Outlet} from "react-router-dom";
-import {useUser} from "../../context/user-context";
+import {useSession} from "../../hooks/useAuth"; // path to your React Query hook
 
 const ProtectedRoute = () => {
-    const {isAuthenticated, loading} = useUser();
-    if (loading) return <div></div>;
-    if (!isAuthenticated) return <Navigate to="/auth/sign-in"/>;
+    const {data, error, isLoading} = useSession();
+
+    console.log(data);
+
+    if (isLoading) return <div></div>;
+    if (error || !data?.user) return <Navigate to="/auth/sign-in"/>;
 
     return <Outlet/>;
 };
