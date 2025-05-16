@@ -4,6 +4,7 @@ import authRoutes from './routes/auth.routes';
 import cookieParser from 'cookie-parser';
 import {PORT, MONGO_URI} from "./utils/env.ts";
 import logger from "./middleware/logger.ts";
+import topicRoutes from "./routes/topic.routes.ts";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(logger);
 
 // Global API prefix
 app.use('/api/auth', authRoutes);
+app.use('/api/topics', topicRoutes);
 
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
