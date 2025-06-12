@@ -1,8 +1,10 @@
+import Topics from "../components/dashboard/topics.tsx";
+
 function Dashboard() {
     return (
-        <div>
-
-        </div>
+        <>
+            <Topics/>
+        </>
     );
 }
 
