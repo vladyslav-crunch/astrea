@@ -2,31 +2,24 @@ import {request} from "./request.ts";
 import {Topic} from "astrea-shared";
 
 const BASE_URL = 'http://localhost:3000/api/topics';
-const AUTH_TOKEN = localStorage.getItem("accessToken");
-const authHeaders = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${AUTH_TOKEN}`,
-};
 
 export async function createTopic(body: Topic) {
-
     const topic = await request<{ message: string; topic: Topic }>(BASE_URL, {
         method: 'POST',
-        headers: authHeaders,
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify(body),
-    });
+    }, true);
 
     console.log('Created topic:', topic);
 }
 
-
 export async function getAllTopics() {
     const data = await request<{ topics: Topic[] }>(BASE_URL, {
         method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${AUTH_TOKEN}`,
-        },
-    });
+    }, true);
+
     console.log('Get all topics:', data);
     return data;
 }
@@ -34,21 +27,20 @@ export async function getAllTopics() {
 export async function getTopicById(topicId: string) {
     const topic = await request<Topic>(`${BASE_URL}/${topicId}`, {
         method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${AUTH_TOKEN}`,
-        },
-    });
+    }, true);
 
     console.log('Topic:', topic);
+    return topic;
 }
 
 export async function updateTopic(topicId: string, body: Topic) {
-
     const result = await request<{ message: string; topic: Topic }>(`${BASE_URL}/${topicId}`, {
         method: 'PUT',
-        headers: authHeaders,
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify(body),
-    });
+    }, true);
 
     console.log('Updated topic:', result);
 }
@@ -56,11 +48,7 @@ export async function updateTopic(topicId: string, body: Topic) {
 export async function deleteTopic(topicId: string) {
     const result = await request<{ message: string }>(`${BASE_URL}/${topicId}`, {
         method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${AUTH_TOKEN}`,
-        },
-    });
+    }, true);
 
     console.log('Deleted:', result.message);
 }
-

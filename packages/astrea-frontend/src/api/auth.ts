@@ -2,6 +2,7 @@ import {SignInFormFields, SignUpFormFields} from "astrea-shared";
 import {request} from "./request";
 import {PublicUser} from "astrea-shared";
 
+
 type SignResponse = {
     accessToken: string;
     refreshToken: string;
@@ -46,6 +47,7 @@ export async function refreshSession(): Promise<RefreshResponse> {
     }
 
     localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem('accessTokenExpiresAt', `${Date.now() + data.expiresInSeconds * 1000}`);
 
     return data;
 }

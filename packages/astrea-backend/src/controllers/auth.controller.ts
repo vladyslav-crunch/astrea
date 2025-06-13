@@ -1,6 +1,8 @@
 import type {Request, Response} from 'express';
 import * as AuthService from '../services/auth.service';
 import {signInSchema, signUpSchema} from 'astrea-shared';
+import {expiresInSeconds} from "../utils/env.ts";
+
 
 export const createUser = async (req: Request, res: Response) => {
     const parsed = signUpSchema.safeParse(req.body);
@@ -27,7 +29,7 @@ export const loginUser = async (req: Request, res: Response) => {
     }
     try {
         const {user, accessToken} = await AuthService.login(parsed.data.email, parsed.data.password, res);
-        res.status(200).json({message: 'Login successful', user, accessToken});
+        res.status(200).json({accessToken, user});
     } catch (err: any) {
         res.status(401).json({message: err.message});
     }
@@ -41,7 +43,7 @@ export const refreshToken = async (req: Request, res: Response) => {
     }
     try {
         const {user, accessToken} = await AuthService.refresh(token, res);
-        res.status(200).json({accessToken, user});
+        res.status(200).json({accessToken, user, expiresInSeconds});
     } catch (err: any) {
         res.status(403).json({message: err.message});
     }

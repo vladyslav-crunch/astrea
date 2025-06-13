@@ -19,6 +19,7 @@ export function useTopic(topicId: string) {
         queryKey: ['topic', topicId],
         queryFn: () => getTopicById(topicId),
         enabled: !!topicId,
+        retry: true,
     });
 }
 
