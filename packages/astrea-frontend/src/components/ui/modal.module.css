@@ -1,0 +1,54 @@
+
+.backdropOverlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.modal {
+    position: relative;
+    background-color: white;
+    max-width: 28rem;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    padding: 17px 21px;
+    z-index: 3;
+}
+
+.closeButton {
+    position: absolute;
+    top: 22px;
+    right: 21px;
+    z-index: 2;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.title {
+    position: relative;
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 12px;
+}
+
+.content {
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+button {
+    cursor: pointer;
+}

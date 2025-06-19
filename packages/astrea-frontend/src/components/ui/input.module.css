@@ -29,6 +29,7 @@
 
 .inputError {
     border: solid 1px #E64B89;
+
 }
 
 .icon {
@@ -47,7 +48,7 @@
     cursor: pointer;
     position: absolute;
     right: 0;
-    transform: translateY(-220%);
+    transform: translateY(-120%);
 }
 
 .inputErrorHint {
@@ -58,7 +59,7 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    transform: translateY(120%);
+    transform: translateY(35%);
 }
 
 .inputLabel {

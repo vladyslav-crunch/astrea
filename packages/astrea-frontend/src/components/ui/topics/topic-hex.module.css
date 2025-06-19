@@ -129,6 +129,7 @@
 .fill {
     stroke: #f38bc9;
     transition: stroke-dashoffset 0.9s;
+
 }
 
 .todayTaskCounter {

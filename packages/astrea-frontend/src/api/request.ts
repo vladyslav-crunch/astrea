@@ -9,7 +9,6 @@ export async function request<T>(url: string, options: RequestInit, auth: boolea
         const now = Date.now();
 
         if (expiresAt && expiresAt < now) {
-            console.log('Access token expired — refreshing...');
             try {
                 const refreshResponse = await refreshSession();
                 accessToken = refreshResponse.accessToken;

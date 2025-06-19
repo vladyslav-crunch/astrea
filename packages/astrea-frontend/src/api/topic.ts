@@ -19,8 +19,7 @@ export async function getAllTopics() {
     const data = await request<{ topics: Topic[] }>(BASE_URL, {
         method: 'GET',
     }, true);
-
-    console.log('Get all topics:', data);
+    
     return data;
 }
 

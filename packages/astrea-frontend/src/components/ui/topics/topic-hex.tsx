@@ -3,28 +3,25 @@ import styles from "./topic-hex.module.css";
 import {Topic as TopicType} from "astrea-shared";
 
 function TopicHex({topic}: { topic: TopicType }) {
-    const [dashOffset, setDashOffset] = useState(2000);
-    const [pathLength, setPathLength] = useState(2000); // default fallback
+    const [dashOffset, setDashOffset] = useState(2160);
+    const [pathLength, setPathLength] = useState(2160); // default fallback
     const fillRef = useRef<SVGPathElement>(null);
-
-    const progress = 0;
+    const [progress, setProgress] = useState<number>(60);
 
     useEffect(() => {
         if (fillRef.current) {
             const length = fillRef.current.getTotalLength();
             setPathLength(length);
-            console.log("path:" + pathLength);
             const offset = ((100 - progress) / 100) * pathLength;
             setDashOffset(offset);
-            console.log("offset:" + offset);
         }
     }, [pathLength]);
 
     return (
         <div className={styles.topicContainer}>
-            <div className={styles.todayTaskCounter}>
-                3
-            </div>
+            {/*<div className={styles.todayTaskCounter}>*/}
+            {/*    3*/}
+            {/*</div>*/}
             <div className={styles.topicHolder}>
                 <div className={styles.progressBar}>
                     <svg className={`${styles.progress} noselect`} viewBox="0 0 776 628">
@@ -32,7 +29,7 @@ function TopicHex({topic}: { topic: TopicType }) {
                               d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"/>
                         <path
                             ref={fillRef}
-                            className={styles.fill}
+                            className={`${styles.fill} ${progress === 0 ? styles.noTransition : ''}`}
                             d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"
                             style={{
                                 strokeDasharray: pathLength,
