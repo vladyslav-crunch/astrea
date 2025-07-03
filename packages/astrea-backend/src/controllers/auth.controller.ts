@@ -24,7 +24,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const loginUser = async (req: Request, res: Response) => {
     const parsed = signInSchema.safeParse(req.body);
     if (!parsed.success) {
-        res.status(400).json({message: 'Invalid input', errors: parsed.error.flatten()})
+        res.status(400).json({message: 'Invalid email or password', errors: parsed.error.flatten()})
         return
     }
     try {

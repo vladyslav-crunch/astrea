@@ -3,6 +3,7 @@ import {createTopicSchema, updateTopicSchema} from 'astrea-shared'
 import * as TopicService from '../services/topic.service';
 import type {AuthRequest} from '../middleware/isAuthenticated';
 
+
 export const createTopic = async (req: AuthRequest, res: Response) => {
     const parsed = createTopicSchema.safeParse(req.body);
     if (!parsed.success) {
@@ -88,3 +89,14 @@ export const deleteTopic = async (req: AuthRequest, res: Response) => {
         res.status(500).json({message: err.message});
     }
 };
+
+export const getTopicsWithTaskCount = async (req: AuthRequest, res: Response) => {
+    try {
+        const topics = await TopicService.getAllWithTaskCount(req.user!.id);
+        res.status(200).json({topics});
+    } catch (err: any) {
+        res.status(500).json({message: err.message});
+    }
+};
+
+

@@ -1,4 +1,3 @@
-// models/task.model.ts
 import mongoose from 'mongoose';
 
 const taskSchema = new mongoose.Schema({
@@ -7,7 +6,17 @@ const taskSchema = new mongoose.Schema({
     goalId: {type: mongoose.Types.ObjectId, ref: 'Goal'},
     title: {type: String, required: true},
     description: {type: String},
-    difficulty: {type: String, enum: ['easy', 'medium', 'hard'], required: true},
+    difficulty: {
+        type: String,
+        enum: ['easy', 'medium', 'hard'],
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ['upcoming', 'in_progress', 'done'],
+        default: 'upcoming',
+        required: true
+    },
     dueDate: {type: Date},
     microtasks: [String],
 }, {timestamps: true});

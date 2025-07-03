@@ -20,3 +20,7 @@ export const update = async (userId: string, topicId: string, updates: UpdateTop
 export const remove = async (userId: string, topicId: string) => {
     return await TopicDAO.deleteTopic(userId, topicId);
 };
+
+export const getAllWithTaskCount = async (userId: string) => {
+    return await TopicDAO.getUserTopicsWithTaskCount(userId);
+};

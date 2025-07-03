@@ -1,7 +1,7 @@
-import {Topic as TopicType} from "astrea-shared";
+import {TopicWithStats} from "astrea-shared";
 import TopicHex from "../ui/topics/topic-hex.tsx";
 
-function Topic({topic}: { topic: TopicType }) {
+function Topic({topic}: { topic: TopicWithStats }) {
     return (
         <TopicHex topic={topic}/>
     )

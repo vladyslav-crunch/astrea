@@ -1,0 +1,46 @@
+
+.pickerWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.selectedIcon {
+    height: 50px;
+    width: 50px;
+    background: rgba(238, 238, 238, 0.43);
+    font-size: 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.grid {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.icon {
+    font-size: 1.5rem;
+    padding: 0.4rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
+.active {
+    border-radius: 6px;
+    background: #e0e0ff;
+}

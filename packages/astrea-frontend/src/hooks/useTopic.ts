@@ -1,4 +1,4 @@
-import {useQuery, useMutation, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {createTopic, deleteTopic, getAllTopics, getTopicById, updateTopic} from "../api/topic.ts";
 
 
@@ -35,6 +35,7 @@ export function useCreateTopic() {
         },
     });
 }
+
 
 export function useUpdateTopic() {
     const queryClient = useQueryClient();

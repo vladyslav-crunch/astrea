@@ -1,11 +1,9 @@
 .topicHolder {
-
     width: 400px;
     height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-
     clip-path: polygon(
             47.5% 5.66987%,
             48.2899% 5.30154%,
@@ -83,7 +81,6 @@
 
 .topicContent .text {
     font-size: 36px;
-
     font-weight: 500;
 }
 

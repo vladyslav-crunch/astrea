@@ -4,7 +4,7 @@ import {
     getTopics,
     getTopic,
     updateTopic,
-    deleteTopic,
+    deleteTopic, getTopicsWithTaskCount,
 } from '../controllers/topic.controller';
 import {isAuthenticated} from '../middleware/isAuthenticated';
 
@@ -14,6 +14,7 @@ router.use(isAuthenticated); // protect all topic routes
 
 router.post('/', createTopic);
 router.get('/', getTopics);
+router.get('/with-task-stats', getTopicsWithTaskCount);
 router.get('/:id', getTopic);
 router.put('/:id', updateTopic);
 router.delete('/:id', deleteTopic);

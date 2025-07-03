@@ -1,5 +1,6 @@
 import {Topic} from '../models/topic.model';
 import type {UpdateTopicInput} from 'astrea-shared'
+import {Types} from "mongoose";
 
 export const createTopic = async (userId: string, title: string, color: string, icon: string) => {
     return await Topic.create({userId, title, color, icon});
@@ -20,3 +21,75 @@ export const updateTopic = async (userId: string, topicId: string, updates: Upda
 export const deleteTopic = async (userId: string, topicId: string) => {
     return Topic.findOneAndDelete({_id: topicId, userId});
 };
+
+
+export const getUserTopicsWithTaskCount = async (userId: string) => {
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const startOfTomorrow = new Date();
+    startOfTomorrow.setHours(24, 0, 0, 0);
+
+    return Topic.aggregate([
+        {$match: {userId: new Types.ObjectId(userId)}},
+        {
+            $lookup: {
+                from: 'tasks',
+                localField: '_id',
+                foreignField: 'topicId',
+                as: 'tasks'
+            }
+        },
+        {
+            $project: {
+                title: 1,
+                color: 1,
+                icon: 1,
+                taskCount: {$size: '$tasks'},
+                upcoming: {
+                    $size: {
+                        $filter: {
+                            input: '$tasks',
+                            as: 'task',
+                            cond: {$eq: ['$$task.status', 'upcoming']}
+                        }
+                    }
+                },
+                in_progress: {
+                    $size: {
+                        $filter: {
+                            input: '$tasks',
+                            as: 'task',
+                            cond: {$eq: ['$$task.status', 'in_progress']}
+                        }
+                    }
+                },
+                done: {
+                    $size: {
+                        $filter: {
+                            input: '$tasks',
+                            as: 'task',
+                            cond: {$eq: ['$$task.status', 'done']}
+                        }
+                    }
+                },
+                dueToday: {
+                    $size: {
+                        $filter: {
+                            input: '$tasks',
+                            as: 'task',
+                            cond: {
+                                $and: [
+                                    {$lt: ['$$task.dueDate', startOfTomorrow]},
+                                    {$ne: ['$$task.status', 'done']}
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]);
+};
+
+

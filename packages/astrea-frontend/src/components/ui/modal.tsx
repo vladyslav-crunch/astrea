@@ -19,7 +19,6 @@ const Modal = ({isOpen, onClose, children}: ModalProps) => {
     return ReactDOM.createPortal(
         <div className={styles.backdropOverlay} onClick={(e) => {
             onClose()
-            console.log(onClose)
             e.stopPropagation()
         }}>
             <div className={styles.modal} onClick={(e) => {

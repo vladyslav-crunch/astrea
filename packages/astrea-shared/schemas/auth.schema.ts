@@ -5,7 +5,7 @@ import {z} from 'zod';
 
 export const signInSchema = z.object({
     email: z.string().nonempty("Email is required").email("Invalid email format"),
-    password: z.string().nonempty("Password is required").min(6, "Password must be at least 6 characters"),
+    password: z.string().nonempty("Password is required"),
 });
 
 export type SignInFormFields = z.infer<typeof signInSchema>

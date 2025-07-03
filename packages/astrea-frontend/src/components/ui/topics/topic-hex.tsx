@@ -1,12 +1,17 @@
 import {useEffect, useRef, useState} from 'react';
 import styles from "./topic-hex.module.css";
-import {Topic as TopicType} from "astrea-shared";
+import {type TopicWithStats} from "astrea-shared";
+import {motion} from "motion/react"
 
-function TopicHex({topic}: { topic: TopicType }) {
+function TopicHex({topic}: { topic: TopicWithStats }) {
     const [dashOffset, setDashOffset] = useState(2160);
-    const [pathLength, setPathLength] = useState(2160); // default fallback
+    const [pathLength, setPathLength] = useState(2160);
+    const [hovered, setHovered] = useState(false);
     const fillRef = useRef<SVGPathElement>(null);
-    const [progress, setProgress] = useState<number>(60);
+    const totalTasks = topic.taskCount;
+    const progress = totalTasks === 0
+        ? 100
+        : (topic.done / totalTasks) * 100;
 
     useEffect(() => {
         if (fillRef.current) {
@@ -19,9 +24,9 @@ function TopicHex({topic}: { topic: TopicType }) {
 
     return (
         <div className={styles.topicContainer}>
-            {/*<div className={styles.todayTaskCounter}>*/}
-            {/*    3*/}
-            {/*</div>*/}
+            {topic.dueToday != 0 && <div className={styles.todayTaskCounter}>
+                {topic.dueToday}
+            </div>}
             <div className={styles.topicHolder}>
                 <div className={styles.progressBar}>
                     <svg className={`${styles.progress} noselect`} viewBox="0 0 776 628">
@@ -42,13 +47,31 @@ function TopicHex({topic}: { topic: TopicType }) {
                 <div
                     className={styles.topicContentOuter}
                     style={{
-                        background: topic.color || '#d9c8ff' // fallback if color not defined
+                        background: topic.color || '#d9c8ff'
                     }}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
                 >
                     <div className={styles.topicContent}>
                         <span className={styles.icon}>{topic.icon}</span>
                         <span className={styles.text}>{topic.title}</span>
                     </div>
+
+                    <motion.div
+                        initial={{opacity: 0, y: 10}}
+                        animate={{opacity: hovered ? 1 : 0, y: hovered ? 0 : 10}}
+                        transition={{duration: 0.3, ease: 'easeOut'}}
+                        className={styles.statsOverlay}
+                        style={{
+                            backgroundColor: topic.color || 'rgb(215, 198, 253)'
+                        }}
+                    >
+                        <div className={styles.statsText}><p>Overall</p><span>{topic.taskCount}</span></div>
+                        <div className={styles.statsText}><p>Upcoming</p><span>{topic.upcoming}</span></div>
+                        <div className={styles.statsText}><p>In progress</p><span>{topic.in_progress}</span>
+                        </div>
+                        <div className={styles.statsText}><p>Done</p><span>{topic.done}</span></div>
+                    </motion.div>
                 </div>
 
             </div>

@@ -11,3 +11,11 @@ export type Topic = TopicBase & {
     createdAt: string;
     updatedAt: string;
 };
+
+export type TopicWithStats = Topic & {
+    taskCount: number;
+    upcoming: number;
+    in_progress: number;
+    done: number;
+    dueToday: number;
+};

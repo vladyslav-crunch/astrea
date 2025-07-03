@@ -1,9 +1,15 @@
 import {request} from "./request.ts";
-import {Topic} from "astrea-shared";
+import {Topic, TopicBase, TopicWithStats} from "astrea-shared";
 
 const BASE_URL = 'http://localhost:3000/api/topics';
 
-export async function createTopic(body: Topic) {
+type CreateTopicInput = {
+    title: string;
+    color: string;
+    icon: string;
+};
+
+export async function createTopic(body: CreateTopicInput) {
     const topic = await request<{ message: string; topic: Topic }>(BASE_URL, {
         method: 'POST',
         headers: {
@@ -16,11 +22,9 @@ export async function createTopic(body: Topic) {
 }
 
 export async function getAllTopics() {
-    const data = await request<{ topics: Topic[] }>(BASE_URL, {
+    return await request<{ topics: TopicWithStats[] }>(`${BASE_URL}/with-task-stats`, {
         method: 'GET',
     }, true);
-    
-    return data;
 }
 
 export async function getTopicById(topicId: string) {
@@ -32,17 +36,22 @@ export async function getTopicById(topicId: string) {
     return topic;
 }
 
-export async function updateTopic(topicId: string, body: Topic) {
-    const result = await request<{ message: string; topic: Topic }>(`${BASE_URL}/${topicId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
+export async function updateTopic(topicId: string, body: Partial<TopicBase>) {
+    const result = await request<{ message: string; topic: Topic }>(
+        `${BASE_URL}/${topicId}`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
         },
-        body: JSON.stringify(body),
-    }, true);
+        true
+    );
 
     console.log('Updated topic:', result);
 }
+
 
 export async function deleteTopic(topicId: string) {
     const result = await request<{ message: string }>(`${BASE_URL}/${topicId}`, {

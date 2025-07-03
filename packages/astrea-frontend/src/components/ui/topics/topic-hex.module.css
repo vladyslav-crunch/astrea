@@ -157,3 +157,27 @@
     transition: none !important;
 }
 
+.statsOverlay {
+    padding: 40px;
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+    text-align: center;
+}
+
+.statsText {
+    font-weight: 300;
+    font-size: 18px;
+    color: #333;
+    margin: 4px 0;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
