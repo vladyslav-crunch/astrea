@@ -5,6 +5,8 @@ import ColorPicker from "../../color-picker.tsx";
 import Input from "../../input.tsx";
 import Button, {BUTTON_TYPE_CLASSES} from "../../button.tsx";
 import {useCreateTopic} from "../../../../hooks/useTopic.ts";
+import {toast} from "sonner";
+import {createTopicSchema} from "astrea-shared";
 
 
 interface TopicCreateModalProps {
@@ -16,12 +18,17 @@ const TopicCreateModal = ({isOpen, onClose}: TopicCreateModalProps) => {
     const [title, setTitle] = useState("");
     const [icon, setIcon] = useState("🎯");
     const [color, setColor] = useState("#d9c8ff");
-
     const {mutate, isPending} = useCreateTopic();
 
     const handleCreate = async () => {
-        if (!title.trim()) return;
-
+        const result = createTopicSchema.safeParse({title, color, icon});
+        if (!result.success) {
+            const firstError = result.error.errors[0]?.message || "Invalid input";
+            toast.error(firstError, {
+                icon: "⚠️",
+            });
+            return;
+        }
         mutate(
             {title, color, icon},
             {
@@ -30,6 +37,7 @@ const TopicCreateModal = ({isOpen, onClose}: TopicCreateModalProps) => {
                     setTitle("");
                     setIcon("🎯");
                     setColor("#d9c8ff");
+                    toast.success("Topic created successfully.");
                 },
                 onError: (error) => {
                     console.error("Failed to create topic:", error);

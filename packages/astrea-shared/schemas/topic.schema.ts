@@ -1,9 +1,9 @@
 import {z} from 'zod';
 
 export const createTopicSchema = z.object({
-    title: z.string().min(1, 'Title is required'),
-    icon: z.string().min(1, 'Icon is required'),
-    color: z.string().min(1, 'Color is required'),
+    title: z.string().min(1, "Title is required").max(25, "Topic title max is 25 characters"),
+    icon: z.string().emoji("Invalid emoji"),
+    color: z.string().startsWith("#").length(7, "Invalid color format")
 }).strict();
 
 export const updateTopicSchema = z.object({

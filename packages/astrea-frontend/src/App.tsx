@@ -5,12 +5,16 @@ import ProtectedRoute from "./components/auth/protected-route"; // just made
 import "normalize.css";
 import AppLayout from "./pages/app-layout.tsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {Toaster} from 'sonner';
+import Shop from "./pages/shop.tsx";
+import Setting from "./pages/setting.tsx";
 
 const queryClient = new QueryClient();
 
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
+            <Toaster/>
             <BrowserRouter>
                 <Routes>
                     <Route path="/auth">
@@ -20,8 +24,8 @@ function App() {
                     <Route element={<ProtectedRoute/>}>
                         <Route element={<AppLayout/>}>
                             <Route path="/" element={<Dashboard/>}/>
-                            <Route path="/shop" element={<Dashboard/>}/>
-                            <Route path="/setting" element={<Dashboard/>}/>
+                            <Route path="/shop" element={<Shop/>}/>
+                            <Route path="/setting" element={<Setting/>}/>
                         </Route>
                     </Route>
                 </Routes>
