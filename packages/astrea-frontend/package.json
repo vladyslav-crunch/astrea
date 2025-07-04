@@ -21,6 +21,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",
     "react-router-dom": "^7.5.1",
+    "resize-observer-polyfill": "^1.5.1",
     "sonner": "^2.0.6",
     "tailwindcss": "^4.1.10",
     "zod": "^3.24.3"

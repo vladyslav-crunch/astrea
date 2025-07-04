@@ -1,5 +1,11 @@
 .topicGrid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    position: relative;
+    padding-top: 100px;
+}
+
+
+.topicGrid .offset {
+    margin-left: 155px; /* stagger offset */
 }

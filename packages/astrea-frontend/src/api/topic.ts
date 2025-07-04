@@ -1,7 +1,7 @@
 import {request} from "./request.ts";
 import {Topic, TopicBase, TopicWithStats} from "astrea-shared";
 
-const BASE_URL = 'http://localhost:3000/api/topics';
+const BASE_URL = 'api/topics';
 
 type CreateTopicInput = {
     title: string;

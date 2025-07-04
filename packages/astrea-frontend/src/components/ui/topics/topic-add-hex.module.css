@@ -1,6 +1,8 @@
 .topicHolder {
-    width: 400px;
-    height: 400px;
+    margin-top: -100px;
+    margin-right: -50px;
+    width: 360px;
+    height: 360px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,8 +57,8 @@
 .topicContentOuter {
     cursor: pointer;
     background: #d9c8ff;
-    width: 360px;
-    height: 360px;
+    width: 320px;
+    height: 320px;
     clip-path: inherit;
     position: relative;
     overflow: hidden;
@@ -89,8 +91,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 375px;
-    height: 375px;
+    width: 330px;
+    height: 330px;
     margin-top: -5px;
     background: transparent;
 }
