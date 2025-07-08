@@ -1,12 +1,11 @@
 import {Outlet} from "react-router-dom";
-import Navbar from "../components/navbar/navbar.tsx";
+import Navbar from "../../navbar/navbar/navbar.tsx";
 import styles from "./app-layout.module.css"
-import Blobs from "../components/ui/blobs.tsx";
+import Blobs from "../../ui/layout/blobs/blobs.tsx";
 
 function AppLayout() {
     return (
-        <div className={styles.appLayoutContainer}
-             style={{position: 'relative', overflow: 'hidden', minHeight: '100vh'}}>
+        <div className={styles.appLayoutContainer}>
             <Navbar/>
             <Blobs/>
             <Outlet/>

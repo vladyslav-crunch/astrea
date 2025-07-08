@@ -1,4 +1,4 @@
-import Topics from "../components/dashboard/topics.tsx";
+import Topics from "../../components/dashboard/topics/topics.tsx";
 
 function Dashboard() {
     return (

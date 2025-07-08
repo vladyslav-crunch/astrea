@@ -1,6 +1,6 @@
 import styles from "./navbar.module.css"
-import UserBadge from "./user-badge.tsx";
-import NavItems from "./nav-items.tsx";
+import UserBadge from "../user-badge/user-badge.tsx";
+import NavItems from "../nav-items/nav-items.tsx";
 
 function Navbar() {
     return (

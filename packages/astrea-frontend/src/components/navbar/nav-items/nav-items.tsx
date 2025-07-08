@@ -1,5 +1,5 @@
 import styles from "./nav-items.module.css"
-import NavItem from "./nav-item.tsx";
+import NavItem from "../nav-item/nav-item.tsx";
 
 
 function NavItems() {

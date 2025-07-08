@@ -1,4 +1,4 @@
-import styles from './Blobs.module.css';
+import styles from './blobs.module.css';
 
 import bottomBlob from '/blobs/bottom-blob.svg';
 import topBlob from '/blobs/top-blob.svg';

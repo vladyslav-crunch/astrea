@@ -1,6 +1,6 @@
-import HexagonIcon from "../ui/hexagonIcon.tsx";
+import HexagonIcon from "../../ui/layout/hexaong-icon/hexagonIcon.tsx";
 import {useNavigate, useLocation} from "react-router-dom";
-import styles from '../ui/hexagon-icon.module.css'; // import the styles here
+import styles from '../../ui/layout/hexaong-icon/hexagon-icon.module.css'; // import the styles here
 
 export type NavItemProps = {
     path: string;
@@ -11,7 +11,8 @@ function NavItem({path, icon}: NavItemProps) {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const isActive = location.pathname === path;
+    const isActive =
+        (path === "/" && location.pathname.startsWith("/topic")) || location.pathname === path;
 
     return (
         <HexagonIcon

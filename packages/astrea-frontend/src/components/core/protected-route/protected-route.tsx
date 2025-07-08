@@ -1,5 +1,5 @@
 import {Navigate, Outlet} from "react-router-dom";
-import {useSession} from "../../hooks/useAuth"; // path to your React Query hook
+import {useSession} from "../../../hooks/useAuth.ts"; // path to your React Query hook
 
 const ProtectedRoute = () => {
     const {data, error, isLoading} = useSession();

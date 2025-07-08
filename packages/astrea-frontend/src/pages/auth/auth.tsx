@@ -1,6 +1,6 @@
-import SignInForm from "../components/auth/sign-in-form.tsx";
+import SignInForm from "../../components/auth/sign-form/sign-in-form.tsx";
 import styles from "./auth.module.css";
-import SignUpForm from "../components/auth/sign-up-form.tsx";
+import SignUpForm from "../../components/auth/sign-form/sign-up-form.tsx";
 
 type AuthProps = {
     type: 'sign-in' | 'sign-up';

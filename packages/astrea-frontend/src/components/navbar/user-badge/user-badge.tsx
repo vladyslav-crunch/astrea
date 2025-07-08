@@ -1,6 +1,6 @@
-import CircularProgressBadge from "../ui/circular-progress-badge.tsx";
+import CircularProgressBadge from "../../ui/layout/circular-progress-badge/circular-progress-badge.tsx";
 import styles from "./user-badge.module.css"
-import {useSession} from "../../hooks/useAuth.ts";
+import {useSession} from "../../../hooks/useAuth.ts";
 
 
 function UserBadge() {

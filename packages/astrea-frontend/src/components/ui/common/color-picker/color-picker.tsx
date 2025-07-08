@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import styles from "./color-picker.module.css";
-import ColorPickerIcon from "../../../public/icons/topic/color-picker.svg?react";
+import ColorPickerIcon from "../../../../../public/icons/topic/color-picker.svg?react";
 
 
 const colorOptions = [

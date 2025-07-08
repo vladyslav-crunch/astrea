@@ -1,9 +1,9 @@
 import {useState} from "react";
-import Modal from "../../modal";
-import IconPicker from "../../icon-picker.tsx";
-import ColorPicker from "../../color-picker.tsx";
-import Input from "../../input.tsx";
-import Button, {BUTTON_TYPE_CLASSES} from "../../button.tsx";
+import Modal from "../../common/modal/modal.tsx";
+import IconPicker from "../../common/icon-picker/icon-picker.tsx";
+import ColorPicker from "../../common/color-picker/color-picker.tsx";
+import Input from "../../common/input/input.tsx";
+import Button, {BUTTON_TYPE_CLASSES} from "../../common/button/button.tsx";
 import {useCreateTopic} from "../../../../hooks/useTopic.ts";
 import {toast} from "sonner";
 import {createTopicSchema} from "astrea-shared";

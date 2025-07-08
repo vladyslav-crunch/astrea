@@ -1,14 +1,14 @@
-import Input from "../ui/input.tsx";
-import Button from "../ui/button.tsx";
-import {BUTTON_TYPE_CLASSES} from "../ui/button.tsx";
+import Input from "../../ui/common/input/input.tsx";
+import Button from "../../ui/common/button/button.tsx";
+import {BUTTON_TYPE_CLASSES} from "../../ui/common/button/button.tsx";
 import styles from "./sign-form.module.css";
 import {Link} from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {SignInFormFields, signInSchema} from "astrea-shared";
 import {zodResolver} from "@hookform/resolvers/zod";
-import Spinner from "../ui/spinner.tsx";
+import Spinner from "../../ui/common/spinner/spinner.tsx";
 import {useNavigate} from "react-router-dom";
-import {useSignIn} from "../../hooks/useAuth.ts";
+import {useSignIn} from "../../../hooks/useAuth.ts";
 
 
 function SignInForm() {
