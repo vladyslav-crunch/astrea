@@ -1,0 +1,25 @@
+.goalContainer {
+    height: 120px;
+    background: #FAF7FF;
+    border: 1px solid #6D6D6D;
+    border-radius: 15px;
+    padding: 15px;
+    color: #555555;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.todayCount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    top: -9px;
+    right: -9px;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-color: #fd9696;
+    position: absolute;
+    font-size: 14px;
+}

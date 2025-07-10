@@ -1,0 +1,7 @@
+.topicContainer {
+    min-height: 0;
+    display: flex;
+    flex: 1;
+    margin-top: 15px;
+    gap: 15px;
+}

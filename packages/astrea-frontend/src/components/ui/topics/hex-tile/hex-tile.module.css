@@ -1,7 +1,6 @@
 .topicContainer {
     display: flex;
     position: relative;
-
 }
 
 .topicHolder {
@@ -76,6 +75,7 @@
 
 
 .topicContent {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -142,19 +142,16 @@
     align-items: center;
     justify-content: center;
     color: #fff;
-
     position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-
     background-color: #FF9797;
     width: 55px;
     height: 55px;
     border-radius: 50%;
-
     z-index: 1;
     font-size: 24px;
+    top: -94px;
+    left: 152px;
+
 }
 
 

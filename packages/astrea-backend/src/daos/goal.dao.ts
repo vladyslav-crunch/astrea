@@ -1,4 +1,5 @@
 import {Goal} from '../models/goal.model';
+import {Types} from "mongoose";
 
 export const createGoal = (userId: string, topicId: string, data: any) =>
     Goal.create({userId, topicId, ...data});
@@ -18,3 +19,80 @@ export const deleteGoal = (userId: string, goalId: string) =>
 export const getGoalById = (userId: string, goalId: string) => {
     return Goal.findOne({_id: goalId, userId});
 }
+
+export const getGoalsWithStats = async (userId: string, topicId: string) => {
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const startOfTomorrow = new Date();
+    startOfTomorrow.setHours(24, 0, 0, 0);
+
+    return Goal.aggregate([
+        {
+            $match: {
+                userId: new Types.ObjectId(userId),
+                topicId: new Types.ObjectId(topicId),
+            }
+        },
+        {
+            $lookup: {
+                from: 'tasks',
+                localField: '_id',
+                foreignField: 'goalId',
+                as: 'tasks'
+            }
+        },
+        {
+            $project: {
+                title: 1,
+                description: 1,
+                modifier: 1,
+                topicId: 1,
+                createdAt: 1,
+                updatedAt: 1,
+                taskCount: {$size: '$tasks'},
+                upcoming: {
+                    $size: {
+                        $filter: {
+                            input: '$tasks',
+                            as: 'task',
+                            cond: {$eq: ['$$task.status', 'upcoming']}
+                        }
+                    }
+                },
+                in_progress: {
+                    $size: {
+                        $filter: {
+                            input: '$tasks',
+                            as: 'task',
+                            cond: {$eq: ['$$task.status', 'in_progress']}
+                        }
+                    }
+                },
+                done: {
+                    $size: {
+                        $filter: {
+                            input: '$tasks',
+                            as: 'task',
+                            cond: {$eq: ['$$task.status', 'done']}
+                        }
+                    }
+                },
+                dueToday: {
+                    $size: {
+                        $filter: {
+                            input: '$tasks',
+                            as: 'task',
+                            cond: {
+                                $and: [
+                                    {$lt: ['$$task.dueDate', startOfTomorrow]},
+                                    {$ne: ['$$task.status', 'done']}
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]);
+};

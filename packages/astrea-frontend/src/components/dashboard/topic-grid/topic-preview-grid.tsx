@@ -1,4 +1,4 @@
-import styles from "./topic-grid.module.css";
+import styles from "./topic-preview-grid.module.css";
 import HexTile from "../../ui/topics/hex-tile/hex-tile.tsx";
 import type {TopicWithStats} from "astrea-shared";
 import {useHexGridLayout} from "../../../hooks/useHexGridLayout.ts";
@@ -8,7 +8,7 @@ type Props = {
     topics: (TopicWithStats | null)[];
 };
 
-function TopicGrid({topics}: Props) {
+function TopicPreviewGrid({topics}: Props) {
     const containerRef = useRef<HTMLDivElement>(null);
     const layout = useHexGridLayout(containerRef, topics.length);
 
@@ -28,4 +28,4 @@ function TopicGrid({topics}: Props) {
     );
 }
 
-export default TopicGrid;
+export default TopicPreviewGrid;

@@ -3,7 +3,7 @@ import {
     createGoal,
     getGoals,
     updateGoal,
-    deleteGoal, getGoal, getGoalsByTopic,
+    deleteGoal, getGoal, getGoalsByTopicWithStats,
 } from '../controllers/goal.controller';
 import {isAuthenticated} from '../middleware/isAuthenticated';
 
@@ -17,6 +17,7 @@ router.get('/', getGoals);
 router.get('/:id', getGoal);
 router.put('/:id', updateGoal);
 router.delete('/:id', deleteGoal);
-router.get('/topic/:topicId', getGoalsByTopic);
+router.get('/topic/:topicId', getGoalsByTopicWithStats);
+
 
 export default router;

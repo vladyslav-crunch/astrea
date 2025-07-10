@@ -1,9 +1,9 @@
-import Topics from "../../components/dashboard/topics/topics.tsx";
+import TopicsPreview from "../../components/dashboard/topics-preview/topics-preview.tsx";
 
 function Dashboard() {
     return (
         <div style={{display: "flex", justifyContent: "center"}}>
-            <Topics/>
+            <TopicsPreview/>
         </div>
     );
 }

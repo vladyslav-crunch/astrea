@@ -102,3 +102,17 @@ export const getGoalsByTopic = async (req: AuthRequest, res: Response) => {
         res.status(500).json({message: err.message});
     }
 };
+
+export const getGoalsByTopicWithStats = async (req: AuthRequest, res: Response) => {
+    const topicId = req.params.topicId;
+    if (!topicId) {
+        res.status(400).json({message: 'Missing topic ID in request URL'});
+        return
+    }
+    try {
+        const goals = await GoalService.getByTopicWithStats(req.user!.id, topicId);
+        res.status(200).json({goals});
+    } catch (err: any) {
+        res.status(500).json({message: err.message});
+    }
+}

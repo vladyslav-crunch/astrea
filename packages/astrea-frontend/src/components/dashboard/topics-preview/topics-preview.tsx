@@ -1,8 +1,8 @@
 import {useMemo} from "react";
 import {useTopics} from "../../../hooks/useTopic.ts";
-import TopicGrid from "../topic-grid/topic-grid.tsx";
+import TopicPreviewGrid from "../topic-grid/topic-preview-grid.tsx";
 
-function Topics() {
+function TopicsPreview() {
     const {data: fetchedTopics, isLoading, error} = useTopics();
 
     const displayTopics = useMemo(() => {
@@ -12,7 +12,7 @@ function Topics() {
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {(error as Error).message}</div>;
 
-    return <TopicGrid topics={displayTopics}/>;
+    return <TopicPreviewGrid topics={displayTopics}/>;
 }
 
-export default Topics;
+export default TopicsPreview;

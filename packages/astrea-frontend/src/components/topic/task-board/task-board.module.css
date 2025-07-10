@@ -1,0 +1,7 @@
+.boardContainer {
+    width: 100%;
+    background-color: #ffffff;
+    border: #c5c5c5 solid 1px;
+    border-radius: 17px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+}

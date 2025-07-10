@@ -24,7 +24,7 @@ app.use(logger);
 
 // Global API prefix
 app.use('/api/auth', authRoutes);
-app.use('/api/topics', topicRoutes);
+app.use('/api/topics-preview', topicRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/tasks', taskRoutes);
 

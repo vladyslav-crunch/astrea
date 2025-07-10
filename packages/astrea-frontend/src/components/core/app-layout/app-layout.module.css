@@ -1,6 +1,8 @@
 .appLayoutContainer {
+    display: flex;
+    flex-direction: column;
     padding: 15px 2%;
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
+    height: 100vh;
 }
