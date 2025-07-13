@@ -67,3 +67,17 @@ export async function deleteGoal(goalId: string) {
         true
     );
 }
+
+export async function reorderGoals(
+    updates: { _id: string; order: number }[]
+) {
+    return await request<{ message: string }>(
+        `${BASE_URL}/reorder`,
+        {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(updates),
+        },
+        true
+    );
+}

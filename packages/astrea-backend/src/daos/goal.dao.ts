@@ -42,6 +42,7 @@ export const getGoalsWithStats = async (userId: string, topicId: string) => {
                 as: 'tasks'
             }
         },
+        {$sort: {order: 1}},
         {
             $project: {
                 title: 1,
@@ -95,4 +96,25 @@ export const getGoalsWithStats = async (userId: string, topicId: string) => {
             }
         }
     ]);
+};
+
+export const reorderGoals = async (
+    userId: string,
+    updates: { _id: string; order: number }[]
+) => {
+    const bulkOps = updates.map(({_id, order}) => ({
+        updateOne: {
+            filter: {_id, userId},
+            update: {$set: {order}},
+        }
+    }));
+
+    return Goal.bulkWrite(bulkOps);
+};
+
+export const incrementOrders = async (userId: string, topicId: string) => {
+    await Goal.updateMany(
+        {userId, topicId},
+        {$inc: {order: 1}}
+    );
 };

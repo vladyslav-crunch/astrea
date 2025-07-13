@@ -83,3 +83,20 @@
         border: none;
     }
 }
+
+.inputTabs {
+    border: 1px solid #ffffff;
+
+    border-bottom: 2px solid transparent;
+    border-radius: 15px;
+    background: #ffffff;
+    font-size: 1rem;
+    padding: 15px;
+    width: 100%;
+
+
+    &:focus {
+
+        border-color: #9953e5;
+    }
+}

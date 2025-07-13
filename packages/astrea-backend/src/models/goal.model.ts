@@ -11,6 +11,7 @@ const goalSchema = new mongoose.Schema(
             medium: {type: Number, default: 1},
             hard: {type: Number, default: 1},
         },
+        order: {type: Number},
     },
     {timestamps: true}
 );

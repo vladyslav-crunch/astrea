@@ -7,7 +7,6 @@ export const modifierSchema = z.object({
 });
 
 export const createGoalSchema = z.object({
-    topicId: z.string(),
     title: z.string().min(1),
     description: z.string().optional(),
     modifier: modifierSchema.default({

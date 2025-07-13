@@ -3,7 +3,7 @@ import {
     createGoal,
     deleteGoal,
     getGoalById,
-    getGoalsByTopic,
+    getGoalsByTopic, reorderGoals,
     updateGoal,
 } from '../api/goal.ts';
 import type {CreateGoalInput} from '../api/goal.ts'; // Optional if you have it typed separately
@@ -60,6 +60,18 @@ export function useDeleteGoal(topicId: string) {
     return useMutation({
         mutationFn: (goalId: string) => deleteGoal(goalId),
         onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ['goals', topicId]});
+        },
+    });
+}
+
+export function useReorderGoals(topicId: string) {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: reorderGoals,
+        onSuccess: () => {
+            // Invalidate and refetch to ensure correct order
             queryClient.invalidateQueries({queryKey: ['goals', topicId]});
         },
     });

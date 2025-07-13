@@ -3,6 +3,7 @@ import type {CreateGoalInput, UpdateGoalInput} from 'astrea-shared'
 
 
 export const create = async (userId: string, topicId: string, data: CreateGoalInput) => {
+    await GoalDAO.incrementOrders(userId, topicId);
     return await GoalDAO.createGoal(userId, topicId, data)
 }
 
@@ -29,3 +30,10 @@ export const getById = (userId: string, goalId: string) => {
 export const getByTopicWithStats = async (userId: string, topicId: string) => {
     return GoalDAO.getGoalsWithStats(userId, topicId);
 }
+
+export const reorder = async (
+    userId: string,
+    updates: { _id: string; order: number }[]
+) => {
+    return GoalDAO.reorderGoals(userId, updates);
+};

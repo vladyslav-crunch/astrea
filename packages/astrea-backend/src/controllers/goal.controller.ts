@@ -7,12 +7,19 @@ import {createGoalSchema, updateGoalSchema} from 'astrea-shared';
 export const createGoal = async (req: AuthRequest, res: Response) => {
     const parsed = createGoalSchema.safeParse(req.body);
     if (!parsed.success) {
-        res.status(400).json({message: 'Invalid input', errors: parsed.error.flatten()});
-        return
+        return res.status(400).json({
+            message: 'Invalid input',
+            errors: parsed.error.flatten()
+        });
+    }
+
+    const topicId = req.params.topicId; // ✅ get from URL
+    if (!topicId) {
+        return res.status(400).json({message: 'Missing topicId in URL'});
     }
 
     try {
-        const goal = await GoalService.create(req.user!.id, parsed.data.topicId, parsed.data);
+        const goal = await GoalService.create(req.user!.id, topicId, parsed.data);
         res.status(201).json({message: 'Goal created', goal});
     } catch (err: any) {
         res.status(500).json({message: err.message});
@@ -116,3 +123,22 @@ export const getGoalsByTopicWithStats = async (req: AuthRequest, res: Response) 
         res.status(500).json({message: err.message});
     }
 }
+
+export const reorderGoals = async (req: AuthRequest, res: Response) => {
+    const updates: { _id: string; order: number }[] = req.body;
+
+    if (!Array.isArray(updates)) {
+        res.status(400).json({message: 'Invalid input format'});
+        return
+    }
+
+    try {
+        await GoalService.reorder(req.user!.id, updates);
+        res.status(200).json({message: 'Goal order updated'});
+        return
+    } catch (err: any) {
+        console.error("Error reordering goals:", err);
+        return
+        res.status(500).json({message: 'Server error'});
+    }
+};

@@ -3,7 +3,7 @@ import {
     createGoal,
     getGoals,
     updateGoal,
-    deleteGoal, getGoal, getGoalsByTopicWithStats,
+    deleteGoal, getGoal, getGoalsByTopicWithStats, reorderGoals,
 } from '../controllers/goal.controller';
 import {isAuthenticated} from '../middleware/isAuthenticated';
 
@@ -12,11 +12,13 @@ const router = Router();
 
 router.use(isAuthenticated);
 
-router.post('/', createGoal);
+
 router.get('/', getGoals);
+router.patch('/reorder', reorderGoals);
 router.get('/:id', getGoal);
 router.put('/:id', updateGoal);
 router.delete('/:id', deleteGoal);
+router.post('/topic/:topicId', createGoal);
 router.get('/topic/:topicId', getGoalsByTopicWithStats);
 
 

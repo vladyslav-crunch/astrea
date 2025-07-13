@@ -5,7 +5,7 @@ type InputProps = {
     label?: string;
     icon?: string;
     hint?: string;
-    error?: string;
+    error?: string | null;
     variant?: string;
     onHintClick?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
@@ -32,11 +32,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         className={`
                         ${styles.input}
                         ${error ? styles.inputError : ''}
-                         ${variant === 'modal' ? styles.inputModal : ''}`}
+                        ${variant === 'modal' ? styles.inputModal : ''}
+                         ${variant === 'tabs' ? styles.inputTabs : ''}  // ✅ Add this line
+                         `}
                         ref={ref}
                         {...rest}
                     />
-
                 </div>
             </>
         );
