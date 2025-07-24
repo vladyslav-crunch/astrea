@@ -1,5 +1,5 @@
 .goalContainer {
-    height: 120px;
+    min-height: 120px;
     background: #FAF7FF;
     border: 1px solid #6D6D6D;
     border-radius: 15px;
@@ -39,9 +39,18 @@
 .goalTitle {
     font-size: 16px;
     font-weight: 500;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 5px;
 }
 
 .goalDescription {
     font-size: 14px;
     font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

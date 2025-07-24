@@ -3,5 +3,36 @@
     flex-direction: column;
     gap: 24px;
     cursor: pointer;
+    height: calc(100% - 65px);
+    overflow-y: auto;
+    width: calc(100% + 10px);
+    padding-right: 10px;
+    padding-top: 10px;
+    overflow-x: hidden;
+}
 
+.goalsListContainer::-webkit-scrollbar {
+    width: 6px; /* thin scrollbar */
+}
+
+.goalsListContainer::-webkit-scrollbar-track {
+    background: transparent; /* no track background */
+}
+
+.goalsListContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* light gray thumb */
+    border-radius: 6px; /* rounded edges */
+}
+
+.goalsListContainer::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3); /* slightly darker on hover */
+}
+
+.noGoalsMessage {
+    font-size: 24px;
+    color: #555555;
+    height: calc(100% - 65px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -17,6 +17,7 @@ import {useGoalsByTopic, useReorderGoals} from "../../../hooks/useGoal.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {useHandleGoalReorder} from "../../../hooks/useHandleGoarReorder.ts";
 import {useEffect} from "react";
+import Spinner from "../../ui/common/spinner/spinner.tsx";
 
 
 function GoalList() {
@@ -40,6 +41,15 @@ function GoalList() {
 
     const filteredGoals = goals.filter(goal => !goal.isDefault);
 
+    if (isLoading) {
+        return (
+            <div className={styles.noGoalsMessage}>
+                <Spinner/>
+            </div>
+        );
+    }
+
+
     return (
         <DndContext
             sensors={sensors}
@@ -54,12 +64,13 @@ function GoalList() {
                 strategy={verticalListSortingStrategy}
             >
                 <div className={styles.goalsListContainer}>
+
                     {filteredGoals.length > 0 ? (
                         filteredGoals.map(goal => (
                             <Goal key={goal._id} goal={goal}/>
                         ))
                     ) : (
-                        <p className={styles.noGoalsMessage}>You need to add goals first.</p>
+                        <div className={styles.noGoalsMessage}>Create your first goal</div>
                     )}
                 </div>
             </SortableContext>
