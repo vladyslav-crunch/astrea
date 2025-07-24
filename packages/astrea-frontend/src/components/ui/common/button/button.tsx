@@ -2,20 +2,26 @@ import * as React from "react";
 import styles from "./button.module.css"
 
 
-export enum BUTTON_TYPE_CLASSES {
+export enum BUTTON_VARIANT {
     base = "base",
-    purple = "purple",
-    google = "google",
+    modal = "modal",
 }
 
+export enum BUTTON_COLOR {
+    purple = "purple",
+    google = "google",
+    red = "red",
+    white = "white",
+}
 
 type ButtonProps = {
     children: React.ReactNode;
-    buttonType?: BUTTON_TYPE_CLASSES;
+    buttonType?: BUTTON_VARIANT;
+    buttonColor?: BUTTON_COLOR;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-function Button({children, buttonType = BUTTON_TYPE_CLASSES.base, ...rest}: ButtonProps) {
-    const buttonClass = `${styles.button} ${styles[buttonType]}`;
+function Button({children, buttonType = BUTTON_VARIANT.base, buttonColor = BUTTON_COLOR.purple, ...rest}: ButtonProps) {
+    const buttonClass = `${styles.button} ${styles[buttonType]} ${styles[buttonColor]}`;
     return (
         <button className={buttonClass} {...rest}>
             {children}

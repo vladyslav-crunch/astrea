@@ -1,0 +1,24 @@
+.editGoalForm {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.editGoalFormInformation {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.editGoalFormAward {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.editGoalFooter {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

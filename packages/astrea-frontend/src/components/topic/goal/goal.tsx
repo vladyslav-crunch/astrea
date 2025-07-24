@@ -2,13 +2,14 @@ import {useSortable} from "@dnd-kit/sortable";
 import {CSS} from "@dnd-kit/utilities";
 import {GoalWithStats} from "astrea-shared/types/goal.type.ts";
 import styles from "./goal.module.css";
+import {useNavigate} from "react-router-dom";
 
 type GoalProps = {
     goal: GoalWithStats;
-    onSelectGoal: (goalId: string) => void;
 };
 
-function Goal({goal, onSelectGoal}: GoalProps) {
+
+function Goal({goal}: GoalProps) {
     const {
         attributes,
         listeners,
@@ -23,7 +24,7 @@ function Goal({goal, onSelectGoal}: GoalProps) {
         transition,
         touchAction: "manipulation",
     };
-
+    const navigate = useNavigate();
     return (
         <div
             ref={setNodeRef}
@@ -31,13 +32,13 @@ function Goal({goal, onSelectGoal}: GoalProps) {
             {...attributes}
             {...listeners}
             className={`${styles.goalContainer} ${isDragging ? styles.dragging : ''}`}
-            onClick={() => onSelectGoal(goal._id)}
+            onClick={() => navigate(`/topic/${goal.topicId}/${goal._id}`)}
         >
             {goal.dueToday ? (
                 <span className={styles.todayCount}>{goal.dueToday}</span>
             ) : ""}
-            <h3>{goal.title}</h3>
-            <p>{goal.description}</p>
+            <h3 className={styles.goalTitle}>{goal.title}</h3>
+            <p className={styles.goalDescription}>{goal.description}</p>
         </div>
     );
 }

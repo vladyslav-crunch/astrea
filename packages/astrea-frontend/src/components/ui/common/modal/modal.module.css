@@ -6,13 +6,13 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: 2;
 }
 
 .modal {
     position: relative;
     background-color: white;
-    max-width: 35rem;
+    max-width: 40rem;
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -40,14 +40,14 @@
 }
 
 .content {
-    margin-top: 17px;
+    margin: 17px 0;
 }
 
 .footer {
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-top: 1px solid #e5e7eb;
+  
 }
 
 button {

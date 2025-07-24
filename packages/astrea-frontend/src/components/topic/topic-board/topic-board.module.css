@@ -1,0 +1,52 @@
+/* .boardContainer - remove z-index unless stacking needed */
+.boardContainer {
+    width: 100%;
+    position: relative; /* needed if .tabHeader uses absolute positioning */
+}
+
+/* Lower z-index for header */
+.tabs {
+    position: absolute;
+    top: -30px;
+    left: 10px;
+    display: flex;
+    gap: 10px;
+    padding: 0 5px;
+    z-index: 1; /* behind tabContent */
+}
+
+/* Higher z-index for content */
+.boardContent {
+    height: 100%;
+    background-color: #ffffff;
+    border: #c5c5c5 solid 1px;
+    border-radius: 17px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* required for z-index to apply */
+    z-index: 2;
+    padding: 24px 16px;
+}
+
+
+.tab {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 15px 15px 0 0;
+    background-color: #abb4f7;
+    color: #ffffff;
+    font-weight: 500;
+    cursor: pointer;
+    transform: translateY(3px); /* lowered slightly */
+    transition: background-color 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+}
+
+.tab:hover {
+    filter: brightness(0.98); /* slightly darker */
+}
+
+.active {
+    background-color: #fc9c9c;
+    color: #ffffff;
+    transform: translateY(-1px); /* raise active tab */
+}
+

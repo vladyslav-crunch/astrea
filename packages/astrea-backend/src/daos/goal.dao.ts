@@ -49,6 +49,7 @@ export const getGoalsWithStats = async (userId: string, topicId: string) => {
                 description: 1,
                 modifier: 1,
                 topicId: 1,
+                isDefault: 1,
                 createdAt: 1,
                 updatedAt: 1,
                 taskCount: {$size: '$tasks'},
@@ -98,6 +99,7 @@ export const getGoalsWithStats = async (userId: string, topicId: string) => {
     ]);
 };
 
+
 export const reorderGoals = async (
     userId: string,
     updates: { _id: string; order: number }[]
@@ -117,4 +119,12 @@ export const incrementOrders = async (userId: string, topicId: string) => {
         {userId, topicId},
         {$inc: {order: 1}}
     );
+};
+
+export const findDefaultByTopic = async (userId: string, topicId: string) => {
+    return Goal.findOne({
+        userId,
+        topicId,
+        isDefault: true
+    });
 };

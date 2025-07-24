@@ -1,6 +1,6 @@
 import Input from "../../ui/common/input/input.tsx";
-import Button from "../../ui/common/button/button.tsx";
-import {BUTTON_TYPE_CLASSES} from "../../ui/common/button/button.tsx";
+import Button, {BUTTON_COLOR} from "../../ui/common/button/button.tsx";
+import {BUTTON_VARIANT} from "../../ui/common/button/button.tsx";
 import styles from "./sign-form.module.css"
 import {Link} from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
@@ -50,10 +50,10 @@ function SignInForm() {
 
             {errors.root && (<p className={styles.formErrorMessage}>{errors.root.message}</p>)}
             <div className={styles.formButtons}>
-                <Button buttonType={BUTTON_TYPE_CLASSES.purple} type={"submit"}
+                <Button buttonType={BUTTON_VARIANT.base} type={"submit"}
                         disabled={isSubmitting}>{isSubmitting ? <Spinner/> : "Sign up"}</Button>
                 <Button onClick={() => alert("Will be soon")}
-                        buttonType={BUTTON_TYPE_CLASSES.google} type={"button"}>Google</Button>
+                        buttonColor={BUTTON_COLOR.google}>Google</Button>
             </div>
             <p className={styles.formHelper}>Already have an account? <Link to="/auth/sign-in">Sign in</Link></p>
         </form>

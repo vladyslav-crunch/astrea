@@ -13,6 +13,7 @@ export type Goal = GoalBase & {
     _id: string;
     createdAt: string;
     updatedAt: string;
+    isDefault: boolean;
 }
 
 export type GoalWithStats = Goal & {

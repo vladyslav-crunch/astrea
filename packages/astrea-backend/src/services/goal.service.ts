@@ -37,3 +37,7 @@ export const reorder = async (
 ) => {
     return GoalDAO.reorderGoals(userId, updates);
 };
+
+export const getDefault = async (userId: string, topicId: string) => {
+    return GoalDAO.findDefaultByTopic(userId, topicId);
+};

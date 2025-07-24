@@ -81,3 +81,13 @@ export async function reorderGoals(
         true
     );
 }
+
+export async function getDraftGoal(topicId: string) {
+    return await request<{ goal: Goal }>(
+        `${BASE_URL}/topic/${topicId}/drafts`,
+        {
+            method: 'GET',
+        },
+        true
+    );
+}

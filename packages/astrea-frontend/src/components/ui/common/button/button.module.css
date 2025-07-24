@@ -12,8 +12,12 @@
 }
 
 .base {
-    background-color: #fff;
-    color: #000;
+}
+
+.modal {
+    height: 50px;
+    font-size: 18px;
+    border-radius: 15px;
 }
 
 .purple {
@@ -24,7 +28,6 @@
 
     &:hover {
         background-color: #B469FF;
-
     }
 }
 
@@ -32,4 +35,19 @@
     background-color: white;
     color: #BC7BFD;
     border: 1px solid #413162;
+}
+
+.red {
+    background-color: #fd9d9d;
+    color: #fff;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #f68383;
+    }
+
+    &:disabled {
+        background-color: #b7b4c0;
+        cursor: not-allowed;
+    }
 }

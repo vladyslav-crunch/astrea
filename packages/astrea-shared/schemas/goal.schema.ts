@@ -19,7 +19,7 @@ export const createGoalSchema = z.object({
 export type CreateGoalInput = z.infer<typeof createGoalSchema>;
 
 export const updateGoalSchema = z.object({
-    title: z.string().optional(),
+    title: z.string().min(1, "Title is required"),
     description: z.string().optional(),
     topicId: z.string().optional(),
     modifier: z.object({

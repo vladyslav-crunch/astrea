@@ -1,7 +1,7 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {
     createGoal,
-    deleteGoal,
+    deleteGoal, getDraftGoal,
     getGoalById,
     getGoalsByTopic, reorderGoals,
     updateGoal,
@@ -15,16 +15,17 @@ export function useGoalsByTopic(topicId: string) {
         queryFn: () => getGoalsByTopic(topicId),
         enabled: !!topicId,
         select: (data) => data.goals,
+        retry: false
     });
 }
 
 // ⬇️ Get one goal by ID
-export function useGoal(goalId: string) {
+export function useGoal(goalId: string, options?: { enabled?: boolean }) {
     return useQuery({
         queryKey: ['goal', goalId],
         queryFn: () => getGoalById(goalId),
-        enabled: !!goalId,
-        select: (data) => data.goal,
+        enabled: !!goalId && (options?.enabled ?? true),
+        select: (data) => data,
     });
 }
 
@@ -74,5 +75,18 @@ export function useReorderGoals(topicId: string) {
             // Invalidate and refetch to ensure correct order
             queryClient.invalidateQueries({queryKey: ['goals', topicId]});
         },
+    });
+}
+
+export function useDraftGoal(
+    topicId: string,
+    options?: { enabled?: boolean }
+) {
+    return useQuery({
+        queryKey: ['goals', topicId, 'default'],
+        queryFn: () => getDraftGoal(topicId),
+        select: (data) => data.goal,
+        retry: false,
+        enabled: !!topicId && (options?.enabled ?? true),
     });
 }

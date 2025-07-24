@@ -1,17 +1,26 @@
 import styles from "./input.module.css";
 import * as React from "react";
 
+export enum INPUT_OPTION_CLASSES {
+    base = "base",
+    modal = "modal",
+    tabs = "tabs",
+    error = "error",
+}
+
 type InputProps = {
     label?: string;
     icon?: string;
     hint?: string;
     error?: string | null;
-    variant?: string;
+    option?: `${INPUT_OPTION_CLASSES}`;
     onHintClick?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
+
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({label, icon, hint, onHintClick, error, variant, ...rest}, ref) => {
+    ({label, icon, hint, onHintClick, error, option = INPUT_OPTION_CLASSES.base, ...rest}, ref) => {
+        const inputClass = `${styles.input} ${option ? styles[option] : ""} ${error ? styles.inputError : ""}`;
         return (
             <>
 
@@ -22,22 +31,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                             {hint}
                         </p>
                     )}
+
+                    {icon && <img className={styles.icon} src={`/icons/auth/${icon}.svg`} alt={icon}/>}
+                    <input className={inputClass} ref={ref} {...rest}/>
                     {error && (
-                        <p className={styles.inputErrorHint}>{error}</p>
+                        <p className={option === INPUT_OPTION_CLASSES.modal ? styles.inputModalErrorHint : styles.inputErrorHint}>{error}</p>
                     )
                     }
-
-                    {icon && <img className={styles.icon} src={`/icons/${icon}.svg`} alt={icon}/>}
-                    <input
-                        className={`
-                        ${styles.input}
-                        ${error ? styles.inputError : ''}
-                        ${variant === 'modal' ? styles.inputModal : ''}
-                         ${variant === 'tabs' ? styles.inputTabs : ''}  // ✅ Add this line
-                         `}
-                        ref={ref}
-                        {...rest}
-                    />
                 </div>
             </>
         );

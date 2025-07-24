@@ -1,16 +1,19 @@
 # 🧠 Astrea – Habits Tracker with Rewards & Gamified Experience
 
-Astrea is an ongoing full-stack web application designed to help users develop and maintain positive habits through a gamified experience. Built with React, Express.js, Node.js, and MongoDB, the app introduces motivation-driven habit tracking with points, levels, and rewards.
+Astrea is an ongoing full-stack web application designed to help users develop and maintain positive habits through a
+gamified experience. Built with React, Express.js, Node.js, and MongoDB, the app introduces motivation-driven habit
+tracking with points, levels, and rewards.
 
 ---
 
 ## 🚧 Project Status
 
-This project is currently in active development. Core features are being implemented, and functionality is subject to change as the app evolves.
+This project is currently in active development. Core features are being implemented, and functionality is subject to
+change as the app evolves.
 
 ---
 
-## ✨ Goals
+## ✨ GoalsPreview
 
 - Track daily and weekly habits
 - Earn points for completing tasks
@@ -22,15 +25,16 @@ This project is currently in active development. Core features are being impleme
 
 ## 🛠 Tech Stack
 
-- **Frontend:** React  
-- **Backend:** Express.js (Node.js)  
+- **Frontend:** React
+- **Backend:** Express.js (Node.js)
 - **Database:** MongoDB (Mongoose)
 
 ---
 
 ## 🔧 Setup Instructions (Coming Soon)
 
-Instructions for local development, environment variables, and database setup will be added here once the core structure is complete.
+Instructions for local development, environment variables, and database setup will be added here once the core structure
+is complete.
 
 ---
 
