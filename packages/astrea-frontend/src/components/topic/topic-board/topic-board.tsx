@@ -1,16 +1,16 @@
-// topic-board.tsx
 import styles from './topic-board.module.css';
 import {useParams} from "react-router-dom";
-import {useState} from "react";
 import {useGoalsByTopic} from "../../../hooks/useGoal.ts";
-import GoalPanel, {GoalPanelType} from "../goal-panel/goal-panel.tsx";
+import GoalPanel from "../goal-panel/goal-panel.tsx";
+import {useTabContext} from "../../../context/tab-context.tsx";
+import Spinner from "../../ui/common/spinner/spinner.tsx";
 
 function TopicBoard() {
-    const [activeTab, setActiveTab] = useState<GoalPanelType>('drafts');
+    const {activeTab, setActiveTab} = useTabContext();
     const {topicId} = useParams<{ topicId: string }>();
-    const {data: goals = [], isLoading, isError, error} = useGoalsByTopic(topicId!);
+    const {data: goals = [], isLoading, isError} = useGoalsByTopic(topicId!);
 
-    if (isLoading) return <p>Loading...</p>;
+
     if (isError || !goals) return <p>Failed to load goals</p>;
 
     return (
@@ -37,7 +37,8 @@ function TopicBoard() {
             </div>
 
             <div className={styles.boardContent}>
-                <GoalPanel type={activeTab} goals={goals}/>
+                {isLoading ? (<div className={styles.goalLoading}><Spinner/></div>) :
+                    <GoalPanel type={activeTab} goals={goals}/>}
             </div>
         </div>
     );

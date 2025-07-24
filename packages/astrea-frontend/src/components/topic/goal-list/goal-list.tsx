@@ -22,7 +22,7 @@ import Spinner from "../../ui/common/spinner/spinner.tsx";
 
 function GoalList() {
     const {topicId} = useParams<{ topicId: string }>();
-    const {data: goals = [], isLoading, isError, error} = useGoalsByTopic(topicId!);
+    const {data: goals = [], isLoading, isError} = useGoalsByTopic(topicId!);
     const {mutate: reorderGoals} = useReorderGoals(topicId!);
     const navigate = useNavigate();
     useEffect(() => {

@@ -12,6 +12,7 @@ export enum BUTTON_COLOR {
     google = "google",
     red = "red",
     white = "white",
+    cancel = "cancel",
 }
 
 type ButtonProps = {

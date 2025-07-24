@@ -41,13 +41,14 @@
 
 .content {
     margin: 17px 0;
+    color: #555555;
 }
 
 .footer {
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-  
+
 }
 
 button {

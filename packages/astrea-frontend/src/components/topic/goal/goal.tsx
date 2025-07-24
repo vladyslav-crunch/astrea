@@ -3,6 +3,7 @@ import {CSS} from "@dnd-kit/utilities";
 import {GoalWithStats} from "astrea-shared/types/goal.type.ts";
 import styles from "./goal.module.css";
 import {useNavigate} from "react-router-dom";
+import {useTabContext} from "../../../context/tab-context.tsx";
 
 type GoalProps = {
     goal: GoalWithStats;
@@ -10,6 +11,14 @@ type GoalProps = {
 
 
 function Goal({goal}: GoalProps) {
+    const {setActiveTab} = useTabContext();
+    const navigate = useNavigate();
+
+    function handleGoalClick() {
+        navigate(`/topic/${goal.topicId}/${goal._id}`)
+        setActiveTab("goals");
+    }
+
     const {
         attributes,
         listeners,
@@ -24,7 +33,7 @@ function Goal({goal}: GoalProps) {
         transition,
         touchAction: "manipulation",
     };
-    const navigate = useNavigate();
+
     return (
         <div
             ref={setNodeRef}
@@ -32,7 +41,7 @@ function Goal({goal}: GoalProps) {
             {...attributes}
             {...listeners}
             className={`${styles.goalContainer} ${isDragging ? styles.dragging : ''}`}
-            onClick={() => navigate(`/topic/${goal.topicId}/${goal._id}`)}
+            onClick={handleGoalClick}
         >
             {goal.dueToday ? (
                 <span className={styles.todayCount}>{goal.dueToday}</span>

@@ -50,3 +50,8 @@
     transform: translateY(-1px); /* raise active tab */
 }
 
+.goalLoading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
