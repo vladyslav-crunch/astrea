@@ -5,7 +5,7 @@ import {GoalWithStats} from "astrea-shared/types/goal.type.ts";
 import GoalProgressRing from "../../ui/goal/goal-progress-ring/goal-progress-ring.tsx";
 import {useState} from "react";
 import GoalEditModal from "../../ui/goal/modals/goal-edit-modal.tsx";
-import GoalTasks from "../goal-tasks/goal-tasks.tsx";
+import GoalKanban from "../goal-tasks/goal-kanban.tsx";
 
 export type GoalPanelType = 'goals' | 'drafts' | 'overall';
 
@@ -59,7 +59,7 @@ function GoalPanel({type = 'drafts', goals}: GoalPanelProps) {
             }
             {selectedGoal && (<>
                 <div className={styles.goalPanelDivider}/>
-                <GoalTasks/>
+                <GoalKanban/>
                 <GoalEditModal isOpen={isOpen} onClose={() => setIsOpen(false)} goal={selectedGoal}/></>)}
         </div>
     );

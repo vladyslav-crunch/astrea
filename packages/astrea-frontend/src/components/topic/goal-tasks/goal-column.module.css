@@ -1,0 +1,10 @@
+.goalColumn {
+    width: 250px;
+}
+
+.tasksContainer{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}

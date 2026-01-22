@@ -1,0 +1,8 @@
+.columnsContainer{
+    margin-top: 17px;
+    display: flex;
+    gap: 40px;
+}
+
+
+/*className="flex flex-col flex-grow p-4 gap-3 overflow-y-auto"*/
