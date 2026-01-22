@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.19",
+    "@types/lodash": "^4.17.23",
     "concurrently": "^9.1.2"
   },
   "dependencies": {
