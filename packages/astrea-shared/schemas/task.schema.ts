@@ -1,4 +1,3 @@
-// task.schema.ts
 import {z} from 'zod';
 
 export const difficultyEnum = z.enum(['easy', 'medium', 'hard']);
@@ -12,8 +11,13 @@ export const createTaskSchema = z.object({
     topicId: z.string(),
     goalId: z.string().optional(),
     dueDate: z.string().datetime().optional(),
-    status: statusEnum.optional(),
+    status: statusEnum,
+    order: z.number().optional(),
     microtasks: z.array(z.string()).optional(),
 });
 
+export type CreateTaskInput = z.infer<typeof createTaskSchema>;
+
 export const updateTaskSchema = createTaskSchema.partial();
+
+export type UpdateTaskInput = z.infer<typeof updateTaskSchema>;

@@ -6,8 +6,9 @@ import {
     getTasksByTopic,
     getTasksByGoal,
     updateTask,
-    deleteTask, getTaskById,
+    deleteTask, getTaskById, reorderTasks,
 } from '../controllers/task.controller';
+
 
 const router = Router();
 
@@ -20,5 +21,5 @@ router.get('/topic/:topicId', getTasksByTopic);
 router.get('/goal/:goalId', getTasksByGoal);
 router.put('/:id', updateTask);
 router.delete('/:id', deleteTask);
-
+router.patch('/reorder', reorderTasks);
 export default router;

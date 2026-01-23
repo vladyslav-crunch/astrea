@@ -104,3 +104,18 @@ export const getTaskById = async (req: AuthRequest, res: Response) => {
         res.status(500).json({message: err.message});
     }
 };
+
+export const reorderTasks = async (req: AuthRequest, res: Response) => {
+    const updates = req.body; // [{ _id, order }]
+    if (!Array.isArray(updates)) {
+        res.status(400).json({ message: 'Invalid payload' });
+        return
+    }
+
+    try {
+        await TaskService.reorderTasks(req.user!.id, updates);
+        res.json({ message: 'Tasks reordered' });
+    } catch (err: any) {
+        res.status(500).json({ message: err.message });
+    }
+};

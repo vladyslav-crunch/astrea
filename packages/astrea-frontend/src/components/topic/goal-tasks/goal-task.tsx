@@ -1,6 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Task } from "./goal-kanban.tsx";
+import {Task} from "astrea-shared/types/task.type.ts";
+
 
 interface Props {
     task: Task;
@@ -15,7 +16,7 @@ function GoalTask({ task }: Props) {
         transition,
         isDragging,
     } = useSortable({
-        id: task.id,
+        id: task._id,
         data: {
             type: "Task",
             task,
@@ -36,7 +37,7 @@ function GoalTask({ task }: Props) {
             {...listeners}
             className="bg-white p-3 h-[75px] rounded-md shadow-sm cursor-grab hover:shadow-md"
         >
-            {task.content}
+            {task.title}
         </div>
     );
 }

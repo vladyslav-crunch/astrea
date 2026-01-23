@@ -1,16 +1,16 @@
-import { Column, Id, Task } from "./goal-kanban.tsx";
 import { SortableContext } from "@dnd-kit/sortable";
 import { useDroppable } from "@dnd-kit/core";
 import GoalTask from "./goal-task.tsx";
 import styles from './goal-column.module.css'
+import {Task} from "astrea-shared/types/task.type.ts";
+import {Column} from "./columns.ts";
 interface Props {
     column: Column;
     tasks: Task[];
-    createTask: (columnId: Id) => void;
 }
 
-function GoalColumn({ column, tasks, createTask }: Props) {
-    const taskIds = tasks.map((task) => task.id);
+function GoalColumn({ column, tasks }: Props) {
+    const taskIds = tasks.map((task) => task._id);
 
     const { setNodeRef } = useDroppable({
         id: column.id,
@@ -28,16 +28,10 @@ function GoalColumn({ column, tasks, createTask }: Props) {
             <div className={styles.tasksContainer}>
                 <SortableContext items={taskIds}>
                     {tasks.map((task) => (
-                        <GoalTask key={task.id} task={task} />
+                        <GoalTask key={task._id} task={task} />
                     ))}
                 </SortableContext>
             </div>
-            <button
-                className="px-4 py-2 bg-purple-100 border-t border-purple-300 text-purple-700 text-sm hover:bg-purple-200"
-                onClick={() => createTask(column.id)}
-            >
-                Add new task
-            </button>
         </div>
     );
 }

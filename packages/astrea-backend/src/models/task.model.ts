@@ -17,6 +17,7 @@ const taskSchema = new mongoose.Schema({
         default: 'upcoming',
         required: true
     },
+    order: { type: Number, default: 0 },
     dueDate: {type: Date},
     microtasks: [String],
 }, {timestamps: true});

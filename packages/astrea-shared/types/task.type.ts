@@ -8,6 +8,7 @@ export type TaskBase = {
     description?: string;
     difficulty: TaskDifficulty;
     status: TaskStatus;
+    order: number;
     dueDate?: string;
     microtasks: string[];
 };

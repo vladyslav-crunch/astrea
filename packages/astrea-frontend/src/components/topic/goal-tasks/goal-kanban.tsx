@@ -1,55 +1,33 @@
-import {useCallback, useState} from "react";
-import {DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, UniqueIdentifier,} from "@dnd-kit/core";
-import {arrayMove} from "@dnd-kit/sortable";
-import {createPortal} from "react-dom";
-import {debounce} from "lodash";
-import styles from "./goal-kanban.module.css"
+import {useEffect, useState } from "react";
+import {
+    DndContext,
+    DragEndEvent,
+    DragOverEvent,
+    DragOverlay,
+    DragStartEvent,
+} from "@dnd-kit/core";
+import { createPortal } from "react-dom";
+import styles from "./goal-kanban.module.css";
 import GoalColumn from "./goal-column.tsx";
 import GoalTask from "./goal-task.tsx";
+import { useTasksByGoal, useReorderTasks } from "../../../hooks/useTask.ts";
+import { Task } from "astrea-shared/types/task.type.ts";
+import {COLUMNS} from "./columns.ts";
 
-/* ---------------- TYPES ---------------- */
 
-export type Id = UniqueIdentifier;
+type GoalKanbanProps = {
+    goalId: string;
+}
 
-export type Column = {
-    id: Id;
-    title: string;
-};
-
-export type Task = {
-    id: Id;
-    content: string;
-    columnId: Id;
-};
-
-/* ---------------- STATIC COLUMNS ---------------- */
-
-const COLUMNS: Column[] = [
-    { id: "todo", title: "To Do" },
-    { id: "in-progress", title: "In Progress" },
-    { id: "done", title: "Done" },
-];
-
-/* ---------------- COMPONENT ---------------- */
-
-function GoalKanban() {
+function GoalKanban({ goalId }: GoalKanbanProps) {
+    const { data: fetchedTasks = [], isLoading, isError } = useTasksByGoal(goalId!);
+    const { mutate: reorderTasksMutation } = useReorderTasks(goalId!);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [activeTask, setActiveTask] = useState<Task | null>(null);
 
-    function generateId(): Id {
-        return crypto.randomUUID();
-    }
-
-    function createTask(columnId: Id) {
-        const newTask: Task = {
-            id: generateId(),
-            columnId,
-            content: `Task ${tasks.length + 1}`,
-        };
-        setTasks((prev) => [...prev, newTask]);
-    }
-
-    /* ---------- DRAG HANDLERS ---------- */
+    useEffect(() => {
+        setTasks(fetchedTasks);
+    }, [fetchedTasks, goalId]);
 
     function onDragStart(event: DragStartEvent) {
         if (event.active.data.current?.type === "Task") {
@@ -57,62 +35,108 @@ function GoalKanban() {
         }
     }
 
-    function onDragEnd(_: DragEndEvent) {
-        setActiveTask(null);
-    }
-
-    const debouncedDragOver = useCallback(
-        debounce((event: DragOverEvent) => {
+    const debouncedDragOver = (event: DragOverEvent) => {
             const { active, over } = event;
-            if (!over) return;
+            if (!over || !active) return;
 
             const activeId = active.id;
             const overId = over.id;
-
             if (activeId === overId) return;
 
-            setTasks((tasks) => {
-                const activeIndex = tasks.findIndex((t) => t.id === activeId);
-                if (activeIndex === -1) return tasks;
-
-                const activeTask = tasks[activeIndex];
+            setTasks((prevTasks) => {
+                const activeTask = prevTasks.find((t) => t._id === activeId);
+                if (!activeTask) return prevTasks;
 
                 const isOverTask = over.data.current?.type === "Task";
                 const isOverColumn = over.data.current?.type === "Column";
 
-                /* ---- DROP OVER TASK ---- */
+                // --- Drop over task ---
                 if (isOverTask) {
-                    const overIndex = tasks.findIndex((t) => t.id === overId);
-                    if (overIndex === -1) return tasks;
+                    const overTask = prevTasks.find((t) => t._id === overId);
+                    if (!overTask) return prevTasks;
 
-                    const overTask = tasks[overIndex];
+                    const newStatus = overTask.status;
+                    const isSameColumn = activeTask.status === newStatus;
 
-                    const updated = tasks.map((t) =>
-                        t.id === activeId
-                            ? { ...t, columnId: overTask.columnId }
-                            : t,
+                    //full list of target column including active task
+                    const fullTargetTasks = prevTasks
+                        .filter((t) => t.status === newStatus)
+                        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+                    const activeIndex = fullTargetTasks.findIndex((t) => t._id === activeId);
+                    const overIndex = fullTargetTasks.findIndex((t) => t._id === overId);
+
+                    if (overIndex === -1) return prevTasks;
+
+                    let insertIndex = overIndex;
+
+                    if (isSameColumn && activeIndex < overIndex) {
+                        insertIndex += 1;
+                    }
+
+                    // Remove active task
+                    const filteredTargetTasks = fullTargetTasks.filter(
+                        (t) => t._id !== activeId
                     );
 
-                    return arrayMove(updated, activeIndex, overIndex);
+                    const movedTask: Task = {
+                        ...activeTask,
+                        status: newStatus,
+                    };
+
+                    const newTargetTasks = [
+                        ...filteredTargetTasks.slice(0, insertIndex),
+                        movedTask,
+                        ...filteredTargetTasks.slice(insertIndex),
+                    ].map((t, idx) => ({
+                        ...t,
+                        order: idx,
+                    }));
+
+                    return prevTasks.map(
+                        (t) => newTargetTasks.find((nt) => nt._id === t._id) || t
+                    );
                 }
 
-                /* ---- DROP OVER COLUMN ---- */
+                // --- Drop over column ---
                 if (isOverColumn) {
-                    if (activeTask.columnId === overId) return tasks;
+                    const newStatus = overId as Task["status"];
+                    if (activeTask.status === newStatus) return prevTasks;
 
-                    return tasks.map((t) =>
-                        t.id === activeId ? {...t, columnId: overId} : t,
-                    );
+                    const columnTasks = prevTasks
+                        .filter((t) => t.status === newStatus)
+                        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+                    const updatedTask: Task = {
+                        ...activeTask,
+                        status: newStatus,
+                        order: columnTasks.length,
+                    };
+
+                    return prevTasks.map((t) => (t._id === activeId ? updatedTask : t));
                 }
 
-                return tasks;
+                return prevTasks;
             });
-        }, 10),
-        [],
-    );
+        }
+
+
+
+    function onDragEnd(_: DragEndEvent) {
+        if (!activeTask) return;
+
+        const updates = tasks.map((t) => ({
+            _id: t._id,
+            status: t.status,
+            order: t.order ?? 0,
+        }));
+
+        reorderTasksMutation(updates);
+        setActiveTask(null);
+    }
+
 
     /* ---------- RENDER ---------- */
-
     return (
         <DndContext
             onDragStart={onDragStart}
@@ -124,8 +148,9 @@ function GoalKanban() {
                     <GoalColumn
                         key={column.id}
                         column={column}
-                        tasks={tasks.filter((task)=> task.columnId === column.id)}
-                        createTask={createTask}
+                        tasks={tasks
+                            .filter((task) => task.status === column.id)
+                            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))}
                     />
                 ))}
             </div>
@@ -134,7 +159,7 @@ function GoalKanban() {
                 <DragOverlay>
                     {activeTask && <GoalTask task={activeTask} />}
                 </DragOverlay>,
-                document.body,
+                document.body
             )}
         </DndContext>
     );

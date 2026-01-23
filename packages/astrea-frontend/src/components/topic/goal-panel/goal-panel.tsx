@@ -59,7 +59,7 @@ function GoalPanel({type = 'drafts', goals}: GoalPanelProps) {
             }
             {selectedGoal && (<>
                 <div className={styles.goalPanelDivider}/>
-                <GoalKanban/>
+                <GoalKanban goalId={selectedGoal._id} />
                 <GoalEditModal isOpen={isOpen} onClose={() => setIsOpen(false)} goal={selectedGoal}/></>)}
         </div>
     );
