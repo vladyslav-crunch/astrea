@@ -21,6 +21,7 @@ function GoalTask({ task }: Props) {
             type: "Task",
             task,
         },
+        // disabled: task.status === "done",
     });
 
     const style = {
