@@ -72,7 +72,15 @@ export function useCreateTask(topicId?: string, goalId?: string) {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (body: CreateTaskInput) => createTask(body),
+        mutationFn: async (body: Omit<CreateTaskInput, 'topicId' | 'goalId' | 'status' | 'difficulty'>) => {
+            return await createTask({
+                ...body,
+                topicId: topicId!,
+                goalId: goalId!,
+                status: "upcoming",
+                difficulty: "easy"
+            });
+        },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["tasks"] });
 

@@ -1,7 +1,7 @@
 import styles from './topic-board.module.css';
 import {useParams} from "react-router-dom";
 import {useGoalsByTopic} from "../../../hooks/useGoal.ts";
-import GoalPanel from "../goal-panel/goal-panel.tsx";
+import GoalPanel from "../../goal/goal-panel/goal-panel.tsx";
 import {useTabContext} from "../../../context/tab-context.tsx";
 import Spinner from "../../ui/common/spinner/spinner.tsx";
 

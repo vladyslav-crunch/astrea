@@ -7,7 +7,7 @@ interface Props {
     task: Task;
 }
 
-function GoalTask({ task }: Props) {
+function GoalKanbanTask({ task }: Props) {
     const {
         setNodeRef,
         attributes,
@@ -43,4 +43,4 @@ function GoalTask({ task }: Props) {
     );
 }
 
-export default GoalTask;
+export default GoalKanbanTask;

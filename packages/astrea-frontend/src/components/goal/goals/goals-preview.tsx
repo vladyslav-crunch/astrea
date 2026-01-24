@@ -1,9 +1,9 @@
 // components/goals/GoalsPreview.tsx
 import {useParams} from "react-router-dom";
-import {useCreateGoal} from "../../../hooks/useGoal";
+import {useCreateGoal} from "../../../hooks/useGoal.ts";
 import {toast} from "sonner";
 import styles from "./goals.module.css";
-import GoalInput from "../goal-input/goal-input.tsx";
+import GoalCreateInput from "../../ui/goal/goal-create-input/goal-create-input.tsx";
 import GoalList from "../goal-list/goal-list.tsx";
 
 
@@ -27,7 +27,7 @@ function GoalsPreview() {
     return (
         <div className={styles.goalsPreviewContainer}>
             <div className={styles.goalsPreviewContent}>
-                <GoalInput onCreate={handleCreateGoal}/>
+                <GoalCreateInput onCreate={handleCreateGoal}/>
                 <GoalList/>
             </div>
         </div>

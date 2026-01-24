@@ -6,6 +6,7 @@ export enum INPUT_OPTION_CLASSES {
     modal = "modal",
     tabs = "tabs",
     error = "error",
+    kanban = "kanban",
 }
 
 type InputProps = {

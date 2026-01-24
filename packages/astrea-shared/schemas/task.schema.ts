@@ -9,7 +9,7 @@ export const createTaskSchema = z.object({
     description: z.string().optional(),
     difficulty: difficultyEnum,
     topicId: z.string(),
-    goalId: z.string().optional(),
+    goalId: z.string(),
     dueDate: z.string().datetime().optional(),
     status: statusEnum,
     order: z.number().optional(),

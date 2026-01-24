@@ -6,9 +6,13 @@ import {createTaskSchema} from 'astrea-shared';
 type TaskInput = z.infer<typeof createTaskSchema>;
 
 export const create = async (userId: string, data: TaskInput) => {
-    const maxOrderTask = await TaskDAO.getTasksByGoal(userId, data.goalId || '');
-    const maxOrder = maxOrderTask.length ? Math.max(...maxOrderTask.map(t => t.order)) : -1;
-    return TaskDAO.createTask({ ...data, userId, order: maxOrder + 1 });
+    const goalId = data.goalId || '';
+    await TaskDAO.incrementOrdersByGoal(userId, goalId);
+    return TaskDAO.createTask({
+        ...data,
+        userId,
+        order: 0,
+    });
 };
 
 export const getAll = (userId: string) => TaskDAO.getUserTasks(userId);

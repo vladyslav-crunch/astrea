@@ -4,10 +4,10 @@ import {
 } from "@dnd-kit/core";
 import { createPortal } from "react-dom";
 import styles from "./goal-kanban.module.css";
-import GoalColumn from "./goal-column";
-import GoalTask from "./goal-task";
-import { useTasksByGoal } from "../../../hooks/useTask";
-import { COLUMNS } from "./columns";
+import GoalKanbanColumn from "./goal-kanban-column/goal-kanban-column.tsx";
+import GoalKanbanTask from "./goal-kanban-task/goal-kanban-task.tsx";
+import { useTasksByGoal } from "../../../hooks/useTask.ts";
+import { COLUMNS } from "./goal-kanban-column/columns.ts";
 import {useKanbanDnd} from "../../../hooks/useKanbanDnd.ts";
 
 
@@ -59,7 +59,7 @@ function GoalKanban({ goalId }: GoalKanbanProps) {
         >
             <div className={styles.columnsContainer}>
                 {COLUMNS.map((column) => (
-                    <GoalColumn
+                    <GoalKanbanColumn
                         key={column.id}
                         column={column}
                         tasks={tasks
@@ -71,7 +71,7 @@ function GoalKanban({ goalId }: GoalKanbanProps) {
 
             {createPortal(
                 <DragOverlay>
-                    {activeTask && <GoalTask task={activeTask} />}
+                    {activeTask && <GoalKanbanTask task={activeTask} />}
                 </DragOverlay>,
                 document.body
             )}

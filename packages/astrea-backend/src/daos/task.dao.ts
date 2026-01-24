@@ -11,6 +11,16 @@ export const bulkReorderTasks = async (userId: string, updates: { _id: string; o
     return Task.bulkWrite(bulkOps);
 };
 
+export const incrementOrdersByGoal = async (
+    userId: string,
+    goalId: string
+) => {
+    await Task.updateMany(
+        { userId, goalId },
+        { $inc: { order: 1 } }
+    );
+};
+
 export const createTask = (data: any) => Task.create(data);
 
 export const getUserTasks = (userId: string) => Task.find({userId});

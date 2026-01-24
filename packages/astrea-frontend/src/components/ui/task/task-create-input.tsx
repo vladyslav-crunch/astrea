@@ -1,11 +1,12 @@
 import {useState} from "react";
-import Input, {INPUT_OPTION_CLASSES} from "../../ui/common/input/input.tsx";
+import Input, {INPUT_OPTION_CLASSES} from "../common/input/input.tsx";
 
-type GoalInputProps = {
+
+type TaskInputProps = {
     onCreate: (title: string) => void;
 };
 
-function GoalInput({onCreate}: GoalInputProps) {
+function TaskCreateInput({onCreate}: TaskInputProps) {
     const [title, setTitle] = useState("");
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -20,9 +21,9 @@ function GoalInput({onCreate}: GoalInputProps) {
 
     return (
         <Input
-            option={INPUT_OPTION_CLASSES.tabs}
+            option={INPUT_OPTION_CLASSES.kanban}
             type="text"
-            placeholder="+ Add new goal"
+            placeholder="+ Add new Task"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             onKeyDown={handleKeyPress}
@@ -30,4 +31,4 @@ function GoalInput({onCreate}: GoalInputProps) {
     );
 }
 
-export default GoalInput;
+export default TaskCreateInput;
