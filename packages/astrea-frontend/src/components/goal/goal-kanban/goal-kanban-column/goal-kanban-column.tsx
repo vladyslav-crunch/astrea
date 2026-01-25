@@ -11,11 +11,11 @@ import {toast} from "sonner";
 interface Props {
     column: Column;
     tasks: Task[];
+    goalId: string;
 }
 
-function GoalKanbanColumn({ column, tasks }: Props) {
+function GoalKanbanColumn({ column, tasks, goalId }: Props) {
     const taskIds = tasks.map((task) => task._id);
-    const {goalId} = useParams<{ goalId: string }>();
     const {topicId} = useParams<{ topicId: string }>();
 
     const {mutate: createTask} = useCreateTask(topicId!, goalId!);

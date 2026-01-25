@@ -62,6 +62,7 @@ function GoalKanban({ goalId }: GoalKanbanProps) {
                     <GoalKanbanColumn
                         key={column.id}
                         column={column}
+                        goalId={goalId}
                         tasks={tasks
                             .filter((t) => t.status === column.id)
                             .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))}

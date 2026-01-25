@@ -18,12 +18,12 @@ type UseKanbanDndProps = {
 export function useKanbanDnd({ initialTasks, goalId }: UseKanbanDndProps) {
     const { mutate: reorderTasks } = useReorderTasks(goalId);
 
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const [tasks, setTasks] = useState<Task[]>(initialTasks);
     const [activeTask, setActiveTask] = useState<Task | null>(null);
 
     useEffect(() => {
         setTasks(initialTasks);
-    }, [initialTasks, goalId]);
+    }, [initialTasks]);
 
     function onDragStart(event: DragStartEvent) {
         if (event.active.data.current?.type === "Task") {
@@ -35,7 +35,7 @@ export function useKanbanDnd({ initialTasks, goalId }: UseKanbanDndProps) {
         debounce((event: DragOverEvent) => {
             handleDragOver(event);
         }, 10),
-        [tasks]
+        []
     );
 
     function handleDragOver(event: DragOverEvent) {
