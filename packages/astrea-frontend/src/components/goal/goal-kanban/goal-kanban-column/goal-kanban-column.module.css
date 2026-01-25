@@ -1,10 +1,49 @@
 .goalColumn {
-    width: 250px;
+    width: 260px;
+    height: 100%;
 }
 
 .tasksContainer{
+    width: 260px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap:10px;
+    overflow-y: auto;
+    max-height: calc(100% - 200px);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0) transparent;
+    transition: scrollbar-color 0.3s;
+    & input{
+        width: 250px;
+    }
+}
+.tasksShowDone{
+    text-align: center;
+    margin-left: -10px;
+    color: rgba(67, 45, 116, 0.9);
+    cursor: pointer;
+    margin-top: 10px;
+}
+.tasksContainer:hover {
+    scrollbar-color: rgba(70, 70, 70, 0.2) transparent;
+}
+
+.tasksContainer::-webkit-scrollbar {
+    width: 6px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tasksContainer:hover::-webkit-scrollbar {
+    opacity: 1;
+}
+
+.tasksContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(197, 197, 197, 0.2);
+    border-radius: 3px;
+}
+
+.tasksContainer::-webkit-scrollbar-track {
+    background: transparent;
 }

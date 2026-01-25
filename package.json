@@ -16,7 +16,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.19",
     "@types/lodash": "^4.17.23",
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "prettier": "3.8.1"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

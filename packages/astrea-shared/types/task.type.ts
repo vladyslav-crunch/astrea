@@ -1,3 +1,5 @@
+import type {Microtask} from "./mircotask.type.ts";
+
 export type TaskStatus = 'upcoming' | 'in_progress' | 'done';
 export type TaskDifficulty = 'easy' | 'medium' | 'hard';
 
@@ -10,7 +12,7 @@ export type TaskBase = {
     status: TaskStatus;
     order: number;
     dueDate?: string;
-    microtasks: string[];
+    microtasks: Microtask[];
 };
 
 export type Task = TaskBase & {
