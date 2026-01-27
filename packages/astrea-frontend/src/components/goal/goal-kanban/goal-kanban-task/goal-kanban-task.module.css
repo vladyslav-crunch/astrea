@@ -10,7 +10,7 @@
     border: 1px solid #E6E6E6;
     transition: opacity 0.3s ease;
     width: 250px;
-    height: 110px;
+    min-height: 110px;
 }
 
 .goalKanbanTaskDone{

@@ -58,7 +58,7 @@ function GoalKanbanColumn({ column, tasks, goalId }: Props) {
           ))}
         </SortableContext>
       </div>
-      {column.id === "done" && (
+      {column.id === "done" && tasks.length > 3 && (
         <p className={styles.tasksShowDone}>Show all completed tasks</p>
       )}
     </div>
