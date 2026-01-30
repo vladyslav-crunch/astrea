@@ -1,4 +1,10 @@
-import { DndContext, DragOverlay } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { createPortal } from "react-dom";
 import styles from "./goal-kanban.module.css";
 import GoalKanbanColumn from "./goal-kanban-column/goal-kanban-column.tsx";
@@ -25,6 +31,14 @@ function GoalKanban({ goalId }: GoalKanbanProps) {
       goalId,
     });
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+  );
+
   if (isLoading) {
     return <div className={styles.state}>Loading tasks…</div>;
   }
@@ -40,6 +54,7 @@ function GoalKanban({ goalId }: GoalKanbanProps) {
 
   return (
     <DndContext
+      sensors={sensors}
       onDragStart={onDragStart}
       onDragOver={debouncedDragOver}
       onDragEnd={onDragEnd}

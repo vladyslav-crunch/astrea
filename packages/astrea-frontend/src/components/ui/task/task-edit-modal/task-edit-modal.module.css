@@ -1,25 +1,35 @@
-.editGoalForm {
+.editToastForm{
     display: flex;
+    flex: 1 1 auto;
     justify-content: space-between;
     gap: 24px;
-    width: 100%;
+    color: #3c3c3c ;
 }
 
-.editGoalFormInformation {
+.editTaskFormLeftSide{
     display: flex;
     flex-direction: column;
     gap: 12px;
-    flex: 1;
+    flex: 1 1 auto;
+    height: 100%;
 }
 
-.editGoalFormAward {
+.editTaskFormRightSide{
+
+}
+.editTaskFormRightSideData{
     display: flex;
-    flex-direction: column;
     gap: 12px;
 }
-
-.editGoalFooter {
+.editTaskFooter {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
+
+.editTaskFormMicrotasks{
+    margin-top: 10px;
+}
+
+
+

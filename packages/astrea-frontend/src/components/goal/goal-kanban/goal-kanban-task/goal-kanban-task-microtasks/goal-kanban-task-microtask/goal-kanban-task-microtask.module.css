@@ -1,0 +1,39 @@
+.microtaskContainer {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+}
+
+.checkbox {
+    margin-top:4px;
+    cursor: pointer;
+}
+
+.microtaskInput {
+    flex: 1;
+    resize: none;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow: hidden;
+}
+
+.microtaskInput::placeholder {
+    color: #999;
+}
+
+.deleteButton {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px;
+    opacity: 0.6;
+}
+
+.deleteButton:hover {
+    opacity: 1;
+}

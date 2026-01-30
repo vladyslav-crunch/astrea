@@ -1,0 +1,24 @@
+.rdp-root {
+    --rdp-accent-color: #bb7afb;
+    --rdp-day_button-border-radius: 0.25rem;
+    --rdp-day_button-height: 32px;
+    --rdp-day_button-width: 36px;
+}
+
+.rdp-day_button:hover {
+    border: 2px solid #bb7afb ;
+    color: #4c1d95;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.rdp-day_selected {
+    background-color: #bb7afb;
+    color: white;
+    border-radius: var(--rdp-day_button-border-radius);
+}
+
+.rdp-caption_label{
+    margin-left: 6px;
+}
