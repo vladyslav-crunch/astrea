@@ -13,12 +13,7 @@
     min-height: 110px;
 }
 
-.goalKanbanTaskDone{
-    opacity: 0.5 !important;
-    .taskTitle{
-        text-decoration: line-through;
-    }
-}
+
 
 .goalKanbanTask:hover {
 
@@ -95,4 +90,16 @@
 .taskDifficulty.hard {
     background-color: rgba(255, 72, 72, 0.37);
     color: #7f1d1d;
+}
+
+.goalKanbanTaskDue{
+    border: 2px solid #dcd1f6;
+}
+
+.goalKanbanTaskDone{
+    border: 1px solid #E6E6E6;
+    opacity: 0.5 !important;
+    .taskTitle{
+        text-decoration: line-through;
+    }
 }

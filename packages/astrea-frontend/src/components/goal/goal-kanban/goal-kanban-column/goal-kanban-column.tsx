@@ -8,7 +8,7 @@ import TaskCreateInput from "../../../ui/task/task-create-input.tsx";
 import { useCreateTask } from "../../../../hooks/useTask.ts";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
-
+import { isToday as isTodayDate } from "date-fns";
 interface Props {
   column: Column;
   tasks: Task[];
@@ -42,6 +42,11 @@ function GoalKanbanColumn({ column, tasks, goalId }: Props) {
     },
   });
 
+  const sortedTasks = [
+    ...tasks.filter((t) => t.dueDate && isTodayDate(new Date(t.dueDate))),
+    ...tasks.filter((t) => !t.dueDate || !isTodayDate(new Date(t.dueDate))),
+  ];
+
   return (
     <div ref={setNodeRef} className={styles.goalColumn}>
       <div>{column.title}</div>
@@ -53,9 +58,11 @@ function GoalKanbanColumn({ column, tasks, goalId }: Props) {
         <SortableContext
           items={column.id === "done" ? taskIds.slice(0, 3) : taskIds}
         >
-          {(column.id === "done" ? tasks.slice(0, 3) : tasks).map((task) => (
-            <GoalKanbanTask key={task._id} task={task} />
-          ))}
+          {(column.id === "done" ? sortedTasks.slice(0, 3) : sortedTasks).map(
+            (task) => (
+              <GoalKanbanTask key={task._id} task={task} />
+            ),
+          )}
         </SortableContext>
       </div>
       {column.id === "done" && tasks.length > 3 && (
