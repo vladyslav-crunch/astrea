@@ -1,4 +1,5 @@
 import User from "../models/user.model";
+import { getNextLevelExp } from "../utils/leveling.ts";
 
 export const findByEmail = (email: string) => User.findOne({ email });
 
@@ -10,17 +11,39 @@ export const create = (data: {
   password: string;
 }) => User.create(data);
 
-export const incrementRewards = (
+export const incrementRewards = async (
   userId: string,
-  rewards: { exp: number; coins: number },
+  reward: { exp?: number; coins?: number },
 ) => {
-  return User.updateOne(
-    { _id: userId },
-    {
-      $inc: {
-        exp: rewards.exp,
-        coins: rewards.coins,
-      },
-    },
-  );
+  const user = await User.findById(userId);
+  if (!user) throw new Error("User not found");
+
+  const prevLevel = user.level ?? 1;
+
+  user.exp = user.exp ?? 0;
+  user.coins = user.coins ?? 0;
+  user.level = user.level ?? 1;
+
+  if (reward.exp) user.exp += reward.exp;
+  if (reward.coins) user.coins += reward.coins;
+
+  while (user.exp >= getNextLevelExp(user.level)) {
+    user.exp -= getNextLevelExp(user.level);
+    user.level += 1;
+  }
+
+  while (user.exp < 0 && user.level > 1) {
+    user.level -= 1;
+    user.exp += getNextLevelExp(user.level);
+  }
+
+  if (user.level === 1 && user.exp < 0) {
+    user.exp = 0;
+  }
+
+  await user.save();
+  return {
+    user,
+    levelChange: user.level - prevLevel,
+  };
 };

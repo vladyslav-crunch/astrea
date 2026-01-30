@@ -37,9 +37,13 @@ async function grantReward(userId: string, task: TaskForReward) {
 
   const reward = calculateTaskReward(task.difficulty, modifier);
 
-  await UserDAO.incrementRewards(userId, reward);
+  const { levelChange } = await UserDAO.incrementRewards(userId, reward);
 
-  return { type: "granted", ...reward };
+  return {
+    type: "granted",
+    ...reward,
+    levelChange,
+  };
 }
 
 async function revokeReward(userId: string, task: TaskForReward) {
@@ -51,10 +55,14 @@ async function revokeReward(userId: string, task: TaskForReward) {
 
   const reward = calculateTaskReward(task.difficulty, modifier);
 
-  await UserDAO.incrementRewards(userId, {
+  const { levelChange } = await UserDAO.incrementRewards(userId, {
     exp: -reward.exp,
     coins: -reward.coins,
   });
 
-  return { type: "revoked", ...reward };
+  return {
+    type: "revoked",
+    ...reward,
+    levelChange,
+  };
 }

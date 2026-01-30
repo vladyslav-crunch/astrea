@@ -114,7 +114,7 @@ export function useUpdateTask(topicId?: string, goalId?: string) {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
-
+      queryClient.invalidateQueries();
       if (topicId) {
         queryClient.invalidateQueries({
           queryKey: ["tasks", "topic", topicId],

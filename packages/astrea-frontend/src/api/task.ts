@@ -56,7 +56,12 @@ export async function updateTask(taskId: string, body: UpdateTaskInput) {
   return await request<{
     message: string;
     task: Task;
-    reward: { type: "granted" | "revoked"; exp: number; coins: number } | null;
+    reward: {
+      type: "granted" | "revoked";
+      exp: number;
+      coins: number;
+      levelChange: number;
+    } | null;
   }>(
     `${BASE_URL}/${taskId}`,
     {

@@ -128,13 +128,22 @@ export function useKanbanDnd({ initialTasks, goalId }: UseKanbanDndProps) {
           onSuccess: (res) => {
             console.log(res);
             if (res.reward) {
-              const { type, exp, coins } = res.reward;
+              const { type, exp, coins, levelChange } = res.reward;
+
               if (type === "granted") {
                 playSound("/sounds/retro-game-coin-pickup.mp3");
                 toast.success(`+${exp} XP, +${coins} Astra coins`);
               } else {
                 playSound("/sounds/game-lose.mp3");
                 toast.error(`-${exp} XP, -${coins} Astra coins`);
+              }
+              if (levelChange > 0) {
+                playSound("/sounds/level-up.mp3");
+                toast.success(`🎉 Level up! +${levelChange}`);
+              }
+              if (levelChange < 0) {
+                playSound("/sounds/level-down.mp3", 0.05);
+                toast.warning(`⬇️ Level down`);
               }
             }
           },
