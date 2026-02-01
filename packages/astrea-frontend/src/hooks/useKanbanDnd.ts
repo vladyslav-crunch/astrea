@@ -109,7 +109,6 @@ export function useKanbanDnd({ initialTasks, goalId }: UseKanbanDndProps) {
       order: t.order ?? 0,
     }));
 
-    // 2️⃣ Send reorder request to backend
     reorderTasks(updates, {
       onError: (error) => {
         console.error("Failed to reorder tasks:", error);
@@ -118,15 +117,12 @@ export function useKanbanDnd({ initialTasks, goalId }: UseKanbanDndProps) {
       },
     });
 
-    // 3️⃣ Detect if active task status actually changed
     const movedTask = tasks.find((t) => t._id === activeTask._id);
     if (movedTask && movedTask.status !== activeTask.status) {
-      console.log(movedTask && movedTask.status !== activeTask.status);
       updateTaskMutation.mutate(
         { taskId: activeTask._id, body: { status: movedTask.status } },
         {
           onSuccess: (res) => {
-            console.log(res);
             if (res.reward) {
               const { type, exp, coins, levelChange } = res.reward;
 
