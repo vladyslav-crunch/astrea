@@ -8,8 +8,8 @@ import TaskCreateInput from "../../../ui/task/task-create-input.tsx";
 import { useCreateTask } from "@/hooks/useTask.ts";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
-import { isToday as isTodayDate } from "date-fns";
 import DoneTasksSheet from "@/components/goal/goal-kanban/done-tasks-sheet/done-tasks-sheet.tsx";
+import { isTaskDueOrOverdue } from "@/utility/taskDateHandlers.ts";
 interface Props {
   column: Column;
   tasks: Task[];
@@ -44,8 +44,8 @@ function GoalKanbanColumn({ column, tasks, goalId }: Props) {
   });
 
   const sortedTasks = [
-    ...tasks.filter((t) => t.dueDate && isTodayDate(new Date(t.dueDate))),
-    ...tasks.filter((t) => !t.dueDate || !isTodayDate(new Date(t.dueDate))),
+    ...tasks.filter((t) => isTaskDueOrOverdue(t)),
+    ...tasks.filter((t) => !isTaskDueOrOverdue(t)),
   ];
 
   return (

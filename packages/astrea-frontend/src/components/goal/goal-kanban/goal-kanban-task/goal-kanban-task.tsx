@@ -6,6 +6,7 @@ import { formatToMonthDay } from "@/utility/format-to-month-day.ts";
 import { useState } from "react";
 import TaskEditModal from "../../../ui/task/task-edit-modal/task-edit-modal.tsx";
 import { isToday } from "date-fns";
+import { isTaskOverdue } from "@/utility/taskDateHandlers.ts";
 
 interface Props {
   task: Task;
@@ -43,7 +44,7 @@ function GoalKanbanTask({ task }: Props) {
         style={dndStyle}
         {...attributes}
         {...listeners}
-        className={`${style.goalKanbanTask} ${task.status === "done" ? style.goalKanbanTaskDone : ""}  ${task.dueDate && isToday(task.dueDate) ? style.goalKanbanTaskDue : ""}`}
+        className={`${style.goalKanbanTask} ${task.status === "done" ? style.goalKanbanTaskDone : ""} ${task.dueDate && isToday(task.dueDate) ? style.goalKanbanTaskDue : ""} ${isTaskOverdue(task) ? style.goalKanbanTaskOverdue : ""}`}
         onClick={() => setEdit(true)}
       >
         <div className={style.taskHeader}>

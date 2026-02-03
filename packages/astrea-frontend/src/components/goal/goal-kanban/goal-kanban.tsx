@@ -9,9 +9,9 @@ import { createPortal } from "react-dom";
 import styles from "./goal-kanban.module.css";
 import GoalKanbanColumn from "./goal-kanban-column/goal-kanban-column.tsx";
 import GoalKanbanTask from "./goal-kanban-task/goal-kanban-task.tsx";
-import { useTasksByGoal } from "../../../hooks/useTask.ts";
+import { useTasksByGoal } from "@/hooks/useTask.ts";
 import { COLUMNS } from "./goal-kanban-column/columns.ts";
-import { useKanbanDnd } from "../../../hooks/useKanbanDnd.ts";
+import { useKanbanDnd } from "@/hooks/useKanbanDnd.ts";
 
 type GoalKanbanProps = {
   goalId: string;

@@ -92,6 +92,10 @@
     border: 2px solid #dcd1f6;
 }
 
+.goalKanbanTaskOverdue{
+    border: 2px solid #fda0a0;
+}
+
 .goalKanbanTaskDone{
     border: 1px solid #E6E6E6;
     opacity: 0.5 !important;
