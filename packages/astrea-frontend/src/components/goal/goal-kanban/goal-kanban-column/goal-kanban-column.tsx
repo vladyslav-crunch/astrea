@@ -5,10 +5,11 @@ import styles from "./goal-kanban-column.module.css";
 import { Task } from "astrea-shared/types/task.type.ts";
 import { Column } from "./columns.ts";
 import TaskCreateInput from "../../../ui/task/task-create-input.tsx";
-import { useCreateTask } from "../../../../hooks/useTask.ts";
+import { useCreateTask } from "@/hooks/useTask.ts";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { isToday as isTodayDate } from "date-fns";
+import DoneTasksSheet from "@/components/goal/goal-kanban/done-tasks-sheet/done-tasks-sheet.tsx";
 interface Props {
   column: Column;
   tasks: Task[];
@@ -65,8 +66,12 @@ function GoalKanbanColumn({ column, tasks, goalId }: Props) {
           )}
         </SortableContext>
       </div>
-      {column.id === "done" && tasks.length > 3 && (
-        <p className={styles.tasksShowDone}>Show all completed tasks</p>
+      {column.id === "done" && (
+        <DoneTasksSheet
+          tasks={sortedTasks}
+          topicId={topicId!}
+          goalId={goalId}
+        />
       )}
     </div>
   );

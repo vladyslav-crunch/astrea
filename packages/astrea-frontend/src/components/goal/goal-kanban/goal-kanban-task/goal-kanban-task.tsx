@@ -2,7 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Task } from "astrea-shared/types/task.type.ts";
 import style from "./goal-kanban-task.module.css";
-import { formatToMonthDay } from "../../../../utility/format-to-month-day.ts";
+import { formatToMonthDay } from "@/utility/format-to-month-day.ts";
 import { useState } from "react";
 import TaskEditModal from "../../../ui/task/task-edit-modal/task-edit-modal.tsx";
 import { isToday } from "date-fns";

@@ -14,10 +14,6 @@
 }
 
 
-
-.goalKanbanTask:hover {
-
-}
 .microtaskCounter{
     background-color: #e4e4e4;
     border-radius: 5px;
@@ -103,3 +99,78 @@
         text-decoration: line-through;
     }
 }
+
+.doneTaskSheetItem {
+    width: 100%;
+}
+
+.doneTaskWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.taskActionsWrapper {
+    overflow: hidden;
+    animation: wrapperSlideDown 0.2s ease-in-out;
+}
+
+.taskActionsWrapperExit {
+    animation: wrapperSlideUp 0.2s ease-in-out forwards;
+}
+
+.taskActions {
+    display: flex;
+    gap: 8px;
+    overflow: hidden;
+    animation: slideDown 0.2s ease-in-out;
+}
+
+.taskActionsExit {
+    animation: slideUp 0.2s ease-in-out forwards;
+}
+
+@keyframes wrapperSlideDown {
+    0% {
+        max-height: 0;
+        margin-top: 0;
+    }
+    100% {
+        max-height: 60px;
+        margin-top: 0;
+    }
+}
+
+@keyframes wrapperSlideUp {
+    0% {
+        max-height: 60px;
+        margin-top: 0;
+    }
+    100% {
+        max-height: 0;
+        margin-top: 0;
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+

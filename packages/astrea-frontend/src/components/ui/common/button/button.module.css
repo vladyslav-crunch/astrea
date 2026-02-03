@@ -1,6 +1,7 @@
 .button {
     display: flex;
     justify-content: center;
+    gap: 10px;
     align-items: center;
     width: 100%;
     height: 55px;
@@ -44,6 +45,22 @@
 
     &:hover {
         background-color: #f68383;
+    }
+
+    &:disabled {
+        background-color: #b7b4c0;
+        cursor: not-allowed;
+    }
+}
+
+.white {
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #9f9f9f;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #fafafa;
     }
 
     &:disabled {
