@@ -41,8 +41,8 @@ export const getUserTopicsWithTaskCount = async (userId: string) => {
   const startOfToday = new Date();
   startOfToday.setHours(0, 0, 0, 0);
 
-  const startOfTomorrow = new Date();
-  startOfTomorrow.setHours(24, 0, 0, 0);
+  const startOfTomorrow = new Date(startOfToday);
+  startOfTomorrow.setDate(startOfTomorrow.getDate() + 1);
 
   return Topic.aggregate([
     { $match: { userId: new Types.ObjectId(userId) } },
@@ -94,6 +94,7 @@ export const getUserTopicsWithTaskCount = async (userId: string) => {
               as: "task",
               cond: {
                 $and: [
+                  { $ifNull: ["$$task.dueDate", false] },
                   { $lt: ["$$task.dueDate", startOfTomorrow] },
                   { $ne: ["$$task.status", "done"] },
                 ],

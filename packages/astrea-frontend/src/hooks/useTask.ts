@@ -150,6 +150,9 @@ export function useDeleteTask(topicId?: string, goalId?: string) {
         queryClient.invalidateQueries({
           queryKey: ["tasks", "goal", goalId],
         });
+        queryClient.invalidateQueries({
+          queryKey: ["goals", topicId],
+        });
       }
     },
   });

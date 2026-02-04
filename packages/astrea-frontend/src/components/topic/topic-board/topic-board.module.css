@@ -1,10 +1,8 @@
-/* .boardContainer - remove z-index unless stacking needed */
 .boardContainer {
     width: 100%;
-    position: relative; /* needed if .tabHeader uses absolute positioning */
+    position: relative;
 }
 
-/* Lower z-index for header */
 .tabs {
     position: absolute;
     top: -30px;
@@ -12,23 +10,23 @@
     display: flex;
     gap: 10px;
     padding: 0 5px;
-    z-index: 1; /* behind tabContent */
+    z-index: 1;
 }
 
-/* Higher z-index for content */
 .boardContent {
     height: 100%;
     background-color: #ffffff;
     border: #c5c5c5 solid 1px;
     border-radius: 17px;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
-    position: relative; /* required for z-index to apply */
+    position: relative;
     z-index: 2;
     padding: 24px 16px;
 }
 
 
 .tab {
+    position: relative;
     padding: 8px 14px;
     border: none;
     border-radius: 15px 15px 0 0;
@@ -36,22 +34,45 @@
     color: #ffffff;
     font-weight: 500;
     cursor: pointer;
-    transform: translateY(3px); /* lowered slightly */
+    transform: translateY(3px);
     transition: background-color 0.2s ease, transform 0.2s ease, filter 0.2s ease;
 }
 
 .tab:hover {
-    filter: brightness(0.98); /* slightly darker */
+    filter: brightness(0.95);
 }
 
 .active {
     background-color: #fc9c9c;
     color: #ffffff;
-    transform: translateY(-1px); /* raise active tab */
+    transform: translateY(-1px);
 }
 
 .goalLoading {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.tabDueCounter{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -5px;
+    right: -8px;
+    background-color: #fb9595;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+    transition: background-color 0.2s ease;
+}
+
+.active .tabDueCounter {
+    background-color: #9880fa;
 }
