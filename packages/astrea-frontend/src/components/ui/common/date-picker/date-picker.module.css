@@ -21,20 +21,36 @@
     border-radius: 12px;
     background-color: #f3f3f3;
     outline: none;
-    padding: 0.5rem 0.75rem;
-    width: 125px;
+    width: 155px;
     height: 50px;
     border: 1px solid #ffffff;
     cursor: pointer;
     font-size: 14px;
+    padding-left: 40px;
 }
 .icon {
     position: absolute;
-    right: 12px;
+    left: 12px;
     top: 50%;
     transform: translateY(-54%);
     color: #565656;
     cursor: pointer;
     display: flex;
     align-items: center;
+}
+
+.clearIcon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #565656;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.clearIcon:hover {
+    color: #ef4444;
 }

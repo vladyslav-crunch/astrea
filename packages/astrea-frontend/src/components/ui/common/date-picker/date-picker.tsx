@@ -4,7 +4,7 @@ import "react-day-picker/style.css";
 import { format } from "date-fns";
 import styles from "./date-picker.module.css";
 import "./data-picker-rules.css";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, X } from "lucide-react";
 
 type DatePickerProps = {
   value?: string | null;
@@ -40,6 +40,13 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       setOpen(false);
     };
 
+    const handleClear = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setSelected(undefined);
+      onChange(null);
+      setOpen(false);
+    };
+
     return (
       <div ref={wrapperRef} className={styles.wrapper}>
         <input
@@ -51,6 +58,11 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           placeholder={placeholder || "Select a date"}
           className={styles.input}
         />
+        {selected && (
+          <span className={styles.clearIcon} onClick={handleClear}>
+            <X size={18} strokeWidth={2} />
+          </span>
+        )}
         <span className={styles.icon} onClick={() => setOpen(!open)}>
           <CalendarDays size={20} strokeWidth={1.6} />
         </span>

@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { Topic, updateTopicSchema } from "astrea-shared";
 import ConfirmModal from "../../common/confirm-modal/confirm-modal.tsx";
 import { Trash } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface TopicEditModalProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ const TopicEditModal = ({ isOpen, onClose, topic }: TopicEditModalProps) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const { mutate, isPending } = useUpdateTopic();
   const deleteTopicMutation = useDeleteTopic();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTitle(topic.title);
@@ -64,6 +66,7 @@ const TopicEditModal = ({ isOpen, onClose, topic }: TopicEditModalProps) => {
         toast.success("Topic deleted successfully.");
         setIsConfirmOpen(false);
         onClose();
+        navigate("/");
       },
       onError: (err) => {
         console.error("Delete failed:", err);
