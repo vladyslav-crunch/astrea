@@ -7,6 +7,7 @@ import logger from "./middleware/logger.ts";
 import topicRoutes from "./routes/topic.routes.ts";
 import goalRoutes from "./routes/goal.routes.ts";
 import taskRoutes from "./routes/task.routes.ts";
+import shopRoutes from "./routes/shop.routes.ts";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/topics", topicRoutes);
 app.use("/api/goals", goalRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/shop", shopRoutes);
 
 app.listen(PORT, () => {
   console.log(`✅  Server running on http://localhost:${PORT}`);

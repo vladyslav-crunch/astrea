@@ -11,6 +11,9 @@ const userSchema = new Schema<IUser>(
     profilePic: { type: String, default: "" },
     exp: { type: Number, default: 0 },
     coins: { type: Number, default: 0 },
+    inventory: { type: [String], default: [] },
+    border: { type: String, default: "" },
+    title: { type: String, default: "" },
   },
   { timestamps: true },
 );

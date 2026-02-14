@@ -2,3 +2,22 @@
 .progressCircle circle {
     transition: stroke-dashoffset 0.8s ease;
 }
+
+.badgeContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.levelBadge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.levelBadge:hover {
+    transform: scale(1.1);
+}

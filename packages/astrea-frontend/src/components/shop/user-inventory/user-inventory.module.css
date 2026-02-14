@@ -1,0 +1,155 @@
+.inventorySection {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f5ff;
+  border: 2px solid #9769FF;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  overflow: hidden;
+}
+
+.inventoryHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inventoryCoins{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid #E1D4FF;
+}
+.inventoryItemsQuantity{
+  background-color: #ffffff;
+  border: 1px solid #E1D4FF;
+  padding: 15px;
+  border-radius: 15px;
+  color: #4b4b4b;
+  font-weight: 400;
+}
+
+.inventoryExp{
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid #E1D4FF;
+}
+
+.inventoryUserStats{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inventoryCoinsHeader{
+  font-size: 18px;
+  color: #4b4b4b;
+  display: flex;
+  gap: 5px;
+}
+.inventoryCoinsFooter{
+  font-size: 14px;
+  font-weight: 300;
+  color: #848484;
+
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.25rem 0;
+}
+
+.sectionSubtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.categoriesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar for categories wrapper */
+.categoriesWrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.categoriesWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.categoriesWrapper::-webkit-scrollbar-thumb {
+  background: #9769FF;
+  border-radius: 10px;
+}
+
+.categoriesWrapper::-webkit-scrollbar-thumb:hover {
+  background: #7B4FE8;
+}
+
+.categorySection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.categoryTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #9769FF;
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #9769FF;
+}
+
+.inventoryItemsGrid {
+  border: 1px solid #d2c6ee;
+  margin-top: 10px;
+  background-color: #fff;
+  border-radius: 14px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-auto-rows: 100px;
+  gap: 10px;
+  justify-content: center;
+  height: 100%;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #9769FF;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.emptyState h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #9769FF;
+}
+
+.emptyState p {
+  color: #999;
+}

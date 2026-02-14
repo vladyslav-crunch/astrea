@@ -1,0 +1,22 @@
+.userInventoryBadgeContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 15px;
+    border: 1px solid #d2c6ee;
+    height: 100%;
+    width: 150px;
+}
+.userInventoryBadgeUsername{
+    color: #555555;
+    text-transform: uppercase;
+    margin-top: 5px;
+    font-size: 24px;
+}
+
+.userInventoryBadgeTitle{
+    color: #BC7BFD;
+}

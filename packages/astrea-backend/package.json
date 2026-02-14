@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "bun run ./src/main.ts",
-    "dev": "bun run --watch ./src/main.ts"
+    "dev": "bun run --watch ./src/main.ts",
+    "seed:shop": "bun run ./src/utils/seed-shop.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "astrea-shared": "^1.0.0",
+    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^5.1.0",

@@ -1,0 +1,42 @@
+.shopContainer {
+  width: 100%;
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Split Layout */
+.splitLayout {
+  display: grid;
+  margin-top: 25px;
+  grid-template-columns: 1fr 410px;
+  gap: 2rem;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .splitLayout {
+    grid-template-columns: 1fr 350px;
+  }
+}
+
+@media (max-width: 968px) {
+  .splitLayout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .shopContainer {
+    padding: 1rem;
+  }
+
+  .splitLayout {
+    gap: 1rem;
+    grid-template-rows: 1fr 350px;
+  }
+}

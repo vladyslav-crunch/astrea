@@ -1,0 +1,291 @@
+.shopItem {
+  background: white;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+/* Shop variant - larger, more detailed */
+.shopItem.shop {
+  min-height: 120px;
+}
+
+/* Inventory variant - compact */
+.shopItem.inventory {
+  min-height: 100px;
+}
+
+/* Owned items in shop - disabled appearance */
+.shopItem.shop.owned {
+  opacity: 0.6;
+  border: 1px solid #e0e0e0;
+  background: #f5f5f5;
+}
+
+.shopItem.equipped {
+  border: 1px solid #4CAF50;
+  background: linear-gradient(135deg, #f0fff0 0%, #e8f5e9 100%);
+}
+
+/* Clickable owned items - hover effects (only for inventory) */
+.shopItem.clickableItem {
+  cursor: pointer;
+}
+
+.shopItem.clickableItem:hover {
+  background: linear-gradient(135deg, #f8f5ff 0%, #ede8ff 100%);
+}
+
+/* Prevent hover effects on owned items in shop */
+.shopItem.shop.owned.clickableItem:hover {
+  background: #f5f5f5;
+  transform: none;
+}
+
+.shopItem.clickableItem:active {
+  transform: translateY(0);
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.itemName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.rarity {
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.rarity.common {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.rarity.rare {
+  background: #64B5F6;
+  color: white;
+}
+
+.rarity.epic {
+  background: #9C27B0;
+  color: white;
+}
+
+.rarity.legendary {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #333;
+}
+
+.itemDescription {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  min-height: 3rem;
+}
+
+.itemPreview {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  flex: 1;
+  padding: 0.5rem;
+}
+
+/* Shop variant - larger preview */
+.shop .borderPreview {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.shop .titlePreview {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Inventory variant - smaller preview */
+.inventory .borderPreview {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.inventory .titlePreview {
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.itemFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e0e0e0;
+  background: #fde2b8;
+  padding: 0 10px;
+  border-radius: 0 0 11px 11px;
+  flex-shrink: 0;
+}
+
+.itemFooter.centered {
+  justify-content: center;
+}
+
+.shop .itemFooter {
+  min-height: 33px;
+}
+
+.inventory .itemFooter {
+  display: none;
+}
+
+.itemPrice span {
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  display: flex;
+  color: #A76700;
+}
+
+.levelRequirement {
+  color: #4A3C69;
+}
+
+.inventory .levelRequirement {
+  font-size: 0.7rem;
+}
+
+.itemActions {
+  display: flex;
+  gap: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 0 0 13px 13px;
+}
+
+.shop .itemActions {
+  padding: 0.75rem;
+}
+
+.inventory .itemActions {
+  padding: 0.25rem;
+}
+
+.purchaseButton,
+.equipButton,
+.unequipButton {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inventory .purchaseButton,
+.inventory .equipButton,
+.inventory .unequipButton {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.7rem;
+  border-radius: 6px;
+}
+
+.purchaseButton {
+  background: linear-gradient(135deg, #9769FF 0%, #7B4FE8 100%);
+  color: white;
+}
+
+.purchaseButton:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.purchaseButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.equipButton {
+  background: #4CAF50;
+  color: white;
+}
+
+.equipButton:hover:not(:disabled) {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+.equipButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.unequipButton {
+  background: #FF9800;
+  color: white;
+}
+
+.unequipButton:hover:not(:disabled) {
+  background: #F57C00;
+  transform: scale(1.05);
+}
+
+.unequipButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.soldBadge,
+.equippedBadge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.inventory .soldBadge,
+.inventory .equippedBadge {
+  top: 0.25rem;
+  right: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6rem;
+  border-radius: 8px;
+}
+
+.soldBadge {
+  background: #FF4444;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.equippedBadge {
+  background: #4CAF50;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}

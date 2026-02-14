@@ -1,0 +1,119 @@
+.shopSection {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.itemsContainer {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.categoriesWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar for categories wrapper */
+.categoriesWrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.categoriesWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.categoriesWrapper::-webkit-scrollbar-thumb {
+  background: #9769FF;
+  border-radius: 10px;
+}
+
+.categoriesWrapper::-webkit-scrollbar-thumb:hover {
+  background: #7B4FE8;
+}
+
+.categorySection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.categoryTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #555555;
+  margin: 0;
+}
+
+.customRewards {
+  width: 35%;
+}
+
+.customRewards p{
+  color: #555555;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sectionHeader {
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #555555;
+  margin: 0 0 0.25rem 0;
+}
+
+.sectionSubtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.itemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  grid-auto-rows: 120px;
+  gap: 1rem;
+}
+
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #9769FF;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.emptyState h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.emptyState p {
+  color: #999;
+}
