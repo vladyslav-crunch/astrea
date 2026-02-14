@@ -24,6 +24,7 @@
   border-radius: 15px;
   border: 1px solid #E1D4FF;
 }
+
 .inventoryItemsQuantity{
   background-color: #ffffff;
   border: 1px solid #E1D4FF;
@@ -83,7 +84,6 @@
   padding-right: 0.5rem;
 }
 
-/* Scrollbar for categories wrapper */
 .categoriesWrapper::-webkit-scrollbar {
   width: 8px;
 }
@@ -129,6 +129,13 @@
   gap: 10px;
   justify-content: center;
   height: 100%;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.inventoryItemsGrid::-webkit-scrollbar {
+  display: none;
 }
 
 .loading {

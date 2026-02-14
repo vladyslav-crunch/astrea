@@ -1,0 +1,194 @@
+.modalHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+    align-items: center;
+}
+
+.itemName {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #4A4A4A;
+  margin: 0;
+}
+
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.rarityBadge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.rarityBadge.common {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.rarityBadge.rare {
+  background: #64B5F6;
+  color: white;
+}
+
+.rarityBadge.epic {
+  background: #823fff;
+  color: white;
+}
+
+.rarityBadge.legendary {
+  background: #FFD700;
+  color: #333;
+}
+
+.levelBadge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #a876fd;
+  color: white;
+}
+
+.modalContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.footerButtons{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.previewSection {
+  width: 100%;
+  max-width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.borderPreview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.titlePreview {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.infoSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.description {
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 400px;
+}
+
+.priceSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priceDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fde2b8;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.priceAmount {
+  font-size: 18px;
+  font-weight: 400;
+  color: #FF9B65;
+}
+
+.warningText {
+  color: #dc2626;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.ownedBadge {
+  margin-top: 10px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  background: #4CAF50;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.equippedText {
+  color: #FFD700;
+}
+
+.cancelButton,
+.buyButton {
+  padding: 0.75rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.cancelButton:hover {
+  background: #d0d0d0;
+}
+
+.buyButton {
+  background: linear-gradient(135deg, #9769FF 0%, #7B4FE8 100%);
+  color: white;
+  min-width: 120px;
+}
+
+.buyButton:hover:not(:disabled) {
+  box-shadow: 0 4px 12px rgba(151, 105, 255, 0.3);
+}
+
+.buyButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}

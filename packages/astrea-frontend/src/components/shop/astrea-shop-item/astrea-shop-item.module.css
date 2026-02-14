@@ -9,17 +9,14 @@
   transition: all 0.2s ease;
 }
 
-/* Shop variant - larger, more detailed */
 .shopItem.shop {
   min-height: 120px;
 }
 
-/* Inventory variant - compact */
 .shopItem.inventory {
   min-height: 100px;
 }
 
-/* Owned items in shop - disabled appearance */
 .shopItem.shop.owned {
   opacity: 0.6;
   border: 1px solid #e0e0e0;
@@ -31,16 +28,10 @@
   background: linear-gradient(135deg, #f0fff0 0%, #e8f5e9 100%);
 }
 
-/* Clickable owned items - hover effects (only for inventory) */
 .shopItem.clickableItem {
   cursor: pointer;
 }
 
-.shopItem.clickableItem:hover {
-  background: linear-gradient(135deg, #f8f5ff 0%, #ede8ff 100%);
-}
-
-/* Prevent hover effects on owned items in shop */
 .shopItem.shop.owned.clickableItem:hover {
   background: #f5f5f5;
   transform: none;
@@ -110,7 +101,6 @@
   padding: 0.5rem;
 }
 
-/* Shop variant - larger preview */
 .shop .borderPreview {
   width: 60px;
   height: 60px;
@@ -122,7 +112,6 @@
   font-size: 1rem;
 }
 
-/* Inventory variant - smaller preview */
 .inventory .borderPreview {
   width: 50px;
   height: 50px;

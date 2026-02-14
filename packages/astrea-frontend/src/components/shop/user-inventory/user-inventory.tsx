@@ -18,7 +18,7 @@ function UserInventory({ items, isLoading }: UserInventoryProps) {
     <div className={styles.inventorySection}>
       <div className={styles.inventoryHeader}>
         <div className={styles.inventoryUserImage}>
-          <UserInventoryBadge user={user!} />
+          <UserInventoryBadge user={user!} items={items} />
         </div>
         <div className={styles.inventoryUserStats}>
           <UserInventoryExp />
