@@ -6,3 +6,5 @@ export * from "./schemas/goal.schema.ts";
 export * from "./schemas/task.schema.ts";
 export * from "./types/shop-item.type.ts";
 export * from "./schemas/shop.schema.ts";
+export * from "./types/custom-reward.type.ts";
+export * from "./schemas/custom-reward.schema.ts";

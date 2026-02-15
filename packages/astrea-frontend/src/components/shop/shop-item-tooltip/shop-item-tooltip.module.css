@@ -1,7 +1,7 @@
 /* Hover Tooltip Styles */
 .hoverTooltip {
   position: fixed;
-  z-index: 2;
+  z-index: 9999;
   opacity: 0;
   pointer-events: none;
   animation: tooltipFadeIn 0.2s ease forwards;
@@ -13,7 +13,7 @@
     transform: translateY(-50%) ;
   }
   to {
-    opacity: 1 ;
+    opacity: 1;
     transform: translateY(-50%) translateX(0);
   }
 }

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import * as ShopAPI from "../api/shop";
 import { toast } from "sonner";
+import { playSound } from "@/utility/playSound.ts";
 
 export const useShopItems = () => {
   return useQuery({
@@ -23,6 +24,7 @@ export const usePurchaseItem = () => {
     mutationFn: (itemId: string) => ShopAPI.purchaseItem(itemId),
     onSuccess: (data) => {
       toast.success(data.message);
+      playSound("/sounds/coin-spent.mp3");
       queryClient.invalidateQueries({ queryKey: ["session"] });
       queryClient.invalidateQueries({ queryKey: ["shop", "inventory"] });
     },

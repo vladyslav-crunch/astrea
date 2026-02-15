@@ -1,5 +1,6 @@
 import type { ShopItem } from "astrea-shared";
 import { CircleDollarSign } from "lucide-react";
+import { createPortal } from "react-dom";
 import styles from "./shop-item-tooltip.module.css";
 
 interface ShopItemTooltipProps {
@@ -8,7 +9,7 @@ interface ShopItemTooltipProps {
 }
 
 function ShopItemTooltip({ item, position }: ShopItemTooltipProps) {
-  return (
+  return createPortal(
     <div
       className={styles.hoverTooltip}
       style={{
@@ -47,7 +48,8 @@ function ShopItemTooltip({ item, position }: ShopItemTooltipProps) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

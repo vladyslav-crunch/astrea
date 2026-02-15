@@ -62,12 +62,59 @@
 
 .customRewards {
   width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
 }
 
-.customRewards p{
+.customRewardsTitle {
   color: #555555;
   font-size: 1.2rem;
   font-weight: 600;
+  margin: 0;
+}
+
+.customRewardsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar for custom rewards */
+.customRewardsContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.customRewardsContent::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.customRewardsContent::-webkit-scrollbar-thumb {
+  background: #9769FF;
+  border-radius: 10px;
+}
+
+.customRewardsContent::-webkit-scrollbar-thumb:hover {
+  background: #7B4FE8;
+}
+
+.rewardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.loadingRewards {
+  text-align: center;
+  padding: 1rem;
+  color: #9769FF;
+  font-size: 0.9rem;
 }
 
 .sectionHeader {
