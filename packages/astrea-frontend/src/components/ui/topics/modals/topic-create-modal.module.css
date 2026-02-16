@@ -1,0 +1,57 @@
+.topicCreateForm {
+    width: 100%;
+}
+
+.topicCreateFormContent {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.topicCreateFormPickers {
+    display: flex;
+    gap: 8px;
+}
+
+.topicCreateFormInput {
+    flex-grow: 1;
+}
+
+.topicCreateFormButton {
+    display: flex;
+}
+
+/* Mobile responsiveness - screens smaller than 768px */
+@media (max-width: 768px) {
+    .topicCreateFormContent {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .topicCreateFormPickers {
+        justify-content: center;
+    }
+
+    .topicCreateFormInput {
+        width: 100%;
+    }
+
+    .topicCreateFormButton {
+        width: 100%;
+    }
+
+    .topicCreateFormButton button {
+        width: 100% !important;
+    }
+}
+
+/* Extra small screens - phones in portrait mode */
+@media (max-width: 480px) {
+    .topicCreateFormContent {
+        gap: 10px;
+    }
+
+    .topicCreateFormPickers {
+        gap: 6px;
+    }
+}

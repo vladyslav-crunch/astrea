@@ -18,3 +18,17 @@
     gap: 0.8rem;
     margin-top: 0.8rem;
 }
+
+.addTopic{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 1.5rem;
+    right: 1rem;
+    background-color: #f1c78a;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+}

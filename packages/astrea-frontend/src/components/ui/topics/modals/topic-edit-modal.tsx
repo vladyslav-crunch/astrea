@@ -13,6 +13,7 @@ import { Topic, updateTopicSchema } from "astrea-shared";
 import ConfirmModal from "../../common/confirm-modal/confirm-modal.tsx";
 import { Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import styles from "./topic-edit-modal.module.css";
 
 interface TopicEditModalProps {
   isOpen: boolean;
@@ -80,19 +81,14 @@ const TopicEditModal = ({ isOpen, onClose, topic }: TopicEditModalProps) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <Modal.Title>Edit topic</Modal.Title>
         <Modal.Content>
-          <form
-            onSubmit={handleUpdate}
-            style={{
-              width: "100%",
-            }}
-          >
-            <div style={{ display: "flex", gap: "12px", width: "100%" }}>
-              <div style={{ display: "flex", gap: "8px" }}>
+          <form onSubmit={handleUpdate} className={styles.topicEditForm}>
+            <div className={styles.topicEditFormContent}>
+              <div className={styles.topicEditFormPickers}>
                 <ColorPicker value={color} onChange={setColor} />
                 <IconPicker value={icon} onChange={setIcon} />
               </div>
 
-              <div style={{ flexGrow: 1 }}>
+              <div className={styles.topicEditFormInput}>
                 <Input
                   option={INPUT_OPTION_CLASSES.modal}
                   placeholder="Enter topic title"
@@ -101,24 +97,26 @@ const TopicEditModal = ({ isOpen, onClose, topic }: TopicEditModalProps) => {
                 />
               </div>
 
-              <Button
-                buttonType={BUTTON_VARIANT.modal}
-                buttonColor={BUTTON_COLOR.red}
-                style={{ height: "50px", width: "50px" }}
-                onClick={() => setIsConfirmOpen(true)}
-                type="button"
-              >
-                <Trash color="#fff" size={20} />
-              </Button>
+              <div className={styles.topicEditFormButtons}>
+                <Button
+                  buttonType={BUTTON_VARIANT.modal}
+                  buttonColor={BUTTON_COLOR.red}
+                  style={{ height: "50px", width: "50px" }}
+                  onClick={() => setIsConfirmOpen(true)}
+                  type="button"
+                >
+                  <Trash color="#fff" size={20} />
+                </Button>
 
-              <Button
-                buttonType={BUTTON_VARIANT.modal}
-                type="submit"
-                style={{ height: "50px", width: "100px", fontSize: "16px" }}
-                disabled={isPending}
-              >
-                Update
-              </Button>
+                <Button
+                  buttonType={BUTTON_VARIANT.modal}
+                  type="submit"
+                  style={{ height: "50px", width: "100px", fontSize: "16px" }}
+                  disabled={isPending}
+                >
+                  Update
+                </Button>
+              </div>
             </div>
           </form>
         </Modal.Content>

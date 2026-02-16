@@ -44,3 +44,10 @@
     border-radius: 6px;
     background: #e0e0ff;
 }
+
+@media (max-width: 700px) {
+
+    .grid{
+        left: -235%;
+    }
+}
