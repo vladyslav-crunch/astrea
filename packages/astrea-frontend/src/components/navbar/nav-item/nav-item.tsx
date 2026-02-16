@@ -16,7 +16,7 @@ function NavItem({ path, icon }: NavItemProps) {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
-        setIconSize(60);
+        setIconSize(70);
       } else if (window.innerWidth <= 1024) {
         setIconSize(75);
       } else {

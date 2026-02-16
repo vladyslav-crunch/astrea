@@ -13,6 +13,6 @@
 
 .active {
     background-image: url("/icons/navbar/hexagon-active.svg");
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
