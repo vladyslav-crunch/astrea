@@ -5,3 +5,17 @@
     position: relative;
     height: 100vh;
 }
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .appLayoutContainer {
+        padding: 12px 2%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .appLayoutContainer {
+        padding: 10px 1.5%;
+    }
+}

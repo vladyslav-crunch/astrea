@@ -43,10 +43,24 @@ function GoalKanbanColumn({ column, tasks, goalId }: Props) {
     },
   });
 
-  const sortedTasks = [
-    ...tasks.filter((t) => isTaskDueOrOverdue(t)),
-    ...tasks.filter((t) => !isTaskDueOrOverdue(t)),
-  ];
+  // Sort tasks based on column type
+  const sortedTasks =
+    column.id === "done"
+      ? [...tasks].sort((a, b) => {
+          // Sort done tasks by completedAt (most recent first)
+          if (!a.completedAt && !b.completedAt) return 0;
+          if (!a.completedAt) return 1;
+          if (!b.completedAt) return -1;
+          return (
+            new Date(b.completedAt).getTime() -
+            new Date(a.completedAt).getTime()
+          );
+        })
+      : [
+          // Sort other columns by due/overdue first
+          ...tasks.filter((t) => isTaskDueOrOverdue(t)),
+          ...tasks.filter((t) => !isTaskDueOrOverdue(t)),
+        ];
 
   return (
     <div ref={setNodeRef} className={styles.goalColumn}>

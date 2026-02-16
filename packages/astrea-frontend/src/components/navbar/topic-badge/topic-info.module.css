@@ -5,6 +5,7 @@
   background-color: #9668fd;
   padding: 3px 15px;
   border-radius: 15px;
+    height: 100%;
 }
 
 .topicBadge{
@@ -26,3 +27,30 @@
   color: white;
 
 }
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .topicTitle {
+        font-size: 32px;
+    }
+
+    .topicWrapper {
+        padding: 2px 12px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .topicTitle {
+        font-size: 24px;
+    }
+
+    .topicWrapper {
+        padding: 2px 10px;
+    }
+
+    .topicIcon {
+        font-size: 20px;
+    }
+}
+

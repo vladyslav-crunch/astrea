@@ -2,10 +2,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
 }
 
 .navbarContainerRightSide{
     display: flex;
     align-items: center;
     gap: 30px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .navbarContainer {
+        gap: 10px;
+    }
+
+    .navbarContainerRightSide {
+        gap: 15px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .navbarContainer {
+        gap: 15px;
+    }
+
+    .navbarContainerRightSide {
+
+        gap: 10px;
+    }
 }

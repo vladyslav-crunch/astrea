@@ -5,4 +5,22 @@
     background-color: #E2D5FF;
     border-radius: 20px;
     padding: 15px;
+    gap: 5px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .navItemsContainer {
+        height: 100px;
+        padding: 10px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .navItemsContainer {
+        height: 80px;
+        padding: 8px;
+        gap: 5px;
+    }
 }

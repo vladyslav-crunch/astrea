@@ -55,6 +55,7 @@ function GoalKanban({ goalId }: GoalKanbanProps) {
   return (
     <DndContext
       sensors={sensors}
+      autoScroll={false}
       onDragStart={onDragStart}
       onDragOver={debouncedDragOver}
       onDragEnd={onDragEnd}

@@ -28,3 +28,32 @@
     font-size: 18px;
     border-radius: 12px;
 }
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .userBadgeContainer {
+        height: 130px;
+        padding: 8px 15px;
+    }
+
+    .levelBadge {
+        width: 75px;
+        height: 28px;
+        font-size: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .userBadgeContainer {
+        height: 110px;
+        padding: 6px 12px;
+    }
+
+    .levelBadge {
+        width: 65px;
+        height: 25px;
+        font-size: 14px;
+        margin-top: 6px;
+    }
+}
