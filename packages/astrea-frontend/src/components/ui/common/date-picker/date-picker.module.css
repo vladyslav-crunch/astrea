@@ -54,3 +54,10 @@
 .clearIcon:hover {
     color: #ef4444;
 }
+@media (max-width: 768px) {
+    .popover{
+        margin-top: 55px;
+        margin-left: 0;
+    }
+
+}

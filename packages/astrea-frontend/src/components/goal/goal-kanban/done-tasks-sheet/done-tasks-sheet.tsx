@@ -72,11 +72,13 @@ function DoneTasksSheet({ tasks, topicId, goalId }: Props) {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <p className={styles.showAll} onClick={() => setOpen(true)}>
-          Show all completed tasks
-        </p>
-      </SheetTrigger>
+      {sortedTasks.length > 3 && (
+        <SheetTrigger asChild>
+          <p className={styles.showAll} onClick={() => setOpen(true)}>
+            Show all completed tasks
+          </p>
+        </SheetTrigger>
+      )}
 
       <SheetContent
         side="right"
