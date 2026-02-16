@@ -44,8 +44,22 @@ export const update = async (userId: string, taskId: string, updates: any) => {
 
   const prevStatus = existingTask.status;
 
+  // Handle completedAt timestamp
+  const updatesToApply = { ...updates };
+  if (updates.status === "done" && prevStatus !== "done") {
+    // Task is being completed
+    updatesToApply.completedAt = new Date();
+  } else if (
+    updates.status &&
+    updates.status !== "done" &&
+    prevStatus === "done"
+  ) {
+    // Task is being uncompleted
+    updatesToApply.completedAt = null;
+  }
+
   // 2️⃣ Update task
-  const updatedTask = await TaskDAO.updateTask(userId, taskId, updates);
+  const updatedTask = await TaskDAO.updateTask(userId, taskId, updatesToApply);
 
   if (!updatedTask) return null;
 

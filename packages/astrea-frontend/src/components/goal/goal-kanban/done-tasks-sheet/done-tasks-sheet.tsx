@@ -28,6 +28,16 @@ function DoneTasksSheet({ tasks, topicId, goalId }: Props) {
   const { mutate: deleteTask } = useDeleteTask(topicId, goalId);
   const { mutate: updateTask } = useUpdateTask(topicId, goalId);
 
+  // Sort tasks by completedAt (most recent first)
+  const sortedTasks = [...tasks].sort((a, b) => {
+    if (!a.completedAt && !b.completedAt) return 0;
+    if (!a.completedAt) return 1;
+    if (!b.completedAt) return -1;
+    return (
+      new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
+    );
+  });
+
   const handleDelete = (taskId: string) => {
     deleteTask(taskId, {
       onSuccess: () => {
@@ -83,7 +93,7 @@ function DoneTasksSheet({ tasks, topicId, goalId }: Props) {
         </SheetHeader>
 
         <div className="mb-4 space-y-2">
-          {tasks.map((task) => (
+          {sortedTasks.map((task) => (
             <DoneTaskSheetItem
               key={task._id}
               task={task}

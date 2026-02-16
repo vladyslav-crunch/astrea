@@ -56,6 +56,11 @@ function DoneTaskSheetItem({
 
         <div className={style.taskFooter}>
           <div className={style.taskFooterLeft}>
+            {task.completedAt && (
+              <span className={style.completedDate}>
+                Done: {formatToMonthDay(task.completedAt!)}
+              </span>
+            )}
             {task.microtasks.length > 0 && (
               <span className={style.microtaskCounter}>
                 {task.microtasks.filter((t) => t.completed).length}/
