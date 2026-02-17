@@ -1,7 +1,7 @@
 import { request } from "./request";
 import type { CustomReward } from "astrea-shared";
 
-const API_URL = "http://localhost:3000/api/custom-rewards";
+const API_URL = "/api/custom-rewards";
 
 export const getCustomRewards = async (): Promise<{
   rewards: CustomReward[];

@@ -13,6 +13,7 @@
 .inventoryHeader {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .inventoryCoins{
@@ -159,4 +160,22 @@
 
 .emptyState p {
   color: #999;
+}
+
+@media (max-width: 968px) {
+  .inventorySection {
+   height: auto;
+    overflow: visible;
+  }
+
+  .inventoryItemsGrid{
+    display: none;
+
+  }
+  .inventoryCoins{
+    text-align: center;
+  }
+  .inventoryItemsQuantity{
+    text-align: center;
+  }
 }

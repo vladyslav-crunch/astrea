@@ -3,6 +3,8 @@
   height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 /* Split Layout */
@@ -25,18 +27,21 @@
 
 @media (max-width: 968px) {
   .splitLayout {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 400px;
+    gap: 1rem;
+    display: flex;
+    margin-top: 15px;
+    flex-direction: column-reverse;
+  }
+
+  .shopContainer {
+    height: auto;
   }
 }
 
 @media (max-width: 640px) {
   .shopContainer {
-    padding: 1rem;
+
   }
 
-  .splitLayout {
-    gap: 1rem;
-    grid-template-rows: 1fr 350px;
-  }
+
 }

@@ -1,7 +1,7 @@
 import { request } from "./request";
-import type { ShopItem } from "astrea-shared";
+import type { PublicUser, ShopItem } from "astrea-shared";
 
-const API_URL = "http://localhost:3000/api/shop";
+const API_URL = "/api/shop";
 
 export const getShopItems = async (): Promise<{ items: ShopItem[] }> => {
   return request(`${API_URL}/items`, { method: "GET" }, true);
@@ -15,7 +15,7 @@ export const getUserInventory = async (): Promise<{
 
 export const purchaseItem = async (
   itemId: string,
-): Promise<{ message: string; user: any }> => {
+): Promise<{ message: string; user: PublicUser }> => {
   return request(
     `${API_URL}/purchase`,
     {
@@ -30,7 +30,7 @@ export const purchaseItem = async (
 export const equipItem = async (
   itemId: string,
   type: "border" | "title",
-): Promise<{ message: string; user: any }> => {
+): Promise<{ message: string; user: PublicUser }> => {
   return request(
     `${API_URL}/equip`,
     {
