@@ -83,20 +83,21 @@ const TopicEditModal = ({ isOpen, onClose, topic }: TopicEditModalProps) => {
         <Modal.Content>
           <form onSubmit={handleUpdate} className={styles.topicEditForm}>
             <div className={styles.topicEditFormContent}>
-              <div className={styles.topicEditFormPickers}>
-                <ColorPicker value={color} onChange={setColor} />
-                <IconPicker value={icon} onChange={setIcon} />
-              </div>
+              <div className={styles.topicEditFormMain}>
+                <div className={styles.topicEditFormPickers}>
+                  <ColorPicker value={color} onChange={setColor} />
+                  <IconPicker value={icon} onChange={setIcon} />
+                </div>
 
-              <div className={styles.topicEditFormInput}>
-                <Input
-                  option={INPUT_OPTION_CLASSES.modal}
-                  placeholder="Enter topic title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
+                <div className={styles.topicEditFormInput}>
+                  <Input
+                    option={INPUT_OPTION_CLASSES.modal}
+                    placeholder="Enter topic title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </div>
               </div>
-
               <div className={styles.topicEditFormButtons}>
                 <Button
                   buttonType={BUTTON_VARIANT.modal}

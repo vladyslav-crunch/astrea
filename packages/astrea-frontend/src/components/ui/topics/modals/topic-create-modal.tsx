@@ -53,18 +53,20 @@ const TopicCreateModal = ({ isOpen, onClose }: TopicCreateModalProps) => {
       <Modal.Content>
         <form onSubmit={handleCreate} className={styles.topicCreateForm}>
           <div className={styles.topicCreateFormContent}>
-            <div className={styles.topicCreateFormPickers}>
-              <ColorPicker value={color} onChange={setColor} />
-              <IconPicker value={icon} onChange={setIcon} />
-            </div>
+            <div className={styles.topicCreateFormMain}>
+              <div className={styles.topicCreateFormPickers}>
+                <ColorPicker value={color} onChange={setColor} />
+                <IconPicker value={icon} onChange={setIcon} />
+              </div>
 
-            <div className={styles.topicCreateFormInput}>
-              <Input
-                option={INPUT_OPTION_CLASSES.modal}
-                placeholder="Enter topic title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+              <div className={styles.topicCreateFormInput}>
+                <Input
+                  option={INPUT_OPTION_CLASSES.modal}
+                  placeholder="Enter topic title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
             </div>
 
             <div className={styles.topicCreateFormButton}>

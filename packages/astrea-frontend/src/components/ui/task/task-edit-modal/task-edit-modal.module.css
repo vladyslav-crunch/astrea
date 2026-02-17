@@ -8,7 +8,7 @@
 
 .editTaskFormLeftSide {
     display: flex;
-    flex-direction: column;
+
     gap: 12px;
     flex: 1 1 auto;
     height: 100%;
@@ -16,7 +16,7 @@
 
 .editTaskFormRightSide {
     display: flex;
-    flex-direction: column;
+
 }
 
 .editTaskFormRightSideData {

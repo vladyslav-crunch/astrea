@@ -8,6 +8,12 @@
     width: 100%;
 }
 
+.topicCreateFormMain {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
 .topicCreateFormPickers {
     display: flex;
     gap: 8px;
@@ -25,7 +31,12 @@
 @media (max-width: 768px) {
     .topicCreateFormContent {
         flex-direction: column;
-        gap: 12px;
+        gap: 20px;
+    }
+
+    .topicCreateFormMain {
+        display: flex;
+        gap: 10px;
     }
 
     .topicCreateFormPickers {
@@ -48,7 +59,7 @@
 /* Extra small screens - phones in portrait mode */
 @media (max-width: 480px) {
     .topicCreateFormContent {
-        gap: 10px;
+        gap: 20px;
     }
 
     .topicCreateFormPickers {

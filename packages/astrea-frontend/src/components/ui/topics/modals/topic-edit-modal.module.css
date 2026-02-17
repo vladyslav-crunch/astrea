@@ -22,11 +22,25 @@
     gap: 8px;
 }
 
+.topicEditFormMain{
+    display: flex;
+    gap: 10px;
+}
+
+.topicEditFormMain {
+    width: 100%;
+}
+
+
 /* Mobile responsiveness - screens smaller than 768px */
 @media (max-width: 768px) {
     .topicEditFormContent {
         flex-direction: column;
-        gap: 12px;
+        gap: 20px;
+    }
+    .topicEditFormMain{
+        display: flex;
+        gap: 10px;
     }
 
     .topicEditFormPickers {
@@ -40,6 +54,7 @@
     .topicEditFormButtons {
         width: 100%;
         justify-content: space-between;
+        gap: 30px;
     }
 
     .topicEditFormButtons button {
@@ -54,7 +69,7 @@
 /* Extra small screens - phones in portrait mode */
 @media (max-width: 480px) {
     .topicEditFormContent {
-        gap: 10px;
+        gap: 20px;
     }
 
     .topicEditFormPickers {
@@ -62,6 +77,6 @@
     }
 
     .topicEditFormButtons {
-        gap: 6px;
+        gap: 30px;
     }
 }

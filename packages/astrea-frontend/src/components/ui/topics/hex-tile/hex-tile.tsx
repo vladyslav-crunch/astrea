@@ -3,7 +3,9 @@ import { motion } from "motion/react";
 import type { TopicWithStats } from "astrea-shared";
 import styles from "./hex-tile.module.css";
 import TopicCreateModal from "../modals/topic-create-modal.tsx";
+import TopicEditModal from "../modals/topic-edit-modal.tsx";
 import { useNavigate } from "react-router-dom";
+import { Pencil } from "lucide-react";
 
 type HexTileProps = {
   topic?: TopicWithStats;
@@ -15,6 +17,7 @@ function HexTile({ topic, isAddTile = false }: HexTileProps) {
   const [pathLength, setPathLength] = useState(2160);
   const [hovered, setHovered] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const fillRef = useRef<SVGPathElement>(null);
   const totalTasks = topic?.taskCount ?? 0;
   const progress = totalTasks === 0 ? 100 : (topic!.done / totalTasks) * 100;
@@ -34,6 +37,11 @@ function HexTile({ topic, isAddTile = false }: HexTileProps) {
     } else {
       navigate(`topic/${topic?._id}`);
     }
+  };
+
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setEditModalOpen(true);
   };
 
   return (
@@ -83,34 +91,48 @@ function HexTile({ topic, isAddTile = false }: HexTileProps) {
           </div>
 
           {!isAddTile && topic && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className={styles.statsOverlay}
-              style={{ backgroundColor: topic?.color || "rgb(215, 198, 253)" }}
-            >
-              <div className={styles.statsText}>
-                <p>Overall</p>
-                <span>{topic.taskCount}</span>
-              </div>
-              <div className={styles.statsText}>
-                <p>Due</p>
-                <span>{topic.dueToday}</span>
-              </div>
-              <div className={styles.statsText}>
-                <p>Upcoming</p>
-                <span>{topic.upcoming}</span>
-              </div>
-              <div className={styles.statsText}>
-                <p>In progress</p>
-                <span>{topic.in_progress}</span>
-              </div>
-              <div className={styles.statsText}>
-                <p>Done</p>
-                <span>{topic.done}</span>
-              </div>
-            </motion.div>
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: hovered ? 1 : 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className={styles.editIconWrapper}
+                onClick={handleEditClick}
+              >
+                <Pencil size={20} color="#333" />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className={styles.statsOverlay}
+                style={{
+                  backgroundColor: topic?.color || "rgb(215, 198, 253)",
+                }}
+              >
+                <div className={styles.statsText}>
+                  <p>Overall</p>
+                  <span>{topic.taskCount}</span>
+                </div>
+                <div className={styles.statsText}>
+                  <p>Due</p>
+                  <span>{topic.dueToday}</span>
+                </div>
+                <div className={styles.statsText}>
+                  <p>Upcoming</p>
+                  <span>{topic.upcoming}</span>
+                </div>
+                <div className={styles.statsText}>
+                  <p>In progress</p>
+                  <span>{topic.in_progress}</span>
+                </div>
+                <div className={styles.statsText}>
+                  <p>Done</p>
+                  <span>{topic.done}</span>
+                </div>
+              </motion.div>
+            </>
           )}
         </div>
       </div>
@@ -119,6 +141,14 @@ function HexTile({ topic, isAddTile = false }: HexTileProps) {
         <TopicCreateModal
           isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
+        />
+      )}
+
+      {!isAddTile && topic && (
+        <TopicEditModal
+          isOpen={editModalOpen}
+          onClose={() => setEditModalOpen(false)}
+          topic={topic}
         />
       )}
     </div>

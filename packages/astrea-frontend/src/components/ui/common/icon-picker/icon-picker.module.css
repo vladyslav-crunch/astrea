@@ -22,7 +22,7 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 0.5rem;
     padding: 0.5rem;
-    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     z-index: 10;
 }
@@ -45,9 +45,3 @@
     background: #e0e0ff;
 }
 
-@media (max-width: 700px) {
-
-    .grid{
-        left: -235%;
-    }
-}
