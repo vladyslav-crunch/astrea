@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DragStartEvent, DragOverEvent, DragEndEvent } from "@dnd-kit/core";
 import { Task } from "astrea-shared/types/task.type";
 import { useReorderTasks, useUpdateTask } from "./useTask.ts";
@@ -27,14 +27,8 @@ export function useKanbanDnd({ initialTasks, goalId }: UseKanbanDndProps) {
     }
   }
 
-  const debouncedDragOver = useCallback(
-    debounce((event: DragOverEvent) => {
-      handleDragOver(event);
-    }, 10),
-    [],
-  );
-
-  function handleDragOver(event: DragOverEvent) {
+  // Store the drag over logic in a ref to avoid recreating debounced function
+  const handleDragOverRef = useRef((event: DragOverEvent) => {
     const { active, over } = event;
     if (!active || !over) return;
     if (active.id === over.id) return;
@@ -99,7 +93,22 @@ export function useKanbanDnd({ initialTasks, goalId }: UseKanbanDndProps) {
 
       return prevTasks;
     });
-  }
+  });
+
+  // Create debounced function once and keep it stable across renders
+  const debouncedDragOverRef = useRef(
+    debounce((event: DragOverEvent) => {
+      handleDragOverRef.current(event);
+    }, 10),
+  );
+
+  // Cleanup on unmount
+  useEffect(() => {
+    const debouncedFn = debouncedDragOverRef.current;
+    return () => {
+      debouncedFn.cancel();
+    };
+  }, []);
 
   function onDragEnd(_: DragEndEvent) {
     if (!activeTask) return;
@@ -138,7 +147,7 @@ export function useKanbanDnd({ initialTasks, goalId }: UseKanbanDndProps) {
     tasks,
     activeTask,
     onDragStart,
-    debouncedDragOver,
+    debouncedDragOver: debouncedDragOverRef.current,
     onDragEnd,
   };
 }

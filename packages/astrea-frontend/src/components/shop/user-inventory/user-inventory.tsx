@@ -5,6 +5,7 @@ import styles from "./user-inventory.module.css";
 import UserInventoryBadge from "@/components/shop/user-inventory/user-inventory-badge/user-inventory-badge.tsx";
 import UserInventoryExp from "@/components/shop/user-inventory/user-inventory-exp/user-inventory-exp.tsx";
 import { CircleDollarSign } from "lucide-react";
+import { useMediaQuery } from "react-responsive";
 
 interface UserInventoryProps {
   items: ShopItem[];
@@ -14,6 +15,8 @@ interface UserInventoryProps {
 function UserInventory({ items, isLoading }: UserInventoryProps) {
   const { data: sessionData } = useSession();
   const user = sessionData?.user;
+  const isMobile = useMediaQuery({ maxWidth: 850 });
+
   return (
     <div className={styles.inventorySection}>
       <div className={styles.inventoryHeader}>
@@ -36,7 +39,9 @@ function UserInventory({ items, isLoading }: UserInventoryProps) {
       </div>
 
       {isLoading ? (
-        <div className={styles.loading}>Loading inventory...</div>
+        !isMobile ? (
+          <div className={styles.loading}>Loading inventory...</div>
+        ) : null
       ) : items.length === 0 ? (
         <div className={styles.emptyState}>
           <h3>Your inventory is empty</h3>

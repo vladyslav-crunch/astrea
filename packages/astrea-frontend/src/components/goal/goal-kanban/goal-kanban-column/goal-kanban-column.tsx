@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import DoneTasksSheet from "@/components/goal/goal-kanban/done-tasks-sheet/done-tasks-sheet.tsx";
 import { isTaskDueOrOverdue } from "@/utility/taskDateHandlers.ts";
+import { useMediaQuery } from "react-responsive";
+import { sortTaskByCompleteDate } from "@/utility/sortTaskByCompleteDate.ts";
 interface Props {
   column: Column;
   tasks: Task[];
@@ -19,7 +21,7 @@ interface Props {
 function GoalKanbanColumn({ column, tasks, goalId }: Props) {
   const taskIds = tasks.map((task) => task._id);
   const { topicId } = useParams<{ topicId: string }>();
-
+  const isMobile = useMediaQuery({ maxWidth: 850 });
   const { mutate: createTask } = useCreateTask(topicId!, goalId!);
 
   const handleCreateTask = (title: string) => {
@@ -43,21 +45,10 @@ function GoalKanbanColumn({ column, tasks, goalId }: Props) {
     },
   });
 
-  // Sort tasks based on column type
   const sortedTasks =
     column.id === "done"
-      ? [...tasks].sort((a, b) => {
-          // Sort done tasks by completedAt (most recent first)
-          if (!a.completedAt && !b.completedAt) return 0;
-          if (!a.completedAt) return 1;
-          if (!b.completedAt) return -1;
-          return (
-            new Date(b.completedAt).getTime() -
-            new Date(a.completedAt).getTime()
-          );
-        })
+      ? sortTaskByCompleteDate(tasks)
       : [
-          // Sort other columns by due/overdue first
           ...tasks.filter((t) => isTaskDueOrOverdue(t)),
           ...tasks.filter((t) => !isTaskDueOrOverdue(t)),
         ];
@@ -79,8 +70,19 @@ function GoalKanbanColumn({ column, tasks, goalId }: Props) {
             ),
           )}
         </SortableContext>
+
+        {/* Render inside on mobile */}
+        {column.id === "done" && isMobile && (
+          <DoneTasksSheet
+            tasks={sortedTasks}
+            topicId={topicId!}
+            goalId={goalId}
+          />
+        )}
       </div>
-      {column.id === "done" && (
+
+      {/* Render outside on desktop */}
+      {column.id === "done" && !isMobile && (
         <DoneTasksSheet
           tasks={sortedTasks}
           topicId={topicId!}

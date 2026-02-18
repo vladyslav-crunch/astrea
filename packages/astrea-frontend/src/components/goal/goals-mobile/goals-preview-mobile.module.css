@@ -1,0 +1,63 @@
+.goalsPreviewMobileWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+}
+
+.goalsPreviewMobileHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.goalsPreviewMobileHeader p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #555555;
+}
+
+.backArrow {
+  cursor: pointer;
+  color: #555555;
+}
+
+.backArrow:hover {
+  color: #333333;
+}
+
+.goalsPreviewMobileContainer {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  overflow-y: auto;
+}
+
+.noGoalsMessage {
+  font-size: 1rem;
+  color: #999999;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.addGoal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 1.5rem;
+  right: 1rem;
+  background-color: #f1c78a;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+
+

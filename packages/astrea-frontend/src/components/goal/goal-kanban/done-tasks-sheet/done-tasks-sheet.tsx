@@ -14,6 +14,7 @@ import { Archive } from "lucide-react";
 import { useDeleteTask, useUpdateTask } from "@/hooks/useTask.ts";
 import { toast } from "sonner";
 import { handleReward } from "@/utility/handleReward.ts";
+import { sortTaskByCompleteDate } from "@/utility/sortTaskByCompleteDate.ts";
 
 interface Props {
   tasks: Task[];
@@ -28,15 +29,7 @@ function DoneTasksSheet({ tasks, topicId, goalId }: Props) {
   const { mutate: deleteTask } = useDeleteTask(topicId, goalId);
   const { mutate: updateTask } = useUpdateTask(topicId, goalId);
 
-  // Sort tasks by completedAt (most recent first)
-  const sortedTasks = [...tasks].sort((a, b) => {
-    if (!a.completedAt && !b.completedAt) return 0;
-    if (!a.completedAt) return 1;
-    if (!b.completedAt) return -1;
-    return (
-      new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
-    );
-  });
+  const sortedTasks = sortTaskByCompleteDate(tasks);
 
   const handleDelete = (taskId: string) => {
     deleteTask(taskId, {
@@ -82,7 +75,7 @@ function DoneTasksSheet({ tasks, topicId, goalId }: Props) {
 
       <SheetContent
         side="right"
-        className="w-[420px] overflow-y-auto px-6 gap-0"
+        className="w-[330px] md:w-[420px] overflow-y-auto px-6 gap-0"
       >
         <SheetHeader className={"py-4 px-0  "}>
           <SheetTitle className={"text-2xl flex items-center gap-3"}>
