@@ -15,11 +15,14 @@ import { z } from "zod";
 const createGoalFormSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
-  modifier: z.object({
-    easy: z.number(),
-    medium: z.number(),
-    hard: z.number(),
-  }),
+  modifier: z
+    .object({
+      easy: z.number().optional(),
+      medium: z.number().optional(),
+      hard: z.number().optional(),
+      epic: z.number().optional(),
+    })
+    .optional(),
 });
 
 type CreateGoalFormData = z.infer<typeof createGoalFormSchema>;
@@ -46,6 +49,7 @@ function GoalCreateModal({ isOpen, onClose, topicId }: GoalCreateModalProps) {
         easy: 1,
         medium: 1,
         hard: 1,
+        epic: 1,
       },
     },
   });
@@ -54,13 +58,14 @@ function GoalCreateModal({ isOpen, onClose, topicId }: GoalCreateModalProps) {
     { label: "x0.25", value: 0.25 },
     { label: "x0.50", value: 0.5 },
     { label: "x0.75", value: 0.75 },
-    { label: "x1 (default)", value: 1 },
+    { label: "x1", value: 1 },
     { label: "x1.25", value: 1.25 },
     { label: "x1.50", value: 1.5 },
     { label: "x1.75", value: 1.75 },
     { label: "x2.00", value: 2 },
   ];
-  const levels = ["easy", "medium", "hard"] as const;
+
+  const levels = ["easy", "medium", "hard", "epic"] as const;
   const createGoalMutation = useCreateGoal(topicId);
 
   const onSubmit: SubmitHandler<CreateGoalFormData> = (data) => {

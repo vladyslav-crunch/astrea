@@ -94,6 +94,11 @@
     color: #7f1d1d;
 }
 
+.taskDifficulty.epic {
+    background-color: #af8cfd;
+    color: #fafafa;
+}
+
 .goalKanbanTaskDue{
     border: 2px solid #dcd1f6;
 }

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const difficultyEnum = z.enum(["easy", "medium", "hard"]);
+export const difficultyEnum = z.enum(["easy", "medium", "hard", "epic"]);
 export const statusEnum = z.enum(["upcoming", "in_progress", "done"]);
 
 export const microtaskSchema = z.object({

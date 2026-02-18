@@ -1,7 +1,7 @@
 import type { Microtask } from "./mircotask.type.ts";
 
 export type TaskStatus = "upcoming" | "in_progress" | "done";
-export type TaskDifficulty = "easy" | "medium" | "hard";
+export type TaskDifficulty = "easy" | "medium" | "hard" | "epic";
 
 export type TaskBase = {
   topicId: string;

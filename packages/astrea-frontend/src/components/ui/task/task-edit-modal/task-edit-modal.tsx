@@ -16,7 +16,7 @@ import {
 import { UpdateTaskInput, updateTaskSchema } from "astrea-shared";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { useDeleteTask, useUpdateTask } from "../../../../hooks/useTask.ts";
+import { useDeleteTask, useUpdateTask } from "@/hooks/useTask.ts";
 import Button, {
   BUTTON_COLOR,
   BUTTON_VARIANT,
@@ -68,6 +68,7 @@ function TaskEditModal({ isOpen, onClose, task }: TaskEditModalProps) {
     { label: "Easy", value: "easy" },
     { label: "Medium", value: "medium" },
     { label: "Hard", value: "hard" },
+    { label: "Epic", value: "epic" },
   ];
 
   const onSubmit: SubmitHandler<UpdateTaskInput> = (data) => {

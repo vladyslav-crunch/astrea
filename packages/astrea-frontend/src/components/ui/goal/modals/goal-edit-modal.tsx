@@ -41,6 +41,7 @@ function GoalEditModal({ isOpen, onClose, goal }: GoadEditModalProps) {
         easy: goal.modifier?.easy,
         medium: goal.modifier?.medium,
         hard: goal.modifier?.hard,
+        epic: goal.modifier?.epic,
       },
     },
   });
@@ -52,9 +53,10 @@ function GoalEditModal({ isOpen, onClose, goal }: GoadEditModalProps) {
         description: goal.description || "",
         topicId: goal.topicId ?? undefined,
         modifier: {
-          easy: goal.modifier?.easy ?? 1.15,
-          medium: goal.modifier?.medium ?? 1.15,
-          hard: goal.modifier?.hard ?? 1.15,
+          easy: goal.modifier?.easy ?? 1,
+          medium: goal.modifier?.medium ?? 1,
+          hard: goal.modifier?.hard ?? 1,
+          epic: goal.modifier?.epic ?? 1,
         },
       });
     }
@@ -64,13 +66,13 @@ function GoalEditModal({ isOpen, onClose, goal }: GoadEditModalProps) {
     { label: "x0.25", value: 0.25 },
     { label: "x0.50", value: 0.5 },
     { label: "x0.75", value: 0.75 },
-    { label: "x1 (default)", value: 1 },
+    { label: "x1", value: 1 },
     { label: "x1.25", value: 1.25 },
     { label: "x1.50", value: 1.5 },
     { label: "x1.75", value: 1.75 },
     { label: "x2.00", value: 2 },
   ];
-  const levels = ["easy", "medium", "hard"] as const;
+  const levels = ["easy", "medium", "hard", "epic"] as const;
   const updateGoalMutation = useUpdateGoal(goal.topicId);
   const deleteGoalMutation = useDeleteGoal(goal.topicId);
   const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);

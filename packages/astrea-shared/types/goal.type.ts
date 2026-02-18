@@ -1,25 +1,26 @@
 export type GoalBase = {
-    topicId: string;
-    title: string;
-    description?: string;
-    modifier?: {
-        easy?: number;
-        medium?: number;
-        hard?: number;
-    };
-}
+  topicId: string;
+  title: string;
+  description?: string;
+  modifier?: {
+    easy?: number;
+    medium?: number;
+    hard?: number;
+    epic?: number;
+  };
+};
 
 export type Goal = GoalBase & {
-    _id: string;
-    createdAt: string;
-    updatedAt: string;
-    isDefault: boolean;
-}
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  isDefault: boolean;
+};
 
 export type GoalWithStats = Goal & {
-    taskCount: number;
-    upcoming: number;
-    in_progress: number;
-    done: number;
-    dueToday: number;
+  taskCount: number;
+  upcoming: number;
+  in_progress: number;
+  done: number;
+  dueToday: number;
 };

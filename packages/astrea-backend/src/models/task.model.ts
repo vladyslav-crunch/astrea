@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema(
 
     difficulty: {
       type: String,
-      enum: ["easy", "medium", "hard"],
+      enum: ["easy", "medium", "hard", "epic"],
       required: true,
     },
 
