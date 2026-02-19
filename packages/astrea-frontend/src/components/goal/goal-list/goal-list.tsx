@@ -15,7 +15,7 @@ import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 import styles from "./goal-list.module.css";
 import Goal from "../goal/goal.tsx";
-import { useGoalsByTopic, useReorderGoals } from "../../../hooks/useGoal.ts";
+import { useGoalsByTopic, useReorderGoals } from "@/hooks/useGoal.ts";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Spinner from "../../ui/common/spinner/spinner.tsx";
@@ -88,7 +88,7 @@ function GoalList() {
   if (isLoading) {
     return (
       <div className={styles.noGoalsMessage}>
-        <Spinner />
+        <Spinner size={48} />
       </div>
     );
   }

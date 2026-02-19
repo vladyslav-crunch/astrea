@@ -19,6 +19,14 @@
     margin-top: 0.8rem;
 }
 
+.topicListNoTopic{
+    height: calc(100vh - 300px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .addTopic{
     position: fixed;
     display: flex;

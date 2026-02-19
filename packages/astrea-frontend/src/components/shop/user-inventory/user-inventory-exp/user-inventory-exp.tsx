@@ -1,10 +1,11 @@
-import { useSession } from "@/hooks/useAuth.ts";
 import styles from "./user-inventory-exp.module.css";
+import { PublicUser } from "astrea-shared";
 
-function UserInventoryExp() {
-  const { data: sessionData } = useSession();
+type UserInventoryProps = {
+  user: PublicUser;
+};
 
-  const user = sessionData?.user;
+function UserInventoryExp({ user }: UserInventoryProps) {
   const currentExp = user?.exp ?? 0;
   const currentLevel = user?.level ?? 1;
 

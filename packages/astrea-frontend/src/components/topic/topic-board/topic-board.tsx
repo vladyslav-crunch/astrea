@@ -53,7 +53,7 @@ function TopicBoard() {
       <div className={styles.boardContent}>
         {isLoading ? (
           <div className={styles.goalLoading}>
-            <Spinner />
+            <Spinner size={45} />
           </div>
         ) : (
           <GoalPanel type={activeTab} goals={goals} />

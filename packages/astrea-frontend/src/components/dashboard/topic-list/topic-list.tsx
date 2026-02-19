@@ -11,14 +11,13 @@ type TopicListProps = {
 
 function TopicList({ topics }: TopicListProps) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-
   return (
     <>
       <div className={styles.topicListWrapper}>
-        <p>Choose Activity</p>
+        {topics.length > 0 && <p>Choose Activity</p>}
         <div className={styles.topicListContainer}>
           {topics.length === 0 ? (
-            <div>No topics available</div>
+            <div className={styles.topicListNoTopic}>No topics created yet</div>
           ) : (
             topics.map((topic) =>
               topic ? <TopicListItem topic={topic} key={topic._id} /> : null,

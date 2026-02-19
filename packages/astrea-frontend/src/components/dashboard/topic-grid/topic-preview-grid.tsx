@@ -11,7 +11,7 @@ type Props = {
 function TopicPreviewGrid({ topics }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const layout = useHexGridLayout(containerRef, topics.length);
-
+  topics = [...topics, null];
   return (
     <div className={styles.topicGrid} ref={containerRef}>
       {topics.map((topic, index) => (

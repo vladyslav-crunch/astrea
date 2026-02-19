@@ -11,6 +11,7 @@ import {
   useDeleteCustomReward,
 } from "@/hooks/useCustomReward.ts";
 import styles from "./astrea-shop.module.css";
+import Spinner from "@/components/ui/common/spinner/spinner.tsx";
 
 interface AstreaShopProps {
   items: ShopItem[];
@@ -58,11 +59,15 @@ function AstreaShop({ items, isLoading }: AstreaShopProps) {
     <div className={styles.shopSection}>
       <div className={styles.sectionHeader}>
         <h2 className={styles.sectionTitle}>Astra Shop</h2>
-        <p className={styles.sectionSubtitle}>Browse available items</p>
+        <p className={styles.sectionSubtitle}>
+          A place to treat yourself with your hard-earned money
+        </p>
       </div>
 
       {isLoading ? (
-        <div className={styles.loading}>Loading shop items...</div>
+        <div className={styles.loading}>
+          <Spinner size={45} />
+        </div>
       ) : items.length === 0 ? (
         <div className={styles.emptyState}>
           <h3>No items available</h3>

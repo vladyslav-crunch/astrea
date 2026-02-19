@@ -3,15 +3,21 @@ import { useTopics } from "@/hooks/useTopic.ts";
 import TopicPreviewGrid from "../topic-grid/topic-preview-grid.tsx";
 import { useMediaQuery } from "react-responsive";
 import TopicList from "@/components/dashboard/topic-list/topic-list.tsx";
+import styles from "./topics-preview.module.css";
+import Spinner from "@/components/ui/common/spinner/spinner.tsx";
 function TopicsPreview() {
   const { data: fetchedTopics, isLoading, error } = useTopics();
   const displayTopics = useMemo(() => {
-    return fetchedTopics ? [...fetchedTopics, null] : [];
+    return fetchedTopics || [];
   }, [fetchedTopics]);
-
   const isMobile = useMediaQuery({ maxWidth: 850 });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className={styles.topicLoading}>
+        <Spinner size={60} />
+      </div>
+    );
   if (error) return <div>Error: {(error as Error).message}</div>;
 
   if (isMobile) {

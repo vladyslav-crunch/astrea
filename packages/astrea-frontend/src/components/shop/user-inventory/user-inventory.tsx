@@ -6,6 +6,7 @@ import UserInventoryBadge from "@/components/shop/user-inventory/user-inventory-
 import UserInventoryExp from "@/components/shop/user-inventory/user-inventory-exp/user-inventory-exp.tsx";
 import { CircleDollarSign } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
+import Spinner from "@/components/ui/common/spinner/spinner.tsx";
 
 interface UserInventoryProps {
   items: ShopItem[];
@@ -24,7 +25,7 @@ function UserInventory({ items, isLoading }: UserInventoryProps) {
           <UserInventoryBadge user={user!} items={items} />
         </div>
         <div className={styles.inventoryUserStats}>
-          <UserInventoryExp />
+          <UserInventoryExp user={user!} />
           <div className={styles.inventoryCoins}>
             <p className={styles.inventoryCoinsHeader}>
               Coins: {user?.coins}
@@ -40,9 +41,11 @@ function UserInventory({ items, isLoading }: UserInventoryProps) {
 
       {isLoading ? (
         !isMobile ? (
-          <div className={styles.loading}>Loading inventory...</div>
+          <div className={styles.loading}>
+            <Spinner size={45} />
+          </div>
         ) : null
-      ) : items.length === 0 ? (
+      ) : !isMobile && items.length === 0 ? (
         <div className={styles.emptyState}>
           <h3>Your inventory is empty</h3>
           <p>Purchase items from the shop to fill your inventory!</p>

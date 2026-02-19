@@ -12,6 +12,7 @@ import GoalKanbanTask from "./goal-kanban-task/goal-kanban-task.tsx";
 import { useTasksByGoal } from "@/hooks/useTask.ts";
 import { COLUMNS } from "./goal-kanban-column/columns.ts";
 import { useKanbanDnd } from "@/hooks/useKanbanDnd.ts";
+import Spinner from "@/components/ui/common/spinner/spinner.tsx";
 
 type GoalKanbanProps = {
   goalId: string;
@@ -40,7 +41,11 @@ function GoalKanban({ goalId }: GoalKanbanProps) {
   );
 
   if (isLoading) {
-    return <div className={styles.state}>Loading tasks…</div>;
+    return (
+      <div className={styles.state}>
+        <Spinner size={45} />
+      </div>
+    );
   }
   if (isError) {
     return (

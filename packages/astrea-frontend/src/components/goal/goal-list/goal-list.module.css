@@ -31,7 +31,7 @@
 .noGoalsMessage {
     font-size: 24px;
     color: #555555;
-    height: calc(100% - 65px);
+    height: calc(100% - 100px);
     display: flex;
     justify-content: center;
     align-items: center;

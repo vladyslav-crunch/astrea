@@ -33,7 +33,7 @@ function TopicListItem({ topic }: TopicListItemProps) {
           <div>
             <p className={styles.topicListItemTitle}>{topic.title}</p>
             <p className={styles.topicListItemTasksQuantity}>
-              {topic.taskCount ? `${topic.upcoming}/${topic.done}` : 0} tasks
+              {topic.taskCount ? `${topic.done}/${topic.taskCount}` : 0} tasks
             </p>
           </div>
         </div>

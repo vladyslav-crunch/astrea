@@ -5,6 +5,7 @@ import styles from "./goals-preview-mobile.module.css";
 import GoalListItem from "./goal-list-item/goal-list-item.tsx";
 import { useState } from "react";
 import GoalCreateModal from "../../ui/goal/modals/goal-create-modal.tsx";
+import Spinner from "@/components/ui/common/spinner/spinner.tsx";
 
 function GoalsPreviewMobile() {
   const { topicId } = useParams<{ topicId: string }>();
@@ -21,7 +22,12 @@ function GoalsPreviewMobile() {
     navigate("/");
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className={styles.goalsLoading}>
+        <Spinner size={45} />
+      </div>
+    );
   if (isError) return <div>Error loading goals</div>;
 
   return (

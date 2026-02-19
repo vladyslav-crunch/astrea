@@ -144,7 +144,10 @@
 
 
 .loading {
-  text-align: center;
+  display: flex;
+  height: calc(100% - 100px);
+    justify-content: center;
+    align-items: center;
   padding: 3rem;
   font-size: 1.2rem;
   color: #9769FF;

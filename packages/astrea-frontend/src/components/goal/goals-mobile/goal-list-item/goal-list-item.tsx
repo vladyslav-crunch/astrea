@@ -31,7 +31,7 @@ function GoalListItem({ goal }: GoalListItemProps) {
             <p className={styles.goalListItemDescription}>{goal.description}</p>
             <p className={styles.goalListItemTasksQuantity}>
               {goal.taskCount
-                ? `${goal.in_progress}/${goal.done} tasks`
+                ? `${goal.done}/${goal.taskCount} tasks`
                 : "0 tasks"}
             </p>
           </div>
