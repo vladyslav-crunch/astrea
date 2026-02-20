@@ -6,18 +6,23 @@ import { createGoalSchema, updateGoalSchema } from "astrea-shared";
 import mongoose from "mongoose";
 
 export const createGoal = async (req: AuthRequest, res: Response) => {
-  const parsed = createGoalSchema.safeParse(req.body);
+  const topicId = req.params.topicId;
+  if (!topicId) {
+    res.status(400).json({ message: "Missing topicId in URL" });
+    return;
+  }
+
+  // Merge topicId from params into body for validation
+  const parsed = createGoalSchema.safeParse({
+    ...req.body,
+    topicId,
+  });
+
   if (!parsed.success) {
     res.status(400).json({
       message: "Invalid input",
       errors: parsed.error.flatten(),
     });
-    return;
-  }
-
-  const topicId = req.params.topicId;
-  if (!topicId) {
-    res.status(400).json({ message: "Missing topicId in URL" });
     return;
   }
 
