@@ -16,6 +16,7 @@ export const refreshCookieOptions = {
   sameSite: hasConfiguredFrontendOrigin
     ? ("none" as const)
     : ("strict" as const),
+  partitioned: hasConfiguredFrontendOrigin,
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 };
 
