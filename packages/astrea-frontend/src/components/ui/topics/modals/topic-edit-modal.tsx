@@ -40,7 +40,7 @@ const TopicEditModal = ({ isOpen, onClose, topic }: TopicEditModalProps) => {
     e?.preventDefault();
     const result = updateTopicSchema.safeParse({ title, color, icon });
     if (!result.success) {
-      const firstError = result.error.errors[0]?.message || "Invalid input";
+      const firstError = result.error.issues[0]?.message || "Invalid input";
       toast.error(firstError, {
         icon: "⚠️",
       });
