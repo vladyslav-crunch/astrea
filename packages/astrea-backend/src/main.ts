@@ -11,10 +11,15 @@ import shopRoutes from "./routes/shop.routes.ts";
 import customRewardRoutes from "./routes/custom-reward.routes.ts";
 import cors from "cors";
 
-const frontendOrigin = process.env.FRONTEND_ORIGIN;
-const allowedOrigins = new Set(
-  [frontendOrigin, "http://localhost:3000"].filter(Boolean),
-);
+const frontendOrigins = [
+  process.env.FRONTEND_ORIGIN,
+  process.env.FRONTEND_ORIGINS?.split(",").map((origin) => origin.trim()),
+  ["http://localhost:3000"],
+]
+  .flat()
+  .filter(Boolean);
+
+const allowedOrigins = new Set(frontendOrigins);
 
 const getMongoTarget = (uri: string) => {
   try {
