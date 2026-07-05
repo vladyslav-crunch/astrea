@@ -1,4 +1,5 @@
 import { refreshSession } from "./auth.ts";
+import { createApiUrl } from "./base.ts";
 
 export async function request<T>(
   url: string,
@@ -30,9 +31,10 @@ export async function request<T>(
     };
   }
 
-  const res = await fetch(url, {
+  const res = await fetch(createApiUrl(url), {
     ...options,
     headers,
+    credentials: "include",
   });
 
   let data;

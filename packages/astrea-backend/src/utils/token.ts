@@ -1,21 +1,26 @@
-import type {Response} from 'express';
-import {generateAccessToken, generateRefreshToken} from './jwt';
+import type { Response } from "express";
+import { generateAccessToken, generateRefreshToken } from "./jwt";
 
 export interface TokenPayload {
-    id: string;
-    username: string;
+  id: string;
+  username: string;
 }
 
+export const refreshCookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite:
+    process.env.NODE_ENV === "production"
+      ? ("none" as const)
+      : ("strict" as const),
+  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+};
+
 export const sendTokens = (res: Response, payload: TokenPayload): string => {
-    const accessToken = generateAccessToken(payload);
-    const refreshToken = generateRefreshToken(payload);
+  const accessToken = generateAccessToken(payload);
+  const refreshToken = generateRefreshToken(payload);
 
-    res.cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
+  res.cookie("refreshToken", refreshToken, refreshCookieOptions);
 
-    return accessToken;
+  return accessToken;
 };

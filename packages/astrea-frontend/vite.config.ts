@@ -1,11 +1,15 @@
 import path from "path";
-import { defineConfig } from "vite";
+import { defineConfig, type PluginOption } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), svgr()],
+  plugins: [
+    react() as unknown as PluginOption,
+    tailwindcss() as unknown as PluginOption,
+    svgr() as unknown as PluginOption,
+  ],
 
   resolve: {
     alias: {
@@ -16,9 +20,6 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 3000,
-    proxy: {
-      "/api": "http://localhost:8080/",
-    },
     allowedHosts: ["b28e8c26361d.ngrok-free.app"],
   },
 });

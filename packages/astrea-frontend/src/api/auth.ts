@@ -1,6 +1,7 @@
 import { SignInFormFields, SignUpFormFields } from "astrea-shared";
 import { request } from "./request";
 import { PublicUser } from "astrea-shared";
+import { createApiUrl } from "./base";
 
 type SignResponse = {
   accessToken: string;
@@ -39,7 +40,7 @@ export async function signUp(
 }
 
 export async function refreshSession(): Promise<RefreshResponse> {
-  const res = await fetch("/api/auth/refresh", {
+  const res = await fetch(createApiUrl("/api/auth/refresh"), {
     method: "POST",
     credentials: "include", // Needed to send the refresh token cookie
   });
@@ -60,7 +61,7 @@ export async function refreshSession(): Promise<RefreshResponse> {
 }
 
 export async function signOut() {
-  await fetch("/api/auth/log-out", {
+  await fetch(createApiUrl("/api/auth/log-out"), {
     method: "POST",
     credentials: "include",
   });

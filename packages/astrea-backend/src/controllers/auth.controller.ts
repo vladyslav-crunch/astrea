@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import * as AuthService from "../services/auth.service";
 import { signInSchema, signUpSchema } from "astrea-shared";
 import { expiresInSeconds } from "../utils/env.ts";
+import { refreshCookieOptions } from "../utils/token.ts";
 
 export const createUser = async (req: Request, res: Response) => {
   const parsed = signUpSchema.safeParse(req.body);
@@ -62,10 +63,6 @@ export const refreshToken = async (req: Request, res: Response) => {
 };
 
 export const logout = (_req: Request, res: Response) => {
-  res.clearCookie("refreshToken", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-  });
+  res.clearCookie("refreshToken", refreshCookieOptions);
   res.status(200).json({ message: "Logged out" });
 };

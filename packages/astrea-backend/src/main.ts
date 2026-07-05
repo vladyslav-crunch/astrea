@@ -9,6 +9,21 @@ import goalRoutes from "./routes/goal.routes.ts";
 import taskRoutes from "./routes/task.routes.ts";
 import shopRoutes from "./routes/shop.routes.ts";
 import customRewardRoutes from "./routes/custom-reward.routes.ts";
+import cors from "cors";
+
+const frontendOrigin = process.env.FRONTEND_ORIGIN;
+const allowedOrigins = new Set(
+  [frontendOrigin, "http://localhost:3000"].filter(Boolean),
+);
+
+const getMongoTarget = (uri: string) => {
+  try {
+    const parsed = new URL(uri);
+    return `${parsed.protocol}//${parsed.host}${parsed.pathname}`;
+  } catch {
+    return uri;
+  }
+};
 
 const app = express();
 
@@ -21,8 +36,25 @@ mongoose
   .catch((err) => console.error("❌ MongoDB connection error", err));
 
 app.use(cookieParser());
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.has(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error(`Origin not allowed: ${origin}`));
+    },
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(logger);
+
+console.log(
+  `✅ Backend starting on port ${PORT} with MongoDB ${getMongoTarget(MONGO_URI)}`,
+);
 
 // Global API prefix
 app.use("/api/auth", authRoutes);
