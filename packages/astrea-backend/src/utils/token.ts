@@ -6,13 +6,16 @@ export interface TokenPayload {
   username: string;
 }
 
+const hasConfiguredFrontendOrigin = Boolean(
+  process.env.FRONTEND_ORIGIN || process.env.FRONTEND_ORIGINS,
+);
+
 export const refreshCookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite:
-    process.env.NODE_ENV === "production"
-      ? ("none" as const)
-      : ("strict" as const),
+  secure: hasConfiguredFrontendOrigin,
+  sameSite: hasConfiguredFrontendOrigin
+    ? ("none" as const)
+    : ("strict" as const),
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 };
 
